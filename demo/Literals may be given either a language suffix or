@@ -1,0 +1,17 @@
+Literals may be given either a language suffix or a datatype URI but not both. Languages are indicated by appending the simple literal with @ and the language tag. Datatype URIs similarly append ^^ followed by any legal URI form (full or qualified) as described above to give the datatype URI.
+
+	# this is not a complete turtle document
+	"chat"
+	"chat"@en
+	"chat"@fr
+	"foo"^^<http://example.org/my/datatype>
+	"""10"""^^xsd:decimal
+
+
+Blank nodes are written as _:nodeID to provide a blank node either from the given nodeID. A generated blank node may also be made with [] which is useful to provide the subject of RDF triples for each pair from the predicateObjectList or the root of the collection.
+
+	# this is not a complete turtle document
+	_:me
+	_:a1234
+
+

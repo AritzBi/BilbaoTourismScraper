@@ -1,0 +1,1675 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es-es" lang="es-es">
+
+<head>
+  <base href="http://www.kafeantzokia.com/web/agenda" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="kafe antzokia',kafeantzokia,antzoki,antxoki,'kafe antzoki" />
+  <meta name="title" content="Agenda Kafe Antzokia" />
+  <meta name="description" content="Antiguo cine en Bilbao convertido en sala de conciertos, teatro, exposiciones, restaurante. Lugar de encuentro de la cultura vasca y la creacion en euskara." />
+  <meta name="generator" content="" />
+  <title>Agenda Kafe Antzokia</title>
+  <link href="/web/es/agenda/eventlist?format=feed&amp;type=rss" rel="alternate" type="application/rss+xml" title="RSS 2.0" />
+  <link href="/web/es/agenda/eventlist?format=feed&amp;type=atom" rel="alternate" type="application/atom+xml" title="Atom 1.0" />
+  <link href="/web/templates/ja_helio/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/web/components/com_eventlist/assets/css/eventlist.css" type="text/css" />
+  <link rel="stylesheet" href="http://www.kafeantzokia.com/web/modules/mod_eventlistcal15q/mod_eventlistcal15q.css" type="text/css" />
+  <link rel="stylesheet" href="/web/modules/mod_jflanguageselection/tmpl/mod_jflanguageselection.css" type="text/css" />
+  <script type="text/javascript" src="/web/media/system/js/mootools.js"></script>
+  <script type="text/javascript">
+		window.addEvent('domready', function(){ var JTooltips = new Tips($$('.hasTip'), { maxTitleChars: 50, fixed: false}); });
+  </script>
+  <!--[if IE]><style type="text/css">.floattext{zoom:1;}, * html #eventlist dd { height: 1%; }</style><![endif]-->
+
+
+<link rel="stylesheet" href="http://www.kafeantzokia.com/web/templates/system/css/system.css" type="text/css" />
+<link rel="stylesheet" href="http://www.kafeantzokia.com/web/templates/system/css/general.css" type="text/css" />
+<link rel="stylesheet" href="http://www.kafeantzokia.com/web/templates/ja_helio/css/editor.css" type="text/css" />
+<link rel="stylesheet" href="http://www.kafeantzokia.com/web/templates/ja_helio/css/template.css" type="text/css" />
+<link rel="stylesheet" href="http://www.kafeantzokia.com/web/templates/ja_helio/css/typo.css" type="text/css" />
+
+<link rel="stylesheet" href="http://www.kafeantzokia.com/web/templates/ja_helio/css/ja_newsmoo.css" type="text/css" />
+
+<script language="javascript" type="text/javascript" src="http://www.kafeantzokia.com/web/templates/ja_helio/js/ja.script.js"></script>
+
+<!-- Menu head -->
+			<link href="http://www.kafeantzokia.com/web/templates/ja_helio/ja_menus/ja_moomenu/ja.moomenu.css" rel="stylesheet" type="text/css" />
+			<script src="http://www.kafeantzokia.com/web/templates/ja_helio/ja_menus/ja_moomenu/ja.moomenu.js" language="javascript" type="text/javascript" ></script>
+			
+<link href="http://www.kafeantzokia.com/web/templates/ja_helio/css/colors/red.css" rel="stylesheet" type="text/css" />
+
+<!--[if lte IE 6]>
+<style type="text/css">
+.clearfix {height: 1%;}
+img {border: none;}
+</style>
+<![endif]-->
+
+<!--[if IE 7.0]>
+<style type="text/css">
+.clearfix {display: inline-block;}
+</style>
+<![endif]-->
+
+
+</head>
+
+<body id="bd" class="wide fs3" >
+<a name="Top" id="Top"></a>
+<ul class="accessibility">
+	<li><a href="/web/agenda?lang=es#ja-content" title="Skip to content">Skip to content</a></li>
+	<li><a href="/web/agenda?lang=es#ja-mainnav" title="Skip to main navigation">Skip to main navigation</a></li>
+	<li><a href="/web/agenda?lang=es#ja-col1" title="Skip to 1st column">Skip to 1st column</a></li>
+	<li><a href="/web/agenda?lang=es#ja-col2" title="Skip to 2nd column">Skip to 2nd column</a></li>
+</ul>
+
+<div id="ja-wrapper">
+
+<!-- BEGIN: MAIN NAVIGATION -->
+<div id="ja-mainnavwrap">
+	<div id="ja-mainnav">
+		<ul id="ja-cssmenu" class="clearfix">
+<li ><a href="http://www.kafeantzokia.com/web/" class="menu-item0 first-item" id="menu1" title="Inicio"><span class="menu-title">Inicio</span></a></li> 
+<li class="havechild"><a href="/web/es/sobre-kafe-antzokia" class="menu-item1" id="menu95" title="Sobre Kafe Antzokia"><span class="menu-title">Sobre Kafe Antzokia</span></a><ul><li class="havesubchild"><a href="/web/es/sobre-kafe-antzokia/bilbao" class=" first-item" id="menu53" title="Bilbao"><span class="menu-title">Bilbao</span></a><ul><li ><a href="/web/es/sobre-kafe-antzokia/bilbao/como-llegar-bilbao" class=" first-item" id="menu111" title="Como llegar"><span class="menu-title">Como llegar</span></a></li> 
+<li class="havesubchild"><a href="/web/es/sobre-kafe-antzokia/bilbao/rider-tecnico-y-planos"  id="menu117" title="Rider técnico y planos"><span class="menu-title">Rider técnico y planos</span></a><ul><li ><a href="/web/es/sobre-kafe-antzokia/bilbao/rider-tecnico-y-planos/rider-audio" class=" first-item" id="menu121" title="Rider audio"><span class="menu-title">Rider audio</span></a></li> 
+</ul></li> 
+<li ><a href="/web/es/sobre-kafe-antzokia/bilbao/uneak-eta-guneak" class=" last-item" id="menu125" title="Uneak eta guneak"><span class="menu-title">Uneak eta guneak</span></a></li> 
+</ul></li> 
+<li class="havesubchild"><a href="/web/es/sobre-kafe-antzokia/multimedia"  id="menu89" title="Multimedia"><span class="menu-title">Multimedia</span></a><ul><li ><a href="/web/es/sobre-kafe-antzokia/multimedia/tus-fotos" class=" first-item" id="menu118" title="Tus fotos"><span class="menu-title">Tus fotos</span></a></li> 
+<li ><a href="/web/es/sobre-kafe-antzokia/multimedia/videos" class=" last-item" id="menu119" title="Videos"><span class="menu-title">Videos</span></a></li> 
+</ul></li> 
+<li ><a href="/web/es/sobre-kafe-antzokia/contacto" class=" last-item" id="menu110" title="Contacto"><span class="menu-title">Contacto</span></a></li> 
+</ul></li> 
+<li class="havechild"><a href="/web/es/restaurante" class="menu-item2" id="menu101" title="Restaurante"><span class="menu-title">Restaurante</span></a><ul><li class="havesubchild"><a href="/web/es/restaurante/menu-dia" class=" first-item" id="menu105" title="Menú del día"><span class="menu-title">Menú del día</span></a><ul><li ><a href="/web/es/restaurante/menu-dia/menu-hoy" class=" first-item" id="menu115" title="Menú de hoy"><span class="menu-title">Menú de hoy</span></a></li> 
+<li ><a href="/web/es/restaurante/menu-dia/carta-platos-combinados" class=" last-item" id="menu127" title="Otras opciones"><span class="menu-title">Otras opciones</span></a></li> 
+</ul></li> 
+<li ><a href="/web/es/restaurante/menus-empresa"  id="menu104" title="Menús de empresa"><span class="menu-title">Menús de empresa</span></a></li> 
+<li ><a href="/web/es/restaurante/cenas-empresa"  id="menu108" title="Cenas de empresa y grupos"><span class="menu-title">Cenas de empresa y grupos</span></a></li> 
+<li ><a href="/web/es/restaurante/menu-navidades"  id="menu122" title="Menú navidades"><span class="menu-title">Menú navidades</span></a></li> 
+<li ><a href="/web/es/restaurante/servicio-lunch"  id="menu106" title="Servicio de lunch"><span class="menu-title">Servicio de lunch</span></a></li> 
+<li ><a href="/web/es/restaurante/menus-para-bodas" class=" last-item" id="menu130" title="Menús para bodas"><span class="menu-title">Menús para bodas</span></a></li> 
+</ul></li> 
+<li class="havechild active"><a href="/web/es/agenda" class="menu-item3 active" id="menu72" title="Agenda"><span class="menu-title">Agenda</span></a><ul><li ><a href="/web/es/agenda/suscribete-email" class=" first-item" id="menu92" title="Suscríbete por email"><span class="menu-title">Suscríbete por email</span></a></li> 
+<li ><a href="/web/es/agenda/artxiboa"  id="menu123" title="Artxiboa"><span class="menu-title">Artxiboa</span></a></li> 
+<li ><a href="/web/es/agenda/ultimos-meses" class=" last-item" id="menu128" title="Ultimos meses"><span class="menu-title">Ultimos meses</span></a></li> 
+</ul></li> 
+<li class="havechild"><a href="/web/es/entradas" class="menu-item4" id="menu113" title="Entradas"><span class="menu-title">Entradas</span></a><ul><li ><a href="/web/es/entradas/entradas-comprar" class=" first-item" id="menu59" title="Compra tu entrada ahora"><span class="menu-title">Compra tu entrada ahora</span></a></li> 
+<li ><a href="/web/es/entradas/preguntas-dudas" class=" last-item" id="menu114" title="Preguntas y dudas"><span class="menu-title">Preguntas y dudas</span></a></li> 
+</ul></li> 
+<li class="havechild"><a href="/web/es/mas" class="menu-item5 last-item" id="menu126" title="Más"><span class="menu-title">Más</span></a><ul><li ><a href="/web/es/mas/organizacion-eventos" class=" first-item" id="menu107" title="Organizacion de eventos"><span class="menu-title">Organizacion de eventos</span></a></li> 
+</ul></li> 
+</ul>
+				<div id="ja-search">
+			<form action="index.php" method="post">
+	<div class="search">
+		<input name="searchword" id="mod_search_searchword" maxlength="20" alt="Buscar" class="inputbox" type="text" size="20" value="buscar..."  onblur="if(this.value=='') this.value='buscar...';" onfocus="if(this.value=='buscar...') this.value='';" />	</div>
+	<input type="hidden" name="task"   value="search" />
+	<input type="hidden" name="option" value="com_search" />
+	<input type="hidden" name="Itemid" value="72" />
+</form>
+		</div>
+			</div>
+</div>
+<!-- END: MAIN NAVIGATION -->
+
+<!-- BEGIN: HEADER -->
+<div id="ja-headerwrap">
+<div id="ja-header" class="clearfix">
+
+			<h1 class="logo">
+			<a href="/web/index.php" title="Kafe Antzokia"><span>Kafe Antzokia</span></a>
+		</h1>
+		
+		<div id="ja-login">
+		<div id="jflanguageselection"><ul class="jflanguageselection"><li><a href="http://www.kafeantzokia.com/web/eu/agenda" ><span lang="eu" xml:lang="eu">Euskara</span></a></li><li id="active_language"><a href="http://www.kafeantzokia.com/web/es/agenda" ><span lang="es" xml:lang="es">Español</span></a></li><li><a href="http://www.kafeantzokia.com/web/en/schedule" ><span lang="en" xml:lang="en">English</span></a></li></ul></div><!--Joom!fish V2.0.3 (Flash)-->
+<!-- &copy; 2003-2009 Think Network, released under the GPL. -->
+<!-- More information: at http://www.joomfish.net -->
+
+	</div>
+	
+</div>
+</div>
+<!-- END: HEADER -->
+
+<div id="ja-containerwrap-fr">
+<div id="ja-container" class="clearfix">
+
+  <div id="ja-mainbody" class="clearfix">
+  
+  
+	<!-- BEGIN: CONTENT -->
+	<div id="ja-content" class="clearfix">
+
+		
+
+		<div id="ja-current-content" class="clearfix">
+		
+			<!-- BEGIN: PATHWAY -->
+			<div id="ja-pathwaywrap"><div id="ja-pathway"><div class="ja-innerpad">
+				<span class="breadcrumbs pathway">
+<a href="http://www.kafeantzokia.com/web/" class="pathway">Inicio</a> <img src="/web/templates/ja_helio/images/arrow.png" alt=""  /> Agenda</span>
+
+			</div></div></div>
+			<!-- END: PATHWAY -->
+
+			<div id="eventlist" class="el_eventlist">
+<p class="buttons">
+	<a href="/web/es/agenda/eventlist/archive" class="editlinktip hasTip" title="Mostrar Archivo::Haga clic para ver el archivo"><img src="/web/components/com_eventlist/assets/images/archive_front.png" alt="Mostrar Archivo"  /></a><a href="/web/es/agenda/eventlist?tmpl=component&amp;pop=1" class="editlinktip hasTip" onclick="window.open(this.href,'win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no'); return false;" title="Imprimir::Imprimir esta pantalla."><img src="/web/images/M_images/printButton.png" alt="Imprimir"  /></a></p>
+
+
+    <h1 class="componentheading">
+		Agenda Kafe Antzokia	</h1>
+
+
+
+	<div class="description no_space floattext">
+		Aquí tienes la lista de los próximos eventos. Haz click en el evento para ver los detalles, o en el calendario de la izquierda para ver los eventos de cada fecha.	</div>
+
+<!--table-->
+
+<script type="text/javascript">
+
+	function tableOrdering( order, dir, view )
+	{
+		var form = document.getElementById("adminForm");
+
+		form.filter_order.value 	= order;
+		form.filter_order_Dir.value	= dir;
+		form.submit( view );
+	}
+</script>
+
+<form action="http://www.kafeantzokia.com/web/agenda?lang=es" method="post" id="adminForm">
+
+
+<table class="eventtable" width="100%" border="0" cellspacing="0" cellpadding="0" summary="eventlist">
+
+	<colgroup>
+		<col width="10%" class="el_col_date" />
+					<col width="35%" class="el_col_title" />
+							<col width="15%" class="el_col_venue" />
+											<col width="7%" class="el_col_category" />
+			</colgroup>
+
+	<thead>
+			<tr>
+				<th id="el_date" class="sectiontableheader" align="left"><a href="javascript:tableOrdering('a.dates','desc','');" title="Haga clic para ordenar por esta columna">Fecha<img src="/web/images/sort_asc.png" alt=""  /></a></th>
+								<th id="el_title" class="sectiontableheader" align="left"><a href="javascript:tableOrdering('a.title','desc','');" title="Haga clic para ordenar por esta columna">Evento</a></th>
+								<th id="el_location" class="sectiontableheader" align="left"><a href="javascript:tableOrdering('l.venue','desc','');" title="Haga clic para ordenar por esta columna">Lugar</a></th>
+								<th id="el_category" class="sectiontableheader" align="left"><a href="javascript:tableOrdering('c.catname','desc','');" title="Haga clic para ordenar por esta columna">Tipo</a></th>
+							</tr>
+	</thead>
+	<tbody>
+	  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.21    					
+    					    				</strong>
+    				
+											<br />
+						19.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1317-juan-jose-ibarretxe-lehendakari-ohia"> Juan Jose Ibarretxe lehendakari ohia</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/6-hitzaldia">
+								Conferencia							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.22    					
+    					    				</strong>
+    				
+											<br />
+						21.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1215-red-fang--the-shrine--lord-dying"> Red Fang + The Shrine + Lord Dying</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.23    					
+    					    				</strong>
+    				
+											<br />
+						20.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1300-xabi-aburruzaga"> Xabi Aburruzaga</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.24    					
+    					    				</strong>
+    				
+											<br />
+						00.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1318-stereorocks-dj-coco--les-alsborregach--optigan-1"> STEREOROCKS: Dj Coco + Les Alsborregach + Optigan 1</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.24    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1299-the-fleshtones--dr-mahas-miracles-tonic"> The Fleshtones + Dr. Maha’s Miracles Tonic</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.25    					
+    					    				</strong>
+    				
+											<br />
+										</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1316-mendi-irteera-algara-konpartsa"> Anbotora mendi irteera (Algara konpartsa)</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/8-beste">
+								Otros							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.25    					
+    					    				</strong>
+    				
+											<br />
+						11.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1319-euskara-ikasleen-kantagunea"> Euskara ikasleen kantagunea</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.25    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1231-poncho-k"> Poncho K + Desidia</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.28    					
+    					    				</strong>
+    				
+											<br />
+						11.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1321-zine-txokoa-urte-berri-on-amona"> Zine txokoa: Urte berri on amona!</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/9-proiekzioa">
+								Proyección							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.28    					
+    					    				</strong>
+    				
+											<br />
+						19.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1320-gure-esku-dago-world-cafe"> Gure Esku Dago World Cafe</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/8-beste">
+								Otros							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.29    					
+    					    				</strong>
+    				
+											<br />
+						20.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1301-jacco-gardner"> Jacco Gardner (Kafe Antzokiaren Gutiziak)</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.30    					
+    					    				</strong>
+    				
+											<br />
+						21.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1287-urtzen-itzulera-kontzertua"> ¡Regreso de URTZ! + JARE</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.31    					
+    					    				</strong>
+    				
+											<br />
+						00.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1322-stereorocks-second-djs--antonio-resines-pincha--ainara-s"> STEREOROCKS: Second dj's + Antonio Resines Pincha + Ainara S</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.01.31    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1247-izal--second"> Izal + Second</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.01    					
+    					    				</strong>
+    				
+											<br />
+						21.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1292-kalimotxo-rock-festibala"> Festival Kalimotxo Rock (entradas agotadas)</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.02    					
+    					    				</strong>
+    				
+											<br />
+						18.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1337-kalimotxo-rock-festibala-2-eguna"> Kalimotxo Rock Festibala (Segunda fecha)</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.06    					
+    					    				</strong>
+    				
+											<br />
+						21.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1259-the-aristocrats--david-rufes-trio"> The Aristocrats + David Rufes Trio</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.07    					
+    					    				</strong>
+    				
+											<br />
+						00.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1342-stereorocks-maadraassoo-razzmatazz-bcn-les-alsborregach"> STEREOROCKS: Maadraassoo (Razzmatazz-Bcn), Les Alsborregach</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.07    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1330-the-bond-scott-band-acdc-tribute"> The Bon Scott Band (AC/DC Tribute)</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.08    					
+    					    				</strong>
+    				
+											<br />
+						14.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1332-bertso-bazkaria"> Bertso bazkaria</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/8-beste">
+								Otros							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.08    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1303-the-cherry-boppers--the-sweet-vandals"> THE CHERRY BOPPERS + THE SWEET VANDALS</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.11    					
+    					    				</strong>
+    				
+											<br />
+						21.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1306-nashville-pussy"> Nashville Pussy</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.12    					
+    					    				</strong>
+    				
+											<br />
+						19.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1343-30-urte-kolpez-kolpe-dokumentala"> Documental '30 urte kolpez kolpe'</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/9-proiekzioa">
+								Proyección							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.13    					
+    					    				</strong>
+    				
+											<br />
+						20.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1323-jabier-muguruza"> Jabier Muguruza + Mikel Azpiroz</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.14    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1297-muchachito-a-sus-compadres-el-raton-y-santos-de-veracruz"> MUCHACHITO &amp; SUS COMPADRES: El RATÓN Y SANTOS DE VERACRUZ</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.15    					
+    					    				</strong>
+    				
+											<br />
+										</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1296-the-groovies"> The Groovies</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.16    					
+    					    				</strong>
+    				
+											<br />
+						20.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1336-dub-inc"> Dub Inc</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.20    					
+    					    				</strong>
+    				
+											<br />
+						21.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1331-eh-sukarra"> EH Sukarra</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.21    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1324-the-fakeband"> The Fakeband + Moonshakers</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.22    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1325-zuzen-zuzenean-capsula"> Capsula +Niña Coyote +Chica Tornado +Belushi +Diablo dee Jay</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.23    					
+    					    				</strong>
+    				
+											<br />
+						20.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1302-the-original-wailers"> Bob Marley Day featuring The Original Wailers</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.27    					
+    					    				</strong>
+    				
+											<br />
+						21.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1307-the-steepwater-band"> THE STEEPWATER BAND</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.02.28    					
+    					    				</strong>
+    				
+											<br />
+						21.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1326-gabriel-aresti-euskaltegiko-inaute-jaia"> Fiesta de Carnaval del Euskaltegi Gabriel Aresti</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/7-jaia">
+								Fiesta							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.03.01    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1185-el-reno-renardo"> El Reno Renardo</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.03.02    					
+    					    				</strong>
+    				
+											<br />
+						19.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1338-inigo-ugarteburu"> Iñigo Ugarteburu (*en la sala superior)</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.03.08    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1245-shooter-jennings"> Shooter Jennings</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.03.12    					
+    					    				</strong>
+    				
+											<br />
+						20.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1248-neil-halstead-vs-the-velvet-underground-a-nico"> Neil Halstead vs The Velvet Underground &amp; Nico (Izar &amp; Star)</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.03.14    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1293-xoel-lopez"> Xoel López + Zarra</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.03.15    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1327-la-raiz--bongo-botrako--calavera-collective"> La Raiz + Bongo Botrako + Calavera Collective</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.03.21    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1328-la-fuga"> La Fuga</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.03.27    					
+    					    				</strong>
+    				
+											<br />
+						21.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1260-reincidentes-30-urteurrena-ospatzen"> Reincidentes (Gira 30 aniversario)</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.03.29    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1329-depedro"> Depedro</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.04.04    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1264-we-are-scientists"> We Are Scientists + Paws</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.04.05    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1339-la-pegatina"> La Pegatina</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.04.10    					
+    					    				</strong>
+    				
+											<br />
+						20.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1233-architects--talde-gonbidatua--talde-gonbidatua"> Architects + grupo invitado + grupo invitado</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.04.11    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1335-esne-beltza--little-pepe"> Esne Beltza + Little Pepe</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.04.12    					
+    					    				</strong>
+    				
+											<br />
+						21.30 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1305-ecolunar-festibala-dinero--sexy-zebras--cyan"> FESTIVAL ECOLUNAR: DINERO + SEXY ZEBRAS + CYAN</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.05.02    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1333-doctor-deseo"> Doctor Deseo</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry1" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.05.03    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1334-doctor-deseo"> Doctor Deseo</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		  			<tr class="sectiontableentry2" >
+
+    			<td headers="el_date" align="left">
+    				<strong>
+    					2014.05.16    					
+    					    				</strong>
+    				
+											<br />
+						22.00 				</td>
+
+				
+				<td headers="el_title" align="left" valign="top"><a href="/web/es/agenda/details/1340-marc-ford--elijah-ford"> Marc Ford + Elijah Ford</a></td>
+
+				
+					<td headers="el_location" align="left" valign="top">
+						<a href='/web/es/agenda/venueevents/1-Bilbo'>Kafe Antzokia Bilbao</a>					</td>
+
+				
+						<td headers="el_category" align="left" valign="top">
+							<a href="/web/es/agenda/categoryevents/1-musika">
+								Música							</a>
+						</td>
+
+					
+			</tr>
+
+  		
+	</tbody>
+</table>
+<p>
+<input type="hidden" name="filter_order" value="a.dates" />
+<input type="hidden" name="filter_order_Dir" value="" />
+</p>
+</form>
+
+<!--footer-->
+
+<div class="pageslinks">
+	<ul class="pagination"><li>&laquo;</li><li>&nbsp;<span>Inicio</span>&nbsp;</li><li>&nbsp;<span>Anterior</span>&nbsp;</li><li>&nbsp;<span>1</span>&nbsp;</li><li>&nbsp;<strong><a href="/web/es/agenda?start=50" title="2">2</a></strong>&nbsp;</li><li>&nbsp;<strong><a href="/web/es/agenda?start=50" title="Siguiente">Siguiente</a></strong>&nbsp;</li><li>&nbsp;<strong><a href="/web/es/agenda?start=50" title="Fin">Fin</a></strong>&nbsp;</li><li>&raquo;</li></ul></div>
+
+<p class="pagescounter">
+	Página 1 de 2</p>
+
+<p class="copyright">
+	EventList powered by <a href="http://www.schlu.net">schlu.net</a></p>
+
+</div>
+	
+			
+		</div>
+
+	</div>
+	<!-- END: CONTENT -->
+
+    <!-- BEGIN: LEFT COLUMN -->
+	<div id="ja-col1">
+		<div class="ja-innerpad">
+				<div class="module">
+			<div>
+				<div>
+					<div>
+													<h3>Calendario eventos</h3>
+											 
+<div class='eventcalq'><table class="mod_eventlistcalq_calendar" cellspacing="0" cellpadding="0">
+<caption class="mod_eventlistcalq_calendar-month"><a href="/web/es/agenda?el_mcal_month=12&amp;el_mcal_year=2013" rel="nofollow">&lt;&lt; </a>&nbsp;Enero&nbsp;2014&nbsp;<a href="/web/es/agenda?el_mcal_month=2&amp;el_mcal_year=2014" rel="nofollow"> &gt;&gt;</a></caption>
+<tr><th class="mod_eventlistcalq_daynames" abbr="Lun">&nbsp;Lu&nbsp;</th><th class="mod_eventlistcalq_daynames" abbr="Mar">&nbsp;Ma&nbsp;</th><th class="mod_eventlistcalq_daynames" abbr="Mié">&nbsp;Mi&nbsp;</th><th class="mod_eventlistcalq_daynames" abbr="Jue">&nbsp;Ju&nbsp;</th><th class="mod_eventlistcalq_daynames" abbr="Vie">&nbsp;Vi&nbsp;</th><th class="mod_eventlistcalq_daynames" abbr="Sáb">&nbsp;Sá&nbsp;</th><th class="mod_eventlistcalq_daynames" abbr="Dom">&nbsp;Do&nbsp;</th></tr>
+<tr><td class="mod_eventlistcalq">&nbsp;</td><td class="mod_eventlistcalq">&nbsp;</td><td class="mod_eventlistcalq_calday">&nbsp;&nbsp;1</td><td class="mod_eventlistcalq_calday">&nbsp;&nbsp;2</td><td class="mod_eventlistcalq_calday">&nbsp;&nbsp;3</td><td class="mod_eventlistcalq_calday">&nbsp;&nbsp;4</td><td class="mod_eventlistcalq_calday">&nbsp;&nbsp;5</td></tr>
+<tr><td class="mod_eventlistcalq_calday">&nbsp;&nbsp;6</td><td class="mod_eventlistcalq_calday">&nbsp;&nbsp;7</td><td class="mod_eventlistcalq_calday">&nbsp;&nbsp;8</td><td class="mod_eventlistcalq_calday">&nbsp;&nbsp;9</td><td class="mod_eventlistcalq_calday">10</td><td class="mod_eventlistcalq_calday">11</td><td class="mod_eventlistcalq_calday">12</td></tr>
+<tr><td class="mod_eventlistcalq_calday">13</td><td class="mod_eventlistcalq_calday">14</td><td class="mod_eventlistcalq_calday">15</td><td class="mod_eventlistcalq_calday">16</td><td class="mod_eventlistcalq_calday">17</td><td class="mod_eventlistcalq_calday">18</td><td class="mod_eventlistcalq_calday">19</td></tr>
+<tr><td class="mod_eventlistcalq_calday">20</td><td class="mod_eventlistcalq_caltodaylink"><span class="editlinktip hasTip" title="Juan Jose Ibarretxe lehendakari ohia&lt;br /&gt;" ><a href="/web/es/agenda/details/1317-juan-jose-ibarretxe-lehendakari-ohia">21</a></span></td><td class="mod_eventlistcalq_caldaylink"><span class="editlinktip hasTip" title="Red Fang + The Shrine + Lord Dying&lt;br /&gt;" ><a href="/web/es/agenda/details/1215-red-fang--the-shrine--lord-dying">22</a></span></td><td class="mod_eventlistcalq_caldaylink"><span class="editlinktip hasTip" title="Xabi Aburruzaga&lt;br /&gt;" ><a href="/web/es/agenda/details/1300-xabi-aburruzaga">23</a></span></td><td class="mod_eventlistcalq_caldaylink"><span class="editlinktip hasTip" title="The Fleshtones + Dr. Maha’s Miracles Tonic&lt;br /&gt;STEREOROCKS: Dj Coco + Les Alsborregach + Optigan 1&lt;br /&gt;" ><a href="/web/es/agenda/day/20140124">24</a></span></td><td class="mod_eventlistcalq_caldaylink"><span class="editlinktip hasTip" title="Poncho K + Desidia&lt;br /&gt;Anbotora mendi irteera (Algara konpartsa)&lt;br /&gt;Euskara ikasleen kantagunea&lt;br /&gt;" ><a href="/web/es/agenda/day/20140125">25</a></span></td><td class="mod_eventlistcalq_calday">26</td></tr>
+<tr><td class="mod_eventlistcalq_calday">27</td><td class="mod_eventlistcalq_caldaylink"><span class="editlinktip hasTip" title="Gure Esku Dago World Cafe&lt;br /&gt;Zine txokoa: Urte berri on amona!&lt;br /&gt;" ><a href="/web/es/agenda/day/20140128">28</a></span></td><td class="mod_eventlistcalq_caldaylink"><span class="editlinktip hasTip" title="Jacco Gardner (Kafe Antzokiaren Gutiziak)&lt;br /&gt;" ><a href="/web/es/agenda/details/1301-jacco-gardner">29</a></span></td><td class="mod_eventlistcalq_caldaylink"><span class="editlinktip hasTip" title="¡Regreso de URTZ! + JARE&lt;br /&gt;" ><a href="/web/es/agenda/details/1287-urtzen-itzulera-kontzertua">30</a></span></td><td class="mod_eventlistcalq_caldaylink"><span class="editlinktip hasTip" title="Izal + Second&lt;br /&gt;STEREOROCKS: Second dj&#039;s + Antonio Resines Pincha + Ainara S&lt;br /&gt;" ><a href="/web/es/agenda/day/20140131">31</a></span></td><td class="mod_eventlistcalq">&nbsp;</td><td class="mod_eventlistcalq">&nbsp;</td></tr>
+</table>
+</div>  					</div>
+				</div>
+			</div>
+		</div>
+			<div class="module">
+			<div>
+				<div>
+					<div>
+													<h3>Menú principal</h3>
+											<ul class="menu"><li class="item1"><a href="http://www.kafeantzokia.com/web/"><span>Inicio</span></a></li><li class="parent item95"><a href="/web/es/sobre-kafe-antzokia"><span>Sobre Kafe Antzokia</span></a></li><li class="parent item101"><a href="/web/es/restaurante"><span>Restaurante</span></a></li><li id="current" class="parent active item72"><a href="/web/es/agenda"><span>Agenda</span></a><ul><li class="item92"><a href="/web/es/agenda/suscribete-email"><span>Suscríbete por email</span></a></li><li class="item123"><a href="/web/es/agenda/artxiboa"><span>Artxiboa</span></a></li><li class="item128"><a href="/web/es/agenda/ultimos-meses"><span>Ultimos meses</span></a></li></ul></li><li class="parent item113"><a href="/web/es/entradas"><span>Entradas</span></a></li><li class="parent item126"><a href="/web/es/mas"><span>Más</span></a></li></ul>					</div>
+				</div>
+			</div>
+		</div>
+			<div class="module_hilite">
+			<div>
+				<div>
+					<div>
+													<h3>Twitter @kafeantzokia</h3>
+											<p><a href="http://twitter.com/kafeantzokia" title="Twitter kontua"><img src="/web/../irudiak/finkoak/logo-twitter2.gif" border="0" /></a></p>
+<p><a href="https://www.facebook.com/kafeantzokia" title="Kafe Antzokia Facebooken"><img src="/web/../irudiak/finkoak/logo-facebook2.gif" border="0" /></a></p>					</div>
+				</div>
+			</div>
+		</div>
+	
+		</div>
+	</div><br />
+	<!-- END: LEFT COLUMN -->
+			
+	</div>
+		
+	
+</div></div>
+
+<!-- BEGIN: BOTTOM SPOTLIGHT -->
+<div id="ja-botslwrap">
+<div id="ja-botsl" class="clearfix">
+
+    <div class="ja-box-left" style="width: 24.98%;">
+				<div class="moduletable">
+					<h3>Referencia euskaldun</h3>
+					<ul class="latestnews">
+<li class="latestnews"> <span class="latestnews"> Surgido del mundo del euskara</span> </li>
+<li class="latestnews"> <a class="latestnews" href="/web/es/component/content/34-demo-category/45-prentsaurrekoakafeantzokiarenitxierasalatzeko"> </a><span class="latestnews"><span class="latestnews">En el centro de Bilbao</span></span> </li>
+<li class="latestnews"> <a class="latestnews" href="/web/es/component/content/34-demo-category/47-kafe-antzokiaren-oharra"> </a><span class="latestnews">Fomentando actividades en nuestra lengua</span></li>
+<li class="latestnews"><span class="latestnews">Manteniendo lo nuestro, abiertos a lo de fuera<br /></span></li>
+</ul>
+<p> </p>		</div>
+	
+  </div>
+  
+    <div class="ja-box-center" style="width: 24.98%;">
+				<div class="moduletable">
+					<h3>¿Negocio privado?</h3>
+					<ul class="latestnews">
+<li class="latestnews"> <span class="latestnews"> Surgido del mundo cooperativo</span></li>
+<li class="latestnews"><span class="latestnews">Todos los beneficios a financiar proyectos </span></li>
+<li class="latestnews"> <a class="latestnews" href="/web/es/component/content/34-demo-category/47-kafe-antzokiaren-oharra"> </a><span class="latestnews">Sueldos dignos para los trabajadores</span></li>
+<li class="latestnews"><span class="latestnews">Financiando proyectos culturales en euskara</span></li>
+</ul>
+<p> </p>		</div>
+	
+  </div>
+  
+  
+    <div class="ja-box-center" style="width: 24.98%;">
+				<div class="moduletable">
+					<h3>Dimensión cultural</h3>
+					<ul class="latestnews">
+<li class="latestnews"><span class="latestnews"><span class="latestnews">Para much@s, el primer contacto con el euskara</span></span> </li>
+<li class="latestnews"> <a class="latestnews" href="/web/es/component/content/34-demo-category/47-kafe-antzokiaren-oharra"> </a><span class="latestnews">Promocionando el nombre de Bilbao en el mundo</span></li>
+<li class="latestnews"><span class="latestnews">Cientos de actos culturales cada año</span> </li>
+<li class="latestnews"> <a class="latestnews" href="/web/es/component/content/35-newsmoo/52-ebuletina"> </a><span class="latestnews">Ejemplo seguido en otros lugares</span></li>
+<li class="latestnews"><span class="latestnews">Sin ayuda municipal alguna<br /></span></li>
+</ul>		</div>
+	
+  </div>
+    
+    <div class="ja-box-right" style="width: 24.98%;">
+				<div class="moduletable">
+					<h3>Estamos segur@s...</h3>
+					<ul class="latestnews">
+<li class="latestnews"> <span class="latestnews"> Porteros de noche todos los fines de semana</span> </li>
+<li class="latestnews"> <a class="latestnews" href="/web/es/component/content/34-demo-category/45-prentsaurrekoakafeantzokiarenitxierasalatzeko"> </a><span class="latestnews"><span class="latestnews">Aforo controlado</span></span> </li>
+<li class="latestnews"> <a class="latestnews" href="/web/es/component/content/34-demo-category/47-kafe-antzokiaren-oharra"> </a><span class="latestnews">Todas las inspecciones de seguridad en regla</span> </li>
+<li class="latestnews"> <a class="latestnews" href="/web/es/component/content/35-newsmoo/52-ebuletina"> </a><span class="latestnews">Controlando la entrada y salida de gente</span></li>
+<li class="latestnews"><span class="latestnews">16 años de trayectoria impecable<br /></span></li>
+</ul>		</div>
+	
+  </div>
+  
+</div></div>
+<!-- END: BOTTOM SPOTLIGHT -->
+
+<!-- BEGIN: FOOTER -->
+<div id="ja-footerwrap">
+<div id="ja-footer" class="clearfix">
+
+	<ul id="mainlevel-nav"><li><a href="/web/es/contactar" class="mainlevel-nav" >Contactar</a></li><li><a href="http://twitter.com/kafeantzokia" target="_blank" class="mainlevel-nav" >Twitter</a> <img src="/web/images/stories/twitter_logogif.gif" border="0" alt="Twitter"/></li><li><a href="http://www.facebook.com/pages/Bilbao-Euskal-Herria/Kafe-Antzokia/57103775972" class="mainlevel-nav" >Facebook</a> <img src="/web/images/stories/facebook.gif" border="0" alt="Facebook"/></li><li><a href="http://www.flickr.com/photos/kafeantzokia/" target="_blank" class="mainlevel-nav" >Flickr</a></li></ul>
+	<!--<small><a href="http://www.joomla.org">Joomla!</a> es software libre publicado bajo la <a href="http://www.gnu.org/licenses/gpl-2.0.html">licencia GNU/GPL.</a></small> -->
+<!-- AddThis Button BEGIN -->
+<p><a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pub=zenbatgara"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" border="0" alt="Bookmark and Share" width="125" height="16" /></a>
+<script src="http://s7.addthis.com/js/250/addthis_widget.js?pub=zenbatgara" type="text/javascript"></script>
+</p>
+<!-- AddThis Button END -->
+
+</div>
+</div>
+<!-- END: FOOTER -->
+
+</div>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-420625-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+
+</html>

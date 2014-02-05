@@ -1,0 +1,78 @@
+#Pasos para instalar
+# brew install postgresql
+#Ejecutar despuues de instalar
+#ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+#launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+#Or, if you don't want/need launchctl, you can just run:
+#   postgres -D /usr/local/var/postgres
+#Crear db-->createdb mydb
+#psql mydb --> Para acceder a ese schema
+#\d+           Show all tables, with descriptions
+#\d+ table     Show the definition of the named table (or view), with  column descriptions
+#\?            Describe briefly all the \ commands in psql               
+
+
+
+
+CREATE TABLE LOCATION
+(ID SERIAL PRIMARY KEY,
+DENOM VARCHAR(60),
+CITY VARCHAR(60),
+POSTALCODE INTEGER,
+LONG FLOAT  NOT NULL,
+LAT FLOAT NOT NULL,
+UNIQUE (DENOM, LONG, LAT));
+
+
+CREATE TABLE EVENT_TYPE
+(ID SERIAL PRIMARY KEY,
+DENOM VARCHAR(60)
+);
+
+CREATE TABLE EVENT_LOCATION 
+(
+	LOCATION_ID INTEGER references location(id),
+	EVENT_ID INTEGER references event(id),
+	PRIMARY KEY(LOCATION_ID, EVENT_ID)
+)
+CREATE TABLE EVENT
+(ID SERIAL PRIMARY KEY,
+DENOM VARCHAR(60),
+LOCATION_ID INTEGER references location(id),
+PRICE FLOAT,
+STARTDATE DATE,
+ENDATE DATE,
+TYPE_ID INTEGER references event_type(id)
+);
+
+#VERSION 2
+CREATE TABLE LOCATION
+(ID SERIAL PRIMARY KEY,
+DENOM VARCHAR(255),
+CITY VARCHAR(255),
+POSTALCODE INTEGER,
+LONG FLOAT  NOT NULL,
+LAT FLOAT NOT NULL,
+UNIQUE (DENOM, LONG, LAT));
+
+CREATE TABLE EVENT_TYPE
+(ID SERIAL PRIMARY KEY,
+DENOM VARCHAR(255)
+);
+
+CREATE TABLE EVENT
+(ID SERIAL PRIMARY KEY,
+DENOM VARCHAR(255),
+PRICE FLOAT,
+STARTDATE DATE,
+ENDATE DATE,
+TYPE_ID INTEGER references event_type(id)
+);
+
+CREATE TABLE EVENT_LOCATION 
+(
+LOCATION_ID INTEGER references location(id),
+EVENT_ID INTEGER references event(id),
+PRIMARY KEY(LOCATION_ID, EVENT_ID)
+); 
+
