@@ -11,7 +11,7 @@ BOT_NAME = 'demo'
 SPIDER_MODULES = ['demo.spiders']
 NEWSPIDER_MODULE = 'demo.spiders'
 ITEM_PIPELINES = ['demo.pipelines.EventPipeline']
-#LOG_LEVEL='ERROR'
+LOG_LEVEL='ERROR'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'demo (+http://www.yourdomain.com)'

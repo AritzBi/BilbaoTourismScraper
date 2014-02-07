@@ -14,9 +14,9 @@ g=geocoders.GoogleV3()
 place, (lat, lng) = g.geocode("Alameda Urquijo 4 48008 Bilbao ")
 print "%s: %.5f, %.5f" % (place, lat, lng)  
 
-"""g=geocoders.GeoNames(None,'aritzbi',None)
-place, (lat, lng) = g.geocode("Kafe Antzokia, Bilbao, Spain")
-print "%s: %.5f, %.5f" % (place, lat, lng)  """
+g=geocoders.GeoNames(None,'aritzbi',None)
+place, (lat, lng) = g.geocode("Kafe Antzokia")
+print "%s: %.5f, %.5f" % (place, lat, lng) 
 
 #g=geocoders.Nominatim()
 #place = g.geocode("Palacio Euskalduna",None,5)
