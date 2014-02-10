@@ -55,6 +55,20 @@ class EventPipeline(object):
 				endDate=startDate	
 			self.insertDataToDB(item['location'][0],item ['title'][0],5,startDate,endDate)
 			#'Category: '+ item ['category'][0]
+		elif spider.name=='bilbaorss_spider':
+			denomEvent=item['title']
+			denomLocation=item['location']
+			startDate=item['startDate']
+			endDate=item['endDate']
+			hour=item['hour']
+			startDate=startDate.split('-')
+			endDate=endDate.split('-')
+			hour=hour.split(':')
+			startDate=datetime.datetime.combine(datetime.date(int(startDate[0]),int(startDate[1]),int(startDate[2])),datetime.time(int(hour[0]),int(hour[1])))
+			endDate=datetime.datetime.combine(datetime.date(int(endDate[0]),int(endDate[1]),int(endDate[2])),datetime.time(int(hour[0]),int(hour[1])))
+
+			print startDate
+			print endDate
 
 
 	def insertDataToDB(self, denomLocation, denomEvent, price, startDate, endDate):

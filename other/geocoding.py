@@ -10,9 +10,9 @@ print results[0].city
 print results[0].postal_code
 #print results[0]"""
 
-g=geocoders.GoogleV3()
-place, (lat, lng) = g.geocode("Alameda Urquijo 4 48008 Bilbao ")
-print "%s: %.5f, %.5f" % (place, lat, lng)  
+"""g=geocoders.GoogleV3()
+place, (lat, lng) = g.geocode("")
+print "%s: %.5f, %.5f" % (place, lat, lng)  """
 
 g=geocoders.GeoNames(None,'aritzbi',None)
 place, (lat, lng) = g.geocode("Kafe Antzokia")

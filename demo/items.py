@@ -26,6 +26,7 @@ class BilbaoItem(Item):
 	nearestMetro=Field()
 	postalCode=Field()
 	city=Field()
+	hour=Field()
 class Item(Item):
 	title=Field()
 	link=Field()
