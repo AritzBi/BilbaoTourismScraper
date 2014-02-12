@@ -6,12 +6,13 @@ from demo.items import Item
 import datetime
 from scrapy.contrib.spiders import XMLFeedSpider
 from demo.items import BilbaoItem
+import re
 
 class BilbaoRSSSpider(XMLFeedSpider):
 	BASE='http://www.bilbao.net'
 	name='bilbaorss_spider'
 	allowed_domains=['bilbao.net']
-	start_urls=["http://www.bilbao.net/cs/Satellite?language=es&pageid=3002273335&pagename=Bilbaonet%2FPage%2FBIO_suscripcionRSS&tipoSus=Agenda"]
+	start_urls=["http://www.bilbao.net/cs/Satellite?language=es&pageid=3002273335&pagename=Bilbaonet%2FPage%2FBIO_suscripcionRSS&tipoSus=Agenda","http://www.bilbao.net/cs/Satellite?language=es&pageid=3002273835&pagename=Bilbaonet%2FPage%2FBIO_suscripcionRSS&tipoSus=Agenda"]
 	iterator = 'iternodes' # This is actually unnecessary, since it's the default value
 	itertag = 'item'
 	def parse_node(self, response, node):
@@ -33,7 +34,8 @@ class BilbaoRSSSpider(XMLFeedSpider):
 		hour=event.xpath("dl[@class='lista_dl']/dd/text()").re(r"\d{2}[:]\d{2}")
 		relativeLink=event.xpath("dl[@class='lista_dl']/dd/a/@href").extract()
 		item=BilbaoItem()
-		item['title']=title[0]
+		item['title']=title[0].strip()
+		print title[0]
 		if(len(startDate)>1):
 			item['startDate']=startDate[0]
 			item['endDate']=startDate[1]
@@ -47,8 +49,13 @@ class BilbaoRSSSpider(XMLFeedSpider):
 			request.meta['item']=item
 			return request
 		else:
-			item['location']=startDate[len(startDate)-1]
-			return item
+			alternativeLocation=event.xpath("dl[@class='lista_dl']/dd/text()").extract()
+			if len(alternativeLocation)>0:
+				pattern=re.compile(r"(?P<date>\d{2}-\d{2}-\d{4})|(?P<time>\d{2}:\d{2})")
+				location=pattern.sub("",alternativeLocation[len(alternativeLocation)-1])
+				if location:
+					item['location']=location
+					return item
 
 	def getLocationDirection(self, response):
 		sel=Selector(response)

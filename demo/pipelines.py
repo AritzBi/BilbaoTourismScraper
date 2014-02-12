@@ -6,7 +6,9 @@ import sys
 import psycopg2
 from pygeocoder import Geocoder
 import pprint
-import datetime;
+import datetime
+from geopy import geocoders
+
 
 class DemoPipeline(object):
     def process_item(self, item, spider):
@@ -64,12 +66,9 @@ class EventPipeline(object):
 			startDate=startDate.split('-')
 			endDate=endDate.split('-')
 			hour=hour.split(':')
-			startDate=datetime.datetime.combine(datetime.date(int(startDate[0]),int(startDate[1]),int(startDate[2])),datetime.time(int(hour[0]),int(hour[1])))
-			endDate=datetime.datetime.combine(datetime.date(int(endDate[0]),int(endDate[1]),int(endDate[2])),datetime.time(int(hour[0]),int(hour[1])))
-
-			print startDate
-			print endDate
-
+			startDate=datetime.datetime.combine(datetime.date(int(startDate[2]),int(startDate[1]),int(startDate[0])),datetime.time(int(hour[0]),int(hour[1])))
+			endDate=datetime.datetime.combine(datetime.date(int(endDate[2]),int(endDate[1]),int(endDate[0])),datetime.time(int(hour[0]),int(hour[1])))
+			self.insertDataToDB(denomLocation, denomEvent,1,startDate,endDate)
 
 	def insertDataToDB(self, denomLocation, denomEvent, price, startDate, endDate):
 		denomLocation=denomLocation.split('y')
@@ -78,16 +77,11 @@ class EventPipeline(object):
 		for i in range(len(denomLocation)-1):
 			listLocations.extend(denomLocation[i].split(','))
 		for val in listLocations:
-			try:
-	 			results=Geocoder.geocode(val)
-			except: 
-				print 'Lugar del fallo: '+val
-			coordinates=results[0].coordinates
+			coordinates=self.getCoordinates(val)
 			longitude=coordinates[0]
 			latitude=coordinates[1]
-			city=results[0].city
-			postalCode=results[0].postal_code
-
+			city="Test"
+			postalCode=48014
 	 		SQLSelect="SELECT id FROM LOCATION WHERE DENOM=%s and long=%s and lat=%s;"
 	 		self.cursor.execute(SQLSelect,(val,longitude,latitude))
 			if self.cursor.rowcount==0:
@@ -110,3 +104,24 @@ class EventPipeline(object):
 				SQLEventLocation="INSERT INTO EVENT_LOCATION (LOCATION_ID,EVENT_ID) VALUES (%s,%s);"
 				self.cursor.execute(SQLEventLocation,(location_id,event_id))
  		self.conn.commit()
+
+ 	def getCoordinates(self, denomLocation):
+ 		try:
+ 			g=geocoders.GoogleV3()
+			place, (lat, lng) = g.geocode(denomLocation)
+			return(lat,lng)
+		except:
+			try:
+				g=geocoders.GeoNames(None,'aritzbi',None)
+				place, (lat, lng) = g.geocode(denomLocation)
+				return(lat,lng)
+			except:
+				try:		
+					g=geocoders.Bing('Ag1Y_zbKfJ-sIea_MXaCdtIgnnYojrBytkIc3Pa0L0JLeKcFBwitYBfJvyak5fhq',timeout=5)
+					place, (lat, lng) = g.geocode(denomLocation, True, None, None)
+					return(lat,lng)
+				except:
+					return (0,0)
+
+
+
