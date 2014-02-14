@@ -53,7 +53,7 @@ CITY VARCHAR(255),
 POSTALCODE INTEGER,
 LONG FLOAT  NOT NULL,
 LAT FLOAT NOT NULL,
-UNIQUE (DENOM, LONG, LAT));
+UNIQUE (DENOM, LONG, LAT));''
 
 CREATE TABLE EVENT_TYPE
 (ID SERIAL PRIMARY KEY,
@@ -76,3 +76,15 @@ EVENT_ID INTEGER references event(id),
 PRIMARY KEY(LOCATION_ID, EVENT_ID)
 ); 
 
+
+INSERT INTO event_type(denom) VALUES ('Infantiles');
+INSERT INTO event_type(denom) VALUES ('Exposiciones');
+INSERT INTO event_type(denom) VALUES ('Concursos');
+INSERT INTO event_type(denom) VALUES ('Jornadas, conferencias y congresos');
+#Voy a meter Opera tambien aqui.
+INSERT INTO event_type(denom) VALUES ('Música');
+INSERT INTO event_type(denom) VALUES ('Teatro y Danza');
+INSERT INTO event_type(denom) VALUES ('Cine');
+INSERT INTO event_type(denom) VALUES ('Deportes');
+INSERT INTO event_type(denom) VALUES ('Mercados y compras');
+INSERT INTO event_type(denom) VALUES ('Folclore y fiestas populares');

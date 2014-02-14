@@ -1,7 +1,10 @@
+#!/usr/bin/env python
+#coding: utf8 
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
+# See: http://doc.scrapy.org/en/latest/topics/item-pipeline.
+
 import sys
 import psycopg2
 from pygeocoder import Geocoder
@@ -12,7 +15,6 @@ from geopy import geocoders
 
 class DemoPipeline(object):
     def process_item(self, item, spider):
-    	print 'asdasdasda'
         return item
 
 class EventPipeline(object):
@@ -35,7 +37,7 @@ class EventPipeline(object):
 			endDate=item['endDate'][0]
 			endDate=endDate.split('-')
 			if(len(denomLocation)!=0):
-				self.insertDataToDB(denomLocation[0], denomEvent[0],1,startDate,endDate)
+				self.insertDataToDB(denomLocation[0], denomEvent[0],1,startDate,endDate,-1)
 		elif spider.name == 'antzoki_spider':
 			date=item['date'][0]
 			date=date.split('.')
@@ -55,7 +57,7 @@ class EventPipeline(object):
 			else:
 				startDate=datetime.datetime.combine(datetime.date(int(date[0]),int(date[1]),int(date[2])),datetime.time(0,0))
 				endDate=startDate	
-			self.insertDataToDB(item['location'][0],item ['title'][0],5,startDate,endDate)
+			self.insertDataToDB(item['location'][0],item ['title'][0],5,startDate,endDate, self.getCategoryId(item['category'][0]) )
 			#'Category: '+ item ['category'][0]
 		elif spider.name=='bilbaorss_spider':
 			denomEvent=item['title']
@@ -68,9 +70,9 @@ class EventPipeline(object):
 			hour=hour.split(':')
 			startDate=datetime.datetime.combine(datetime.date(int(startDate[2]),int(startDate[1]),int(startDate[0])),datetime.time(int(hour[0]),int(hour[1])))
 			endDate=datetime.datetime.combine(datetime.date(int(endDate[2]),int(endDate[1]),int(endDate[0])),datetime.time(int(hour[0]),int(hour[1])))
-			self.insertDataToDB(denomLocation, denomEvent,1,startDate,endDate)
+			self.insertDataToDB(denomLocation, denomEvent,1,startDate,endDate,-1)
 
-	def insertDataToDB(self, denomLocation, denomEvent, price, startDate, endDate):
+	def insertDataToDB(self, denomLocation, denomEvent, price, startDate, endDate, categoryId):
 		denomLocation=denomLocation.split('y')
 		listLocations=[]
 		listLocations.append(denomLocation[len(denomLocation)-1])
@@ -93,8 +95,8 @@ class EventPipeline(object):
 			SQLSelectEvent="Select id FROM event WHERE DENOM=%s;"
 			self.cursor.execute(SQLSelectEvent,(denomEvent,))
 			if self.cursor.rowcount==0:
-				SQLEvent="INSERT INTO event (denom, price, startdate, endate) VALUES (%s, %s, %s, %s) returning id;"
-				self.cursor.execute(SQLEvent, (denomEvent, price, startDate,endDate))
+				SQLEvent="INSERT INTO event (denom, price, startdate, endate, type_id) VALUES (%s, %s, %s, %s, %s) returning id;"
+				self.cursor.execute(SQLEvent, (denomEvent, price, startDate,endDate,categoryId))
 				event_id=self.cursor.fetchone()[0]
 			else:
 				event_id=self.cursor.fetchone()[0]
@@ -122,6 +124,46 @@ class EventPipeline(object):
 					return(lat,lng)
 				except:
 					return (0,0)
+
+	def getCategoryId(self, denomCategory):
+		denomCategory=denomCategory.strip()
+		print denomCategory
+		if denomCategory=='Club' or denomCategory.encode('utf-8')=='Música':
+			SQL="SELECT ID FROM EVENT_TYPE WHERE DENOM='Música';"
+			self.cursor.execute(SQL)
+			if self.cursor.rowcount!=0:
+				#categoryId=self.cursor.fetchone()[0]
+				#print 'denomCategory: '+denomCategory +' categoryId: '+str(categoryId)
+				return self.cursor.fetchone()[0]
+		elif denomCategory=='Danza':
+			SQL="SELECT ID FROM EVENT_TYPE WHERE DENOM='Teatro y Danza';"
+			self.cursor.execute(SQL)
+			if self.cursor.rowcount!=0:
+				#categoryId=self.cursor.fetchone()[0]
+				#print 'denomCategory: '+denomCategory +' categoryId: '+str(categoryId)
+				return self.cursor.fetchone()[0]
+		elif denomCategory=='Conferencia' or denomCategory.encode('utf-8')=='Presentación':
+			SQL="SELECT ID FROM EVENT_TYPE WHERE DENOM='Jornadas, conferencias y congresos';"
+			self.cursor.execute(SQL)
+			if self.cursor.rowcount!=0:
+				#categoryId=self.cursor.fetchone()[0]
+				#print 'denomCategory: '+denomCategory +' categoryId: '+str(categoryId)
+				return self.cursor.fetchone()[0]
+		elif denomCategory=='Fiesta':
+			SQL="SELECT ID FROM EVENT_TYPE WHERE DENOM='Folclore y fiestas populares';"
+			self.cursor.execute(SQL)
+			if self.cursor.rowcount!=0:
+				#categoryId=self.cursor.fetchone()[0]
+				#print 'denomCategory: '+denomCategory +' categoryId: '+str(categoryId)
+				return self.cursor.fetchone()[0]	
+		elif denomCategory.encode('utf-8')=='Proyección':
+			SQL="SELECT ID FROM EVENT_TYPE WHERE DENOM='Cine';"
+			self.cursor.execute(SQL)
+			if self.cursor.rowcount!=0:
+				#categoryId=self.cursor.fetchone()[0]
+				#print 'denomCategory: '+denomCategory +' categoryId: '+str(categoryId)
+				return self.cursor.fetchone()[0]	
+		return -1		
 
 
 
