@@ -35,20 +35,24 @@ class DemoSpider(Spider):
 	def getPrice (self, response):
 		sel=Selector(response)
 		precioAnticipada=sel.xpath("//body/div/div/div/div/div/div/div/div/p/strong/text()").re(r'Anticipada:\s*\d+\s*')
-		precioTaquilla=sel.xpath("//body/div/div/div/div/div/div/div/div/p/strong/text()").re(r'Taquilla:\s*\d+\s*')
-		precioGratis=sel.xpath("//body/div/div/div/div/div/div/div/div/p/strong/text()").re(r'Entrada libre | Entrada gratuita')
+		precioTaquilla=sel.xpath("//body/div/div/div/div/div/div/div/div/p/strong/text()").re(r'Taquilla:\s*\d+\s*|Entrada:\s*\d+\s*')
+		precioGratis=sel.xpath("//body/div/div/div/div/div/div/div/div/p/strong/text()").re(r'Entrada\slibre|Entrada\sgratuita')
 		item = response.meta['item']
 		if len(precioAnticipada)!=0:
 			#print "Precio Anticipada: "+precioAnticipada[0]
 			precioAnticipada=precioAnticipada[0].split(':')
 			#print "Precio Anticipada: "+precioAnticipada.pop()
 			item['priceAnticipada']=precioAnticipada.pop()
+		else:
+			item['priceAnticipada']=-1
 		if len(precioTaquilla)!=0:
 			precioTaquilla=precioTaquilla[0].split(':')
 			#print "Precio Taquilla: "+precioTaquilla.pop()
 			item['priceTaquilla']=precioTaquilla.pop()
+		else:
+			item['priceTaquilla']=-1
 		if len(precioGratis)!=0:
 			#print "Precio Gratis"
-			item['precioTaquilla']=0
+			item['priceTaquilla']=0
 		return item
 		

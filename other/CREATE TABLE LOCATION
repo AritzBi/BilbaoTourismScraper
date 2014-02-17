@@ -90,3 +90,4 @@ INSERT INTO event_type(denom) VALUES ('Cine');
 INSERT INTO event_type(denom) VALUES ('Deportes');
 INSERT INTO event_type(denom) VALUES ('Mercados y compras');
 INSERT INTO event_type(denom) VALUES ('Folclore y fiestas populares');
+INSERT INTO event_type(denom) VALUES ('Otros');
