@@ -1,0 +1,39 @@
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+@prefix gn: <http://www.geonames.org/ontology#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix event: <http://purl.org/NET/c4dm/event.owl#>.
+@prefix tl: <http://purl.org/NET/c4dm/timeline.owl#>.
+
+
+#For the name, should I use foaf or gn?
+<http://enjoybilbao.deusto.es/kafeantzokia> a geo:SpatialThing;
+	gn:name "Kafe Antzokia";
+	geo:longitude "43,263700"^^xsd:decimal;
+	geo:latitude "-2,928221"^^xsd:decimal;
+	gn:countryCode "ES";
+.
+
+
+
+<http://enjoybilbao.deusto.es/event1> a event:Event;
+	event:agent[
+		a foaf:Person;
+		foaf:name "Fermin Muguruza";
+	];
+	event:time [
+		a tl:Interval;
+		tl:at "2007-10-15T12:00:00"^^xsd:dateTime;
+		tl:duration "PT1h"^^xsd:duration;
+	];
+	event:place[
+		geo:longitude "43,263700"^^xsd:decimal;
+		geo:latitude "-2,928221"^^xsd:decimal;
+		gn:countryCode "ES";
+	]
+
+.
