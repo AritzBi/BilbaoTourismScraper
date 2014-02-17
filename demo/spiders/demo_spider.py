@@ -1,11 +1,15 @@
+#!/usr/bin/env python
+#coding: utf8 
 from scrapy.spider import Spider 
 from scrapy.selector import Selector
 from demo.items import EventItem
+from scrapy.http.request import Request
 
 class DemoSpider(Spider):
 	name="antzoki_spider"
 	allowed_domains=["kafeantzokia.com"]
 	start_urls=["http://www.kafeantzokia.com/web/agenda?lang=es"]
+	BASE='http://www.kafeantzokia.com'
 
 	def parse(self, response):
 		sel = Selector(response)
@@ -20,5 +24,31 @@ class DemoSpider(Spider):
 			item['hour'] = site.xpath("td[@headers='el_date']/text()").extract()
 			item['location'] = site.xpath("td[@headers='el_location']/a/text()").extract()
 			item['category'] = site.xpath("td[@headers='el_category']/a/text()").extract()
-			items.append(item)
-		return items
+			relativeLink=site.xpath("td[@headers='el_title']/a/@href").extract()
+			url=self.BASE+relativeLink[0]
+			request= Request(url, callback=self.getPrice)
+			request.meta['item']=item
+			yield request
+			#items.append(item)
+		#return items
+
+	def getPrice (self, response):
+		sel=Selector(response)
+		precioAnticipada=sel.xpath("//body/div/div/div/div/div/div/div/div/p/strong/text()").re(r'Anticipada:\s*\d+\s*')
+		precioTaquilla=sel.xpath("//body/div/div/div/div/div/div/div/div/p/strong/text()").re(r'Taquilla:\s*\d+\s*')
+		precioGratis=sel.xpath("//body/div/div/div/div/div/div/div/div/p/strong/text()").re(r'Entrada libre | Entrada gratuita')
+		item = response.meta['item']
+		if len(precioAnticipada)!=0:
+			#print "Precio Anticipada: "+precioAnticipada[0]
+			precioAnticipada=precioAnticipada[0].split(':')
+			#print "Precio Anticipada: "+precioAnticipada.pop()
+			item['priceAnticipada']=precioAnticipada.pop()
+		if len(precioTaquilla)!=0:
+			precioTaquilla=precioTaquilla[0].split(':')
+			#print "Precio Taquilla: "+precioTaquilla.pop()
+			item['priceTaquilla']=precioTaquilla.pop()
+		if len(precioGratis)!=0:
+			#print "Precio Gratis"
+			item['precioTaquilla']=0
+		return item
+		

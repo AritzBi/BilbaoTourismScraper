@@ -10,7 +10,7 @@ print results[0].city
 print results[0].postal_code
 #print results[0]"""
 
-g=geocoders.GoogleV3()
+"""g=geocoders.GoogleV3()
 #place, (lat, lng) = g.geocode("")
 place,(lat,lng)=g.geocode("Tiboli Eskola")
 print lat

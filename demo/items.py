@@ -16,6 +16,10 @@ class EventItem(Item):
 	hour=Field()
 	location=Field()
 	category=Field()
+	priceAnticipada=Field()
+	priceTaquilla=Field()
+	startDate=Field()
+	endDate=Field()
 	
 class BilbaoItem(Item):
 	title=Field()
