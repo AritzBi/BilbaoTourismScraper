@@ -20,7 +20,7 @@ class EventItem(Item):
 	priceTaquilla=Field()
 	startDate=Field()
 	endDate=Field()
-	
+	informationLink=Field()
 class BilbaoItem(Item):
 	title=Field()
 	startDate=Field()

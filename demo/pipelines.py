@@ -57,7 +57,7 @@ class EventPipeline(object):
 			else:
 				startDate=datetime.datetime.combine(datetime.date(int(date[0]),int(date[1]),int(date[2])),datetime.time(0,0))
 				endDate=startDate	
-			self.insertDataToDB(item['location'][0],item ['title'][0],item['priceAnticipada'],item['priceTaquilla'],startDate,endDate, self.getCategoryId(item['category'][0]) )
+			self.insertDataToDB(item['location'][0],item ['title'][0],item['priceAnticipada'],item['priceTaquilla'],startDate,endDate, self.getCategoryId(item['category'][0]), item['informationLink'] )
 			#'Category: '+ item ['category'][0]
 		elif spider.name=='bilbaorss_spider':
 			denomEvent=item['title']
@@ -72,7 +72,7 @@ class EventPipeline(object):
 			endDate=datetime.datetime.combine(datetime.date(int(endDate[2]),int(endDate[1]),int(endDate[0])),datetime.time(int(hour[0]),int(hour[1])))
 			self.insertDataToDB(denomLocation, denomEvent,1,startDate,endDate,-1)
 
-	def insertDataToDB(self, denomLocation, denomEvent, price_anticipada,price, startDate, endDate, categoryId):
+	def insertDataToDB(self, denomLocation, denomEvent, price_anticipada,price, startDate, endDate, categoryId, information_url):
 		denomLocation=denomLocation.split('y')
 		listLocations=[]
 		listLocations.append(denomLocation[len(denomLocation)-1])
@@ -95,10 +95,10 @@ class EventPipeline(object):
 			SQLSelectEvent="Select id FROM event WHERE DENOM=%s;"
 			self.cursor.execute(SQLSelectEvent,(denomEvent,))
 			if self.cursor.rowcount==0:
-				SQLEvent="INSERT INTO event (denom, price_anticipada,price, startdate, endate, type_id) VALUES (%s, %s, %s,%s, %s, %s) returning id;"
+				SQLEvent="INSERT INTO event (denom, price_anticipada,price, startdate, endate, type_id, information_url) VALUES (%s, %s, %s,%s, %s, %s, %s) returning id;"
 				print price_anticipada
 				print price
-				self.cursor.execute(SQLEvent, (denomEvent,float(price_anticipada), float(price), startDate,endDate,categoryId))
+				self.cursor.execute(SQLEvent, (denomEvent,float(price_anticipada), float(price), startDate,endDate,categoryId, information_url))
 				event_id=self.cursor.fetchone()[0]
 			else:
 				event_id=self.cursor.fetchone()[0]

@@ -38,6 +38,7 @@ class DemoSpider(Spider):
 		precioTaquilla=sel.xpath("//body/div/div/div/div/div/div/div/div/p/strong/text()").re(r'Taquilla:\s*\d+\s*|Entrada:\s*\d+\s*')
 		precioGratis=sel.xpath("//body/div/div/div/div/div/div/div/div/p/strong/text()").re(r'Entrada\slibre|Entrada\sgratuita')
 		item = response.meta['item']
+		item['informationLink']=response.url
 		if len(precioAnticipada)!=0:
 			#print "Precio Anticipada: "+precioAnticipada[0]
 			precioAnticipada=precioAnticipada[0].split(':')
