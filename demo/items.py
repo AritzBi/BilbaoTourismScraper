@@ -21,6 +21,7 @@ class EventItem(Item):
 	startDate=Field()
 	endDate=Field()
 	informationLink=Field()
+	description=Field()
 class BilbaoItem(Item):
 	title=Field()
 	startDate=Field()
