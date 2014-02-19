@@ -11,7 +11,8 @@ class KedinSpider(XMLFeedSpider):
 	name="kedin_spider"
 	BASE='http://www.kedin.es'
 	allowed_domains=["kedin.es"]
-	start_urls=["http://kedin.es/vizcaya/conciertos-de-pop/feed.rss","http://kedin.es/vizcaya/conciertos-de-rock/feed.rss","http://kedin.es/vizcaya/conciertos-de-cantautores.html","http://kedin.es/vizcaya/clasica/feed.rss","http://kedin.es/vizcaya/conciertos-de-electronica/feed.rss","http://kedin.es/vizcaya/conciertos-de-indie.html","http://kedin.es/vizcaya/conciertos-de-musica/feed.rss","http://kedin.es/vizcaya/festivales/feed.rss","http://kedin.es/vizcaya/conciertos-de-heavy/feed.rss","http://kedin.es/vizcaya/conciertos-de-jazz/feed.rss"]
+	#start_urls=["http://kedin.es/vizcaya/conciertos-de-pop/feed.rss","http://kedin.es/vizcaya/conciertos-de-rock/feed.rss","http://kedin.es/vizcaya/conciertos-de-cantautores.html","http://kedin.es/vizcaya/clasica/feed.rss","http://kedin.es/vizcaya/conciertos-de-electronica/feed.rss","http://kedin.es/vizcaya/conciertos-de-indie.html","http://kedin.es/vizcaya/conciertos-de-musica/feed.rss","http://kedin.es/vizcaya/festivales/feed.rss","http://kedin.es/vizcaya/conciertos-de-heavy/feed.rss","http://kedin.es/vizcaya/conciertos-de-jazz/feed.rss","http://kedin.es/vizcaya/exposiciones/feed.rss"]
+	start_urls=['http://kedin.es/vizcaya/arte-cultura/feed.rss']
 	itertag = 'item'
 	iterator = 'iternodes'
 	def parse_node(self, response, node):
@@ -37,10 +38,10 @@ class KedinSpider(XMLFeedSpider):
 		endDate=event.xpath("li[@class='info']/p[@class='lcontainer']/strong/meta[@itemprop='endDate']/@content").extract()
 		category=sel.xpath("//header/div['@id=breadcrumb']/span/a/span/text()").extract()
 		if len(endDate)>0:
-			hours=event.xpath("li[@class='info']/p[@class='lcontainer']/div[@class='recurrence-info']/strong/text()").re(r"\d{2}[:]\d{2}")
+			hours=event.xpath("li[@class='time']/p[@class='lcontainer']/strong/text()").re(r"\d{2}[:]\d{2}")
 			if len(hours)==2:
-				startHour=endHour[0]
-				endHour=endHour.pop()
+				startHour=hours[0]
+				endHour=hours.pop()
 		else:
 			hours=event.xpath("li[@class='time']/p[@class='lcontainer']/strong/text()").re(r"\d{2}[:]\d{2}")
 			if len(hours)==2:
