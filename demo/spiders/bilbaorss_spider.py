@@ -14,7 +14,8 @@ class BilbaoRSSSpider(XMLFeedSpider):
 	BASE='http://www.bilbao.net'
 	name='bilbaorss_spider'
 	allowed_domains=['bilbao.net']
-	start_urls=["http://www.bilbao.net/cs/Satellite?language=es&pageid=3002271745&pagename=Bilbaonet%2FPage%2FBIO_suscripcionRSS&tipoSus=Agenda","http://www.bilbao.net/cs/Satellite?language=es&pageid=3002273237&pagename=Bilbaonet%2FPage%2FBIO_suscripcionRSS&tipoSus=Agenda"]
+	start_urls=["http://www.bilbao.net/cs/Satellite?language=es&pageid=3002271745&pagename=Bilbaonet%2FPage%2FBIO_suscripcionRSS&tipoSus=Agenda","http://www.bilbao.net/cs/Satellite?language=es&pageid=3002273237&pagename=Bilbaonet%2FPage%2FBIO_suscripcionRSS&tipoSus=Agenda","http://www.bilbao.net/cs/Satellite?language=es&pageid=3002273326&pagename=Bilbaonet%2FPage%2FBIO_suscripcionRSS&tipoSus=Agenda","http://www.bilbao.net/cs/Satellite?language=es&pageid=3002273335&pagename=Bilbaonet%2FPage%2FBIO_suscripcionRSS&tipoSus=Agenda","http://www.bilbao.net/cs/Satellite?language=es&pageid=3002273835&pagename=Bilbaonet%2FPage%2FBIO_suscripcionRSS&tipoSus=Agenda","http://www.bilbao.net/cs/Satellite?language=es&pageid=3008987718&pagename=Bilbaonet%2FPage%2FBIO_suscripcionRSS&tipoSus=Agenda","http://www.bilbao.net/cs/Satellite?language=es&pageid=3002274516&pagename=Bilbaonet%2FPage%2FBIO_suscripcionRSS&tipoSus=Agenda"]
+	#start_urls=[""]
 	iterator = 'iternodes' # This is actually unnecessary, since it's the default value
 	itertag = 'item'
 	def parse_node(self, response, node):
@@ -37,6 +38,10 @@ class BilbaoRSSSpider(XMLFeedSpider):
 		item=EventItem()
 		#Remove all the unnecessary blank spaces.
 		item['title']=title[0].strip()
+		if len(observations) >0:
+			item['observations']=observations.pop()
+		else:
+			item['observations']=''
 		#For example: Exposiones - Pintura y escultura
 		if(len(category)>0):
 			item['category']=category.pop().strip()
@@ -46,9 +51,24 @@ class BilbaoRSSSpider(XMLFeedSpider):
 		if(len(startDate)>1):
 			item['startDate']=startDate[0]
 			item['endDate']=startDate[1]
+		if(len(hour)==0):
+			item['startHour']='10:00'
+			item['endHour']='-1'
 		#Check if it has an initial time
 		if(len(hour)==1):
-			item['startHour']=hour[0]
+			item['startHour']=hour.pop()
+			item['endHour']='-1'
+		#Some cases 18:00/17:30 or even 20:00; dia 23 10:00. 
+		elif(len(hour)>=2):	
+			#Un Array de 3 posiciones, startDate,endDate, y lo de la hora 
+			originalHourFormat=event.xpath("dl[@class='lista_dl']/dd/text()").extract()
+			originalHourFormat=originalHourFormat.pop()
+			if '/' in originalHourFormat:
+				item['startHour']=hour[0]
+				item['endHour']=hour[1]
+			elif ';' in originalHourFormat:
+				item['startHour']=hour[0]
+				item['observations']=originalHourFormat
 		#Otherwise-->Default
 		else:
 			item['startHour']='10:00'

@@ -29,6 +29,7 @@ class EventItem(Item):
 	endHour=Field()
 	informationLink=Field()
 	category=Field()
+	observations=Field()
 	
 class BilbaoItem(Item):
 	title=Field()
