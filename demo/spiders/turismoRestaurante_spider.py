@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+#coding: utf8 
 from scrapy.spider import Spider 
 from scrapy.selector import HtmlXPathSelector 
 from scrapy.http.request import Request
@@ -20,7 +22,26 @@ class RestaurantesSpider(Spider):
 		moreLinksPage=otherURLS.xpath("li[@class='r01NavBarCtrlItem r01NavBarNextBlock']/a/@href").extract()
 		for relativeLink in relativeURLS:
 			url=self.BASE+relativeLink
-			print url
 			yield Request(url,callback=self.parse_restaurants_links)
+		if len(moreLinksPage)>0:
+			url=self.BASE+moreLinksPage.pop()
+			yield Request(url)
+			yield Request(url,callback=self.parse_restaurants_links,dont_filter=True)
+		yield Request(response.url,callback=self.parse_restaurants_links)
 
 	def parse_restaurants_links(self,response):
+		sel=Selector(response)
+		listings=sel.xpath('//*[@id="containerConRutas"]/div[3]/div/div/div/div/div[2]/ul/li')
+		links = []
+		for listing in listings:
+			link=listing.xpath('div/div/div/a/@href').extract()[0]
+			links.append(link)
+		for link in links:
+			link=self.BASE+link
+			yield Request(link,callback=self.parse_events_links)
+
+	def parse_events_links(self,response):
+		sel=Selector(response)
+		result=sel.select("//*[@id='containercontVisual']/div[2]/div[3]/div[2]/div[1]/div[1]")
+		#print result.extract()
+		print result.xpath("div[contains(.,'Tipo de cocina')]/following-sibling::div/text()").extract()
