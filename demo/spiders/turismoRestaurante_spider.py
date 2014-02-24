@@ -4,6 +4,7 @@ from scrapy.spider import Spider
 from scrapy.selector import HtmlXPathSelector 
 from scrapy.http.request import Request
 from scrapy.selector import Selector
+import re
 
 class RestaurantesSpider(Spider):
 	BASE='http://turismo.euskadi.net'
@@ -42,6 +43,35 @@ class RestaurantesSpider(Spider):
 
 	def parse_events_links(self,response):
 		sel=Selector(response)
-		result=sel.select("//*[@id='containercontVisual']/div[2]/div[3]/div[2]/div[1]/div[1]")
-		#print result.extract()
-		print result.xpath("div[contains(.,'Tipo de cocina')]/following-sibling::div/text()").extract()
+		name=sel.xpath("//*[@id='containercontVisual']/div[2]/div[1]/div[1]/h1/span/text()").extract()
+		result=sel.xpath("//*[@id='containercontVisual']/div[2]/div[3]/div[2]/div[1]/div")
+		category=result.xpath("div[contains(.,'Tipo de ')]/following-sibling::div/text()").extract()
+		#Direc por el tema de la tilde, esta vez no lo pilla bien aunque este el encoding bien
+		address=result.xpath("div[contains(.,'Direcci')]/following-sibling::div/text()").extract()
+		telephone=result.xpath("div[contains(.,'Tel')]/following-sibling::div/text()").extract()
+		weeklyRest=result.xpath("div[contains(.,'Descanso')]/following-sibling::div/text()").extract()
+		holidays=result.xpath("div[contains(.,'Cierre por')]/following-sibling::div/text()").extract()
+		capacity=result.xpath("div[contains(.,'Capacidad')]/following-sibling::div/text()").extract()
+		email=result.xpath("div[contains(.,'E-mail')]/following-sibling::div/text()").extract()
+		informationLink=response.url
+		awards=sel.xpath("//*[@id='containercontVisual']/div[2]/div[2]/div/div/div[2]")
+		awards=awards.xpath("div/img/@title").extract()
+		repsol=0
+		michelin=0
+		print awards
+		for award in awards:
+			if 'Repsol' in award:
+				repsol=re.search(r"\d",award).group()
+			elif 'Michelin' in award:
+				michelin=re.search(r"\d", award).group()
+		"""
+		print repsol
+		print michelin
+		print name
+		print category
+		print address
+		print telephone
+		print weeklyRest
+		print holidays
+		print capacity
+		print informationLink"""
