@@ -2,7 +2,7 @@ from scrapy.spider import Spider
 from scrapy.selector import HtmlXPathSelector 
 from scrapy.http.request import Request
 from scrapy.selector import Selector
-from demo.items import BilbaoItem
+#from demo.items import BilbaoItem
 import datetime
 
 
@@ -49,7 +49,7 @@ class BilbaoSpider(Spider):
 
 
 	def parse_events(self,response):
-		sel=Selector(response)
+		"""sel=Selector(response)
 		event=sel.xpath('//div[@class="col-50 content-desc"]')
 		item=BilbaoItem()
 		item['title']=event.xpath("h2[@class='big sec-color']/text()").extract()
@@ -60,4 +60,4 @@ class BilbaoSpider(Spider):
 		item['nearestMetro']=event.xpath("span[@itemprop='address']/text()").extract()
 		item['postalCode']=event.xpath("span/span[@itemprop='postalCode']/text()").extract()
 		item['city']=event.xpath("span/span[@itemprop='addressLocality']/text()").extract()
-		return item
+		return item"""

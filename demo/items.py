@@ -31,16 +31,15 @@ class EventItem(Item):
 	category=Field()
 	observations=Field()
 	
-class BilbaoItem(Item):
-	title=Field()
-	startDate=Field()
-	endDate=Field()
-	summary=Field()
-	location=Field()
-	nearestMetro=Field()
-	postalCode=Field()
-	city=Field()
-	hour=Field()
+class RestaurantItem(Item):
+	name=Field()
+	category=Field()
+	address=Field()
+	specialty=Field()
+	telephone=Field()
+	timetable=Field()
+	michelin=Field()
+	repsol=Field()
 class Item(Item):
 	title=Field()
 	link=Field()
