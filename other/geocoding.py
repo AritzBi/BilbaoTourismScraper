@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+#coding: utf8 
 from pygeocoder import Geocoder
 from geopy import geocoders
 
@@ -12,7 +14,7 @@ print results[0].postal_code
 
 g=geocoders.GoogleV3()
 #place, (lat, lng) = g.geocode("")
-place,(lat,lng)=g.geocode("Bidebarrieta Kalea, 4, Bilbao, ES")
+place,(lat,lng)=g.geocode("Santiago de Compostela,  Bilbao")
 print place,(lat,lng)
 #print "%s: %.5f, %.5f" % (place, lat, lng)
 
