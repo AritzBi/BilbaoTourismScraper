@@ -24,35 +24,55 @@ class RestaurantesSpider(Spider):
 		bar=sel.xpath("//*[@id='texto']/table/tbody/tr[1]/td/div")
 		barCategory=bar.xpath("h3/text()").extract()
 		barName=bar.xpath("p/strong[contains(.,'Lugar:')]/following-sibling::text()[1]").extract()
-		barAddress=bar.xpath("p/strong[contains(.,'Lugar:')]/following-sibling::br/text()[1]").extract()
+		barAddress=bar.xpath("p/strong[contains(.,'Lugar:')]/following-sibling::text()[2]").extract()
 		barTimetable=bar.xpath("p/strong[contains(.,'Horario:')]/following-sibling::text()[1]").extract()
 		barTelephone=bar.xpath("p/strong[contains(.,'Tel')]/following-sibling::text()[1]").extract()
 		barLocality=bar.xpath("p/strong[contains(.,'Localidad:')]/following-sibling::text()[1]").extract()
 		barProvince=bar.xpath("p/strong[contains(.,'Provincia:')]/following-sibling::text()[1]").extract()
-		barSpecialty=sel.xpath("//*[@id='wn_textolargo']/div/p[3]/strong[contains(.,'Especialidad:')]/following-sibling::text()[1]")
-		item=RestaurantItem()
-		if len(barSpecialty)>0:
-			item['specialty']=barSpecialty.pop()
-		else:
-			item['specialty']=''
+		#barSpecialty=sel.xpath("//*[@id='wn_textolargo']/div/p[3]/strong[contains(.,'Especialidad:')]/following-sibling::text()[1]").extract()
+		information=sel.xpath("//*[@id='wn_textolargo']/div/p//text()").extract()
 		if len(barName)>0:
-			item['name']=barName.pop()
-		else:
-			item['name']=''
-		if len(barCategory)>0:	
-			item['category']=barCategory.pop()
-		else:
-			item['category']=''
-		if len(barTimetable)>0:	
-			item['timetable']=barTimetable.pop()
-		else:
-			item['timetable']=barTimetable
-		if len(barTelephone)>0:	
-			item['telephone']=barTelephone.pop()
-		else:
-			item['telephone']=''
+			barName=barName.pop()
+			#Para evitar bares donde no hay nombre ni direccion, solo pone una ','
+			if re.search(r"\w+",barName):
+			#TODO: mirar el else		
+				if len(barCategory)>0:	
+					category=barCategory.pop()
+					if re.search(r"Pintxo",category):
+						item=RestaurantItem()
+						item['name']=barName
+						if len(barSpecialty)>0:
+							information=''.join(information)
+							print information
+							item['information']=information
+						else:
+							item['information']=''
+						if len(barTimetable)>0:	
+							item['timetable']=barTimetable.pop()
+						else:
+							item['timetable']=barTimetable
+						if len(barTelephone)>0:	
+							item['telephone']=barTelephone.pop()
+						else:
+							item['telephone']=''
+						if len (barAddress)>0:
+							address=barAddress.pop()
+							comma=' '
+							if re.search(r"\d+", address):
+								comma=', '
+							if len(barLocality)>0:
+								locality=barLocality.pop()
+								locality=locality.replace('-','')
+								locality=locality.replace(' ','')
+								address=address+comma+locality
+							item['address']=address
+						else:
+							item['barAddress']=''
+						item['category']='Bar Pintxos'
+						item['informationLink']=response.url
+						return item
 
-		print barAddress
+
 
 
 

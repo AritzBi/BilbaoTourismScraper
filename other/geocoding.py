@@ -14,14 +14,14 @@ print results[0].postal_code
 
 g=geocoders.GoogleV3()
 #place, (lat, lng) = g.geocode("")
-place,(lat,lng)=g.geocode("Santiago de Compostela,  Bilbao")
+place,(lat,lng)=g.geocode("Metros de Bilbao")
 print place,(lat,lng)
 #print "%s: %.5f, %.5f" % (place, lat, lng)
 
 g=geocoders.GeoNames(None,'aritzbi',None)
-place, (lat, lng) = g.geocode("Kafe Antzokia")
-print "%s: %.5f, %.5f" % (place, lat, lng) 
-
+#place, (lat, lng) = g.geocode("Metro Bilbao",False)
+#print "%s: %.5f, %.5f" % (place, lat, lng) 
+print g.geocode("Metro Bilbao",False)
 #g=geocoders.Nominatim()
 #place = g.geocode("Palacio Euskalduna",None,5)
 #print "%s: %.5f, %.5f" % (place, lat, lng)  

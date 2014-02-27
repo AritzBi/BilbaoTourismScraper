@@ -4,6 +4,7 @@ from scrapy.spider import Spider
 from scrapy.selector import HtmlXPathSelector 
 from scrapy.http.request import Request
 from scrapy.selector import Selector
+from demo.items import RestaurantItem
 import re
 
 class RestaurantesSpider(Spider):
@@ -51,27 +52,62 @@ class RestaurantesSpider(Spider):
 		telephone=result.xpath("div[contains(.,'Tel')]/following-sibling::div/text()").extract()
 		weeklyRest=result.xpath("div[contains(.,'Descanso')]/following-sibling::div/text()").extract()
 		holidays=result.xpath("div[contains(.,'Cierre por')]/following-sibling::div/text()").extract()
-		capacity=result.xpath("div[contains(.,'Capacidad')]/following-sibling::div/text()").extract()
+		#capacity=result.xpath("div[contains(.,'Capacidad')]/following-sibling::div/text()").extract()
+		information=result.xpath("//*[@id='containercontVisual']/div[2]/div[3]/div[2]/div[2]/text()").extract()
 		email=result.xpath("div[contains(.,'E-mail')]/following-sibling::div/text()").extract()
 		informationLink=response.url
 		awards=sel.xpath("//*[@id='containercontVisual']/div[2]/div[2]/div/div/div[2]")
 		awards=awards.xpath("div/img/@title").extract()
 		repsol=0
 		michelin=0
-		print awards
 		for award in awards:
 			if 'Repsol' in award:
 				repsol=re.search(r"\d",award).group()
 			elif 'Michelin' in award:
 				michelin=re.search(r"\d", award).group()
-		"""
-		print repsol
-		print michelin
-		print name
-		print category
-		print address
-		print telephone
-		print weeklyRest
-		print holidays
-		print capacity
-		print informationLink"""
+
+		if len(name)>0:
+			name=name.pop()
+				#Mirar el else
+			if len(category)>0:	
+				item=RestaurantItem()
+				item['name']=name
+				timetable=''
+				if len(weeklyRest)>0:	
+					timetable='Descando Semanal: '+weeklyRest.pop()
+				if len(holidays)>0:
+					timetable=timetable+'. Cierre por vacaciones: '+holidays.pop()
+				item['timetable']=timetable
+				if len(telephone)>0:	
+					item['telephone']=telephone.pop()
+				else:
+					item['telephone']=''
+				if len(email)>0:
+					item['email']=email.pop()
+				else:
+					item['email']=''
+				item['repsol']=repsol
+				item['michelin']=michelin
+				item['informationLink']=informationLink
+				if len(address)>0:
+					if len(address)>2:
+						postalCode=re.search(r"48\d{3}",address[1])
+						if postalCode:
+							postalCode=postalCode.group()
+							item['address']=address[0]+', '+postalCode
+					else:
+						item['address']=address[0]
+				else:
+					item['address']=''
+				if len(information)>0:
+					informationConcatenated=''
+					for val in information:
+						informationConcatenated=informationConcatenated+val
+					item['information']=informationConcatenated
+				else:
+					item['information']=0
+				if len(category)>0:
+					item['category']=category.pop()
+				else:
+					item['category']="Otros"
+				print item['category']
