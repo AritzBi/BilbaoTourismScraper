@@ -20,5 +20,14 @@ class RestauranteBilbaoTurismoSpider(Spider):
 		yield Request(response.url,callback=self.parse_restaurants_links,dont_filter=True)
 	def parse_restaurants_links(self, response):
 		sel=Selector(response)
-		restaurants= sel.xpath("//*[@id='gastronomy-content']/section[2]/div/section[2]/div/section[2]/section/section/a/@href").extract()
-		print restaurants
+		listings = sel.xpath("//*[@id='gastronomy-content']/section[2]/div/section[2]/div/section[2]/section/section")
+		links = []
+		for listing in listings:
+			link=listing.xpath('a/@href').extract()[0]
+			links.append(link)
+		for link in links:
+			yield Request(self.BASE+str(link),callback=self.parse_restaurants)
+	def parse_restaurants(self,response):
+		sel=Selector(response)
+		name=sel.xpath("//*[@id='sectionDetalle']/div[1]/h2/text()").extract()
+		print name
