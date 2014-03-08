@@ -2,6 +2,7 @@ from scrapy.spider import Spider
 from scrapy.selector import HtmlXPathSelector 
 from scrapy.http.request import Request
 from scrapy.selector import Selector
+from demo.items import RestaurantItem
 import datetime
 
 #Restaurantes
@@ -42,12 +43,38 @@ class RestaurantesBilbaoTurismoSpider(Spider):
 		informationLink=descriptionpath.xpath("span/a/@href").extract()
 		categoryPath=sel.xpath("//*[@id='gastronomy-content']/section[2]/div/section[1]/section/div/ul/li[2]/p[2]")
 		category=categoryPath.xpath("a/strong/text()").extract()
-		"""print name
-		print addressLocality
-		print streetAddress
-		print postalCode
-		print telephone
-		print email
-		print description
-		print informationLink
-		print category"""
+		item=RestaurantItem()
+		if len(name)>0:
+			item['name']=name.pop()
+		else:
+			item['name']=''
+		if len(streetAddress)>0:
+			fullAddress=streetAddress.pop()
+			if len(postalCode)>0:
+				fullAddress=', '.join([fullAddress,postalCode.pop()])
+			if len(addressLocality)>0:
+				fullAddress=', '.join([fullAddress,addressLocality.pop()])
+			item['address']=fullAddress
+		else:
+			item['address']=''
+		if len(telephone)>0:
+			item['telephone']=telephone.pop()
+		else:
+			item['telephone']=''
+		if len(email)>0:
+			item['email']=email.pop()
+		else:
+			item['email']=''
+		if len(description)>0:
+			item['description']=description.pop()
+		else:
+			item['description']=''
+		if len(informationLink)>0:
+			item['informationLink']=informationLink.pop()
+		else:
+			item['informationLink']=''		
+		if len(category)>0:
+			item['category']=category.pop()	
+		else:
+			item['category']=''
+		print item

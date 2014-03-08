@@ -2,6 +2,7 @@ from scrapy.spider import Spider
 from scrapy.selector import HtmlXPathSelector 
 from scrapy.http.request import Request
 from scrapy.selector import Selector
+from demo.items import BuildingItem
 
 class PatrimonioBilbaoTurismoSpider(Spider):
 	BASE='http://www.bilbaoturismo.net'
@@ -55,3 +56,20 @@ class PatrimonioBilbaoTurismoSpider(Spider):
 			category="Monumento Religioso"
 		else:
 			category="Monumento Historico"
+		item=BuildingItem()
+		if len(title)>0:
+			item['name']=title.pop()
+		else:
+			item['name']=''
+		if len(summary)>0:
+			item['description']=summary
+		else:
+			item['description']=''
+		if len(address)>0:
+			item['address']=address.pop().strip()
+		else:
+			item['address']=''
+		item['category']=category
+
+		print item
+

@@ -42,6 +42,14 @@ class RestaurantItem(Item):
 	repsol=Field()
 	email=Field()
 	informationLink=Field()
+	description=Field()
+
+class BuildingItem(Item):
+	name=Field()
+	category=Field()
+	address=Field()
+	description=Field()
+	informationLink=Field()
 class Item(Item):
 	title=Field()
 	link=Field()
