@@ -14,7 +14,7 @@ print results[0].postal_code
 
 g=geocoders.GoogleV3()
 #place, (lat, lng) = g.geocode("")
-place,(lat,lng)=g.geocode("Metros de Bilbao")
+place,(lat,lng)=g.geocode("Islas Canarias Bilbao")
 print place,(lat,lng)
 #print "%s: %.5f, %.5f" % (place, lat, lng)
 

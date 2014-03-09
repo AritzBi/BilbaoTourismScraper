@@ -10,7 +10,7 @@ import datetime
 #Posible: Metro cercano
 class PintxosBilbaoTurismoSpider(Spider):
 	BASE='http://www.bilbaoturismo.net'
-	name='bTurismoPintxos_spider'
+	name='bTurismoPintxos_spider_es'
 	allowed_domains=['bilbaoturismo.net']
 	start_urls=['http://www.bilbaoturismo.net/BilbaoTurismo/es/buscador-de-pintxos?zona=1361356724680,1361356724448,1361356724652,1361356724659,1361356724666,1361356724673,1361356724467,1361356724481&tipologia=']
 	def parse(self,response):
@@ -75,9 +75,10 @@ class PintxosBilbaoTurismoSpider(Spider):
 		else:
 			item['informationLink']=''		
 		if len(category)>0:
-			item['category']=category.pop()	
+			item['category']=['Pintxo',category.pop()]	
 		else:
-			item['category']='Otros'
+			item['category']=['Pintxo','Otros']	
+		return item
 
 		
 		

@@ -19,7 +19,6 @@ class DemoPipeline(object):
 
 class EventPipeline(object):
 	def __init__(self):
-		print 'Init del event pipeline'
 		conn_string = "host='localhost' dbname='mydb' user='doctor' password='who'"
 		# print the connection string we will use to connect
 		print "Connecting to database\n	->%s" % (conn_string)
@@ -28,7 +27,45 @@ class EventPipeline(object):
 		# conn.cursor will return a cursor object, you can use this cursor to perform queries
 		self.cursor = self.conn.cursor()
 	def process_item(self,item,spider):
-		if spider.name == 'bilbao_spider':
+		if spider.name == 'bTurismoPatrimonio_spider_es':
+			name=item['name']
+			category=item['category']
+			address=item['address']
+			description=item['description']
+			informationLink=item['informationLink']
+			#Algunos no tienen bien el addres por eso lo dejo asi
+			if address:
+				coordinates=self.getCoordinates(address.encode('utf-8'))
+				longitude=coordinates[0]
+				latitude=coordinates[1]
+		elif spider.name == 'bTurismoPintxos_spider_es' or spider.name=='bTurismoRestaurantes_spider_es':
+			name=item['name']
+			address=item['address']
+			description=item['description']
+			telephone=item['telephone']
+			email=item['email']
+			informationLink=item['informationLink']
+			category1=item['category'][0]
+			category2=item['category'][1]
+			if address:
+				coordinates=self.getCoordinates(address.encode('utf-8'))
+				longitude=coordinates[0]
+				latitude=coordinates[1]
+		elif spider.name=='kedin_spider':
+			title=item['title']
+			description=item['description']
+			informationLink=item['informationLink']
+			startDate=item['startDate']
+			endDate=item['endDate']
+			startHour=item['startHour']
+			endHour=item['endHour']
+			category=item['category']
+			locationName=item['locationName']
+			address=item['locationAddress']
+			item['priceTaquilla']=price
+			item['rangePrices']=rangePrices
+
+		elif spider.name == 'bilbao_spider':
 			denomLocation=item['location']
 			denomEvent=item['title']
 			#price=item['price']

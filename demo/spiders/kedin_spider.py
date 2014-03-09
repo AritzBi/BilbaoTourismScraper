@@ -12,7 +12,17 @@ class KedinSpider(XMLFeedSpider):
 	name="kedin_spider"
 	BASE='http://www.kedin.es'
 	allowed_domains=["kedin.es"]
-	start_urls=["http://kedin.es/vizcaya/conciertos-de-pop/feed.rss","http://kedin.es/vizcaya/conciertos-de-rock/feed.rss","http://kedin.es/vizcaya/conciertos-de-cantautores.html","http://kedin.es/vizcaya/clasica/feed.rss","http://kedin.es/vizcaya/conciertos-de-electronica/feed.rss","http://kedin.es/vizcaya/conciertos-de-indie.html","http://kedin.es/vizcaya/conciertos-de-musica/feed.rss","http://kedin.es/vizcaya/festivales/feed.rss","http://kedin.es/vizcaya/conciertos-de-heavy/feed.rss","http://kedin.es/vizcaya/conciertos-de-jazz/feed.rss","http://kedin.es/vizcaya/arte-cultura/feed.rss","http://kedin.es/vizcaya/teatro/feed.rss","http://kedin.es/vizcaya/musicales/feed.rss","http://kedin.es/vizcaya/monologos-humor/feed.rss","http://kedin.es/vizcaya/danza-baile/feed.rss","http://kedin.es/vizcaya/actividades-para-ninos.html","http://kedin.es/vizcaya/tendencias/feed.rss"]
+	start_urls=["http://kedin.es/vizcaya/conciertos-de-pop/feed.rss","http://kedin.es/vizcaya/conciertos-de-rock/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-cantautores.html","http://kedin.es/vizcaya/clasica/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-electronica/feed.rss","http://kedin.es/vizcaya/conciertos-de-indie.html",
+	"http://kedin.es/vizcaya/conciertos-de-musica/feed.rss","http://kedin.es/vizcaya/festivales/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-heavy/feed.rss","http://kedin.es/vizcaya/conciertos-de-jazz/feed.rss",
+	"http://kedin.es/vizcaya/arte-cultura/feed.rss","http://kedin.es/vizcaya/teatro/feed.rss",
+	"http://kedin.es/vizcaya/musicales/feed.rss",
+	"http://kedin.es/vizcaya/monologos-humor/feed.rss",
+	"http://kedin.es/vizcaya/danza-baile/feed.rss",
+	"http://kedin.es/vizcaya/actividades-para-ninos.html",
+	"http://kedin.es/vizcaya/tendencias/feed.rss"]
 	itertag = 'item'
 	iterator = 'iternodes'
 	def parse_node(self, response, node):

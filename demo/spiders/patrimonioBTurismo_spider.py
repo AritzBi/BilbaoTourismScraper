@@ -6,7 +6,7 @@ from demo.items import BuildingItem
 
 class PatrimonioBilbaoTurismoSpider(Spider):
 	BASE='http://www.bilbaoturismo.net'
-	name='bTurismoPatrimonio_spider'
+	name='bTurismoPatrimonio_spider_es'
 	allowed_domains=['bilbaoturismo.net']
 	start_urls=['http://www.bilbaoturismo.net/BilbaoTurismo/es/edificios-emblematicos']
 
@@ -69,7 +69,11 @@ class PatrimonioBilbaoTurismoSpider(Spider):
 			item['address']=address.pop().strip()
 		else:
 			item['address']=''
+		if len(informationLink)>0:
+			item['informationLink']=informationLink.pop()
+		else:
+			item['informationLink']=response.url
 		item['category']=category
 
-		print item
+		return item
 

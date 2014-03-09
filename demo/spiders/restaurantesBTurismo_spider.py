@@ -10,7 +10,7 @@ import datetime
 #Posible: Metro cercano
 class RestaurantesBilbaoTurismoSpider(Spider):
 	BASE='http://www.bilbaoturismo.net'
-	name='bTurismoRestaurantes_spider'
+	name='bTurismoRestaurantes_spider_es'
 	allowed_domains=['bilbaoturismo.net']
 	start_urls=['http://www.bilbaoturismo.net/BilbaoTurismo/es/restaurantes?zona=1361356724448,1361356724460,1361356724474,1361356724467,1361356724488,1361356724481&tipologia=']
 	def parse(self,response):
@@ -74,7 +74,7 @@ class RestaurantesBilbaoTurismoSpider(Spider):
 		else:
 			item['informationLink']=''		
 		if len(category)>0:
-			item['category']=category.pop()	
+			item['category']=['Restaurante',category.pop()]	
 		else:
-			item['category']=''
-		print item
+			item['category']=['Restaurante','Otros']	
+		return item
