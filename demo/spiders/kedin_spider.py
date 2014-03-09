@@ -12,12 +12,18 @@ class KedinSpider(XMLFeedSpider):
 	name="kedin_spider"
 	BASE='http://www.kedin.es'
 	allowed_domains=["kedin.es"]
-	start_urls=["http://kedin.es/vizcaya/conciertos-de-pop/feed.rss","http://kedin.es/vizcaya/conciertos-de-rock/feed.rss",
-	"http://kedin.es/vizcaya/conciertos-de-cantautores.html","http://kedin.es/vizcaya/clasica/feed.rss",
-	"http://kedin.es/vizcaya/conciertos-de-electronica/feed.rss","http://kedin.es/vizcaya/conciertos-de-indie.html",
-	"http://kedin.es/vizcaya/conciertos-de-musica/feed.rss","http://kedin.es/vizcaya/festivales/feed.rss",
-	"http://kedin.es/vizcaya/conciertos-de-heavy/feed.rss","http://kedin.es/vizcaya/conciertos-de-jazz/feed.rss",
-	"http://kedin.es/vizcaya/arte-cultura/feed.rss","http://kedin.es/vizcaya/teatro/feed.rss",
+	start_urls=["http://kedin.es/vizcaya/conciertos-de-pop/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-rock/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-cantautores.html",
+	"http://kedin.es/vizcaya/clasica/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-electronica/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-indie.html",
+	"http://kedin.es/vizcaya/conciertos-de-musica/feed.rss",
+	"http://kedin.es/vizcaya/festivales/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-heavy/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-jazz/feed.rss",
+	"http://kedin.es/vizcaya/arte-cultura/feed.rss",
+	"http://kedin.es/vizcaya/teatro/feed.rss",
 	"http://kedin.es/vizcaya/musicales/feed.rss",
 	"http://kedin.es/vizcaya/monologos-humor/feed.rss",
 	"http://kedin.es/vizcaya/danza-baile/feed.rss",
@@ -92,10 +98,10 @@ class KedinSpider(XMLFeedSpider):
 		item['rangePrices']=rangePrices
 		locationURL=event.xpath("li[@class='place'][@itemprop='location']/p[@class='lcontainer']/a/@href").extract()
 		if len(locationURL)>0:
-			request=Request(self.BASE+locationURL[0],callback=self.parse_event_location)
+			request=Request(self.BASE+locationURL[0],callback=self.parse_event_location,dont_filter=True)
 			request.meta['item']=item
 			yield request
-
+		#TODO later maybe, si no hay URL mirar por nombre
 	def parse_event_location(self,response):
 		item=response.meta['item']
 		sel=Selector(response)
@@ -109,9 +115,9 @@ class KedinSpider(XMLFeedSpider):
 		else:
 			item['locationName']=''
 		if len(locationAdress)>0:
-			item['locationAdress']=locationAdress.pop()
+			item['locationAddress']=locationAdress.pop()
 		else:
-			item['locationAdress']=''
+			item['locationAddress']=''
 		if len(lat)>0:
 			item['lat']=lat.pop()
 		else:
@@ -121,5 +127,5 @@ class KedinSpider(XMLFeedSpider):
 		else:
 			item['lon']=-1
 		
-		print item
+		return item
 

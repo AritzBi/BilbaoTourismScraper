@@ -38,6 +38,7 @@ class EventPipeline(object):
 				coordinates=self.getCoordinates(address.encode('utf-8'))
 				longitude=coordinates[0]
 				latitude=coordinates[1]
+				self.insertPatrimonioToDB(name,category,address,description,informationLink,longitude,latitude)
 		elif spider.name == 'bTurismoPintxos_spider_es' or spider.name=='bTurismoRestaurantes_spider_es':
 			name=item['name']
 			address=item['address']
@@ -62,9 +63,10 @@ class EventPipeline(object):
 			category=item['category']
 			locationName=item['locationName']
 			address=item['locationAddress']
-			item['priceTaquilla']=price
-			item['rangePrices']=rangePrices
-
+			price=item['priceTaquilla']
+			rangePrices=item['rangePrices']
+			longitude=item['lon']
+			latitude=item['lat']
 		elif spider.name == 'bilbao_spider':
 			denomLocation=item['location']
 			denomEvent=item['title']
@@ -145,6 +147,28 @@ class EventPipeline(object):
 				SQLEventLocation="INSERT INTO EVENT_LOCATION (LOCATION_ID,EVENT_ID) VALUES (%s,%s);"
 				self.cursor.execute(SQLEventLocation,(location_id,event_id))
  		self.conn.commit()
+
+ 	def insertPatrimonioToDB(self, name, category, address, description, informationLink, lon, lat):
+		SQLSelect="SELECT id FROM EMBLEMATIC_BUILDING WHERE DENOM_ES=%s;"
+ 		self.cursor.execute(SQLSelect,(name,))
+		if self.cursor.rowcount==0:
+ 			SQLSelect="SELECT id FROM BUILDING_TYPE WHERE DENOM_ES=%s;"
+	 		self.cursor.execute(SQLSelect,(category,))
+			if self.cursor.rowcount==0:
+				SQLocation="INSERT INTO BUILDING_TYPE (denom_es) VALUES (%s) returning id;"
+				self.cursor.execute(SQLocation, (category,))
+				category_id=self.cursor.fetchone()[0]
+			else:
+				category_id=self.cursor.fetchone()[0]
+			SQLEvent="INSERT INTO LOCATION (denom, address, geom) VALUES (%s, %s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
+			self.cursor.execute(SQLEvent, (name,address,lon,lat))
+			location_id=self.cursor.fetchone()[0]
+			SQLEvent="INSERT INTO EMBLEMATIC_BUILDING(denom_es,location_id, description_es, information_url, BUILDING_TYPE) VALUES (%s, %s, %s, %s, %s) returning id;"
+			self.cursor.execute(SQLEvent, (name,location_id,description,informationLink,category_id))
+		self.conn.commit()
+
+
+
 
  	def getCoordinates(self, denomLocation):
  		try:

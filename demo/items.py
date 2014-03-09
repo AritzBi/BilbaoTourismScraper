@@ -14,7 +14,7 @@ class EventItem(Item):
 	title=Field()
 	description=Field()
 	locationName=Field()
-	locationAdress=Field()
+	locationAddress=Field()
 	locationWebsite=Field()
 	locationEmail=Field()
 	locationTelephone=Field()
