@@ -73,7 +73,7 @@ class PintxosBilbaoTurismoSpider(Spider):
 		if len(informationLink)>0:
 			item['informationLink']=informationLink.pop()
 		else:
-			item['informationLink']=''		
+			item['informationLink']=response.url		
 		if len(category)>0:
 			item['category']=['Pintxo',category.pop()]	
 		else:
