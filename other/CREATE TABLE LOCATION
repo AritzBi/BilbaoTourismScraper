@@ -89,6 +89,14 @@ INFORMATION_URL VARCHAR(255),
 BUILDING_TYPE INTEGER references building_type(id)
 );
 
+CREATE TABLE MEMBER
+(ID SERIAL PRIMARY KEY,
+USERNAME VARCHAR(255),
+SALT VARCHAR(255),
+HASH VARCHAR(255),
+UNIQUE(USERNAME)
+);
+
 INSERT INTO event_type(denom) VALUES ('Infantiles');
 INSERT INTO event_type(denom) VALUES ('Exposiciones');
 INSERT INTO event_type(denom) VALUES ('Concursos');
