@@ -7,7 +7,6 @@
 
 import sys
 import psycopg2
-from pygeocoder import Geocoder
 import pprint
 import datetime
 from geopy import geocoders
@@ -68,6 +67,22 @@ class EventPipeline(object):
 			rangePrices=item['rangePrices']
 			longitude=item['lon']
 			latitude=item['lat']
+			print "Title: "+title
+			print "Description: "+description
+			print informationLink
+			print "StartDate: "+startDate
+			print "endDate: "+endDate
+			print "starthour: "+startHour
+			print "endHour"+ endHour
+			print category
+			print "locationName"+locationName
+			print "address"+address
+			print "price"+str(price)
+			print "rangePrices"+str(rangePrices)
+			print "longitude"+longitude
+			print "latitude"+latitude
+			self.insertEventToDB(title,description,startDate,endDate,startHour,endHour,category[2],category[3],informationLink,longitude, latitude,price, rangePrices, locationName, address)
+
 		elif spider.name == 'bilbao_spider':
 			denomLocation=item['location']
 			denomEvent=item['title']
@@ -162,8 +177,8 @@ class EventPipeline(object):
 					category_id=self.cursor.fetchone()[0]
 				else:
 					category_id=self.cursor.fetchone()[0]
-				SQLEvent="INSERT INTO LOCATION (denom, address, geom) VALUES (%s, %s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
-				self.cursor.execute(SQLEvent, (name,address,lon,lat))
+				SQLEvent="INSERT INTO LOCATION (address, geom) VALUES (%s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
+				self.cursor.execute(SQLEvent, (address,lon,lat))
 				location_id=self.cursor.fetchone()[0]
 				SQLEvent="INSERT INTO EMBLEMATIC_BUILDING(denom_es,location_id, description_es, information_url, BUILDING_TYPE) VALUES (%s, %s, %s, %s, %s) returning id;"
 				self.cursor.execute(SQLEvent, (name,location_id,description,informationLink,category_id))
@@ -188,8 +203,8 @@ class EventPipeline(object):
 					category_id=self.cursor.fetchone()[0]
 				else:
 					category_id=self.cursor.fetchone()[0]
-				SQLEvent="INSERT INTO LOCATION (denom, address, geom) VALUES (%s, %s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
-				self.cursor.execute(SQLEvent, (name,address,lon,lat))
+				SQLEvent="INSERT INTO LOCATION (address, geom) VALUES (%s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
+				self.cursor.execute(SQLEvent, (address,lon,lat))
 				location_id=self.cursor.fetchone()[0]
 				SQLEvent="INSERT INTO HOSTELERY(denom_es,location_id, description_es, information_url, HOSTELERY_TYPE, telephone, email) VALUES (%s, %s, %s, %s, %s,%s, %s) returning id;"
 				self.cursor.execute(SQLEvent, (name,location_id,description,informationLink,category_id,telephone,email))
@@ -201,36 +216,42 @@ class EventPipeline(object):
 			print informationLink
 			print e;
 
-	def insertEventToDB(self, title, description, startDate, endDate, startHour, endHour, category, informationLink, longitude, latitude, price, rangePrices, locationName, address):
-		SQLSelect="SELECT id FROM HOSTELERY WHERE title=%s;"
- 		self.cursor.execute(SQLSelect,(title,))
+	def insertEventToDB(self, title, description, startDate, endDate, startHour, endHour, category1, category2, informationLink, longitude, latitude, price, rangePrices, locationName, address):
  		try:
+ 			SQL="SELECT s.id FROM EVENT_TYPE t, EVENT_SUBTYPE s WHERE t.DENOM=%s and s.denom=%s and s.type_id=t.id;"
+ 			self.cursor.execute(SQL,(category1,category2))
 			if self.cursor.rowcount==0:
-	 			SQLSelect="SELECT id FROM EVENT_TYPE WHERE DENOM=%s;"
-		 		self.cursor.execute(SQLSelect,(category,))
+				SQL="SELECT id FROM EVENT_TYPE WHERE DENOM=%s;"
+				self.cursor.execute(SQL,(category1,))
 				if self.cursor.rowcount==0:
-					SQLocation="INSERT INTO EVENT_TYPE (DENOM) VALUES (%s) returning id;"
-					self.cursor.execute(SQLocation, (category,))
-					category_id=self.cursor.fetchone()[0]
+					SQL="INSERT INTO EVENT_TYPE(denom) VALUES (%s) returning id;"
+					self.cursor.execute(SQL,(category1,))
+					category1_id=self.cursor.fetchone()[0]
+					SQL="INSERT INTO EVENT_SUBTYPE(denom, type_id) VALUES (%s, %s) returning id;"
+					category_id=self.cursor.execute(SQL,(category2,category1_id))
 				else:
-					category_id=self.cursor.fetchone()[0]
-				SQLSelect="SELECT id FROM LOCATION WHERE DENOM=%s or ADDRESS=%s;"
-				self.cursor.execute(SQLSelect,(locationName,address))
-				if self.cursor.rowcount==0:
-					SQL="INSERT INTO LOCATION (denom, address, geom) VALUES (%s, %s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
-					self.cursor.execute(SQL, (locationName,address,longitude,latitude))
-					location_id=self.cursor.fetchone()[0]
-				else:
-					location_id=self.cursor.fetchone()[0]
-				SQL="INSERT INTO EVENT(denom,information_url, startdate,endate, starthour,endhour,type_id, price, range_prices) VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s) returning id;"
-				self.cursor.execute(SQL, (title, informationLink, startDate, endDate, startHour, endHour, category, price, rangePrices))
-				event_id=self.cursor.fetchone()[0]
-				SQL="INSERT INTO EVENT_LOCATION(location_id, event_id) VALUES (%s, %s) returning id;"
-				self.cursor.execute(SQL, (location_id, event_id))
+					category1_id=self.cursor.fetchone()[0]
+					SQL="INSERT INTO EVENT_SUBTYPE(denom, type_id) VALUES (%s, %s) returning id;"
+					category_id=self.cursor.execute(SQL,(category2,category1_id))
+			else:
+				category_id=self.cursor.fetchone()[0]
+			SQL="SELECT id FROM LOCATION WHERE ADDRESS=%s;"
+			self.cursor.execute(SQL,(address,))
+			if self.cursor.rowcount==0:
+				SQL="INSERT INTO LOCATION ( address, geom) VALUES ( %s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
+				self.cursor.execute(SQL, (address,float(longitude),float(latitude)))
+				location_id=self.cursor.fetchone()[0]
+			else:
+				location_id=self.cursor.fetchone()[0]
+			SQL="INSERT INTO EVENT(denom,information_url, startdate,endate, starthour,endhour,type_id, price, range_prices) VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s) returning id;"
+			self.cursor.execute(SQL, (title, informationLink, startDate, endDate, startHour, endHour, category_id, price, rangePrices))
+			event_id=self.cursor.fetchone()[0]
+			SQL="INSERT INTO EVENT_LOCATION(location_id, denom, event_id) VALUES (%s, %s, %s);"
+			self.cursor.execute(SQL, (location_id, locationName, event_id))
 			self.conn.commit()
 		except Exception as e:
 			self.conn.commit()
-			print name
+			print title
 			print address
 			print informationLink
 			print e;
