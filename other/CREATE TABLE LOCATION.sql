@@ -107,7 +107,21 @@ NAME VARCHAR(255),
 SURNAME VARCHAR(255),
 UNIQUE(USERNAME, EMAIL)
 );
+SELECT UpdateGeometrySRID('planet_osm_line','way',4326);
+UPDATE planet_osm_line SET way=ST_TRANSFORM(ST_SETSRID(way, 900913), 4326);
 
+
+SELECT UpdateGeometrySRID('planet_osm_point','way',4326);
+UPDATE planet_osm_point SET way=ST_TRANSFORM(ST_SETSRID(way, 900913), 4326);
+
+
+SELECT UpdateGeometrySRID('planet_osm_polygon','way',4326);
+UPDATE planet_osm_polygon SET way=ST_TRANSFORM(ST_SETSRID(way, 900913), 4326);
+
+
+
+SELECT UpdateGeometrySRID('planet_osm_roads','way',4326);
+UPDATE planet_osm_roads SET way=ST_TRANSFORM(ST_SETSRID(way, 900913), 4326);
 INSERT INTO event_type(denom) VALUES ('Infantiles');
 INSERT INTO event_type(denom) VALUES ('Exposiciones');
 INSERT INTO event_type(denom) VALUES ('Concursos');
