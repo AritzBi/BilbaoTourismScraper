@@ -35,8 +35,8 @@ class EventPipeline(object):
 			#Algunos no tienen bien el addres por eso lo dejo asi
 			if address:
 				coordinates=self.getCoordinates(address.encode('utf-8'))
-				longitude=coordinates[0]
-				latitude=coordinates[1]
+				longitude=coordinates[1]
+				latitude=coordinates[0]
 				self.insertPatrimonioToDB(name,category,address,description,informationLink,longitude,latitude)
 		elif spider.name == 'bTurismoPintxos_spider_es' or spider.name=='bTurismoRestaurantes_spider_es':
 			name=item['name']
@@ -45,12 +45,12 @@ class EventPipeline(object):
 			telephone=item['telephone']
 			email=item['email']
 			informationLink=item['informationLink']
-			category1=item['category'][0]
-			category2=item['category'][1]
+			category1=item['category'][1]
+			category2=item['category'][0]
 			if address:
 				coordinates=self.getCoordinates(address.encode('utf-8'))
-				longitude=coordinates[0]
-				latitude=coordinates[1]
+				longitude=coordinates[1]
+				latitude=coordinates[0]
 				self.insertHosteleriaToDB(name,address,description,telephone,email,informationLink,category1,category2,longitude,latitude)
 		elif spider.name=='kedin_spider':
 			title=item['title']
@@ -126,43 +126,6 @@ class EventPipeline(object):
 			startDate=datetime.datetime.combine(datetime.date(int(startDate[2]),int(startDate[1]),int(startDate[0])),datetime.time(int(hour[0]),int(hour[1])))
 			endDate=datetime.datetime.combine(datetime.date(int(endDate[2]),int(endDate[1]),int(endDate[0])),datetime.time(int(hour[0]),int(hour[1])))
 			self.insertDataToDB(denomLocation, denomEvent,1,startDate,endDate,-1)
-
-	def insertDataToDB(self, denomLocation, denomEvent, price_anticipada,price, startDate, endDate, categoryId, information_url):
-		denomLocation=denomLocation.split('y')
-		listLocations=[]
-		listLocations.append(denomLocation[len(denomLocation)-1])
-		for i in range(len(denomLocation)-1):
-			listLocations.extend(denomLocation[i].split(','))
-		for val in listLocations:
-			coordinates=self.getCoordinates(val)
-			longitude=coordinates[0]
-			latitude=coordinates[1]
-			city="Test"
-			postalCode=48014
-	 		SQLSelect="SELECT id FROM LOCATION WHERE DENOM=%s and lon=%s and lat=%s;"
-	 		self.cursor.execute(SQLSelect,(val,longitude,latitude))
-			if self.cursor.rowcount==0:
-				SQLocation="INSERT INTO location (denom,city,postalcode,lon,lat) VALUES (%s, %s, %s, %s, %s) returning id;"
-				self.cursor.execute(SQLocation, (val, city, postalCode,longitude,latitude))
-				location_id=self.cursor.fetchone()[0]
-			else:
-				location_id=self.cursor.fetchone()[0]
-			SQLSelectEvent="Select id FROM event WHERE DENOM=%s;"
-			self.cursor.execute(SQLSelectEvent,(denomEvent,))
-			if self.cursor.rowcount==0:
-				SQLEvent="INSERT INTO event (denom, price_anticipada,price, startdate, endate, type_id, information_url) VALUES (%s, %s, %s,%s, %s, %s, %s) returning id;"
-				print price_anticipada
-				print price
-				self.cursor.execute(SQLEvent, (denomEvent,float(price_anticipada), float(price), startDate,endDate,categoryId, information_url))
-				event_id=self.cursor.fetchone()[0]
-			else:
-				event_id=self.cursor.fetchone()[0]
-			SQLSelectEventLocation="SELECT location_id FROM EVENT_LOCATION WHERE LOCATION_ID=%s and EVENT_ID=%s;"
-			self.cursor.execute(SQLSelectEventLocation,(location_id,event_id))
-			if self.cursor.rowcount==0:
-				SQLEventLocation="INSERT INTO EVENT_LOCATION (LOCATION_ID,EVENT_ID) VALUES (%s,%s);"
-				self.cursor.execute(SQLEventLocation,(location_id,event_id))
- 		self.conn.commit()
 
  	def insertPatrimonioToDB(self, name, category, address, description, informationLink, lon, lat):
 		SQLSelect="SELECT id FROM EMBLEMATIC_BUILDING WHERE DENOM_ES=%s;"
