@@ -9,12 +9,29 @@ import sys
 import psycopg2
 import pprint
 import datetime
+from scrapy.contrib.pipeline.images import ImagesPipeline
 from geopy import geocoders
+from scrapy.http.request import Request
+
 
 
 class DemoPipeline(object):
     def process_item(self, item, spider):
+    	print item
         return item
+class MyImagesPipeline(ImagesPipeline):
+	def get_media_requests(self, item, info):
+		print item['image_urls']
+		for image_url in item['image_urls']:
+			yield Request(image_url)
+	def item_completed(self, results, item, info):
+		print("pasa por aqui")
+		image_paths = [x['path'] for ok, x in results if ok]
+		if not image_paths:
+			item['image_paths'] ="Item contains no images"
+		else:
+			item['image_paths'] = image_paths
+		return item
 
 class EventPipeline(object):
 	def __init__(self):
@@ -47,6 +64,7 @@ class EventPipeline(object):
 			informationLink=item['informationLink']
 			category1=item['category'][1]
 			category2=item['category'][0]
+			#print item['images_paths']
 			if address:
 				coordinates=self.getCoordinates(address.encode('utf-8'))
 				longitude=coordinates[1]

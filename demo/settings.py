@@ -10,7 +10,9 @@ BOT_NAME = 'demo'
 
 SPIDER_MODULES = ['demo.spiders']
 NEWSPIDER_MODULE = 'demo.spiders'
+#ITEM_PIPELINES = ['demo.pipelines.MyImagesPipeline','demo.pipelines.EventPipeline']
 ITEM_PIPELINES = ['demo.pipelines.EventPipeline']
+#IMAGES_STORE = '/home/aritzbi/Development/XploreBilbao/public/image'
 LOG_LEVEL='ERROR'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

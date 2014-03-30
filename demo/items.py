@@ -43,6 +43,8 @@ class RestaurantItem(Item):
 	email=Field()
 	informationLink=Field()
 	description=Field()
+	image_urls = Field()
+	image_paths= Field()
 
 class BuildingItem(Item):
 	name=Field()

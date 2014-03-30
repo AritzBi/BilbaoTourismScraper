@@ -43,6 +43,7 @@ class RestaurantesBilbaoTurismoSpider(Spider):
 		informationLink=descriptionpath.xpath("span/a/@href").extract()
 		categoryPath=sel.xpath("//*[@id='gastronomy-content']/section[2]/div/section[1]/section/div/ul/li[2]/p[2]")
 		category=categoryPath.xpath("a/strong/text()").extract()
+		images=sel.xpath("//*[@id='CapaImagen_0']/img/@src").extract();
 		item=RestaurantItem()
 		if len(name)>0:
 			item['name']=name.pop()
@@ -76,5 +77,7 @@ class RestaurantesBilbaoTurismoSpider(Spider):
 		if len(category)>0:
 			item['category']=['Restaurante',category.pop()]	
 		else:
-			item['category']=['Restaurante','Otros']	
+			item['category']=['Restaurante','Otros']
+		if len(images)>0:
+			item['image_urls']=[''.join([self.BASE,images.pop()])]
 		return item
