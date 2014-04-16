@@ -9,17 +9,18 @@ import sys
 import psycopg2
 import pprint
 import datetime
+#import Image
 from scrapy.contrib.pipeline.images import ImagesPipeline
 from geopy import geocoders
 from scrapy.http.request import Request
 
 
-
+"""
 class DemoPipeline(object):
     def process_item(self, item, spider):
     	print item
-        return item
-class MyImagesPipeline(ImagesPipeline):
+        return item"""
+"""class MyImagesPipeline(ImagesPipeline):
 	def get_media_requests(self, item, info):
 		print item['image_urls']
 		for image_url in item['image_urls']:
@@ -31,7 +32,7 @@ class MyImagesPipeline(ImagesPipeline):
 			item['image_paths'] ="Item contains no images"
 		else:
 			item['image_paths'] = image_paths
-		return item
+		return item"""
 
 class EventPipeline(object):
 	def __init__(self):
@@ -243,7 +244,9 @@ class EventPipeline(object):
  	def getCoordinates(self, denomLocation):
  		try:
  			g=geocoders.GoogleV3()
+ 			print('hola2')
 			place, (lat, lng) = g.geocode(denomLocation)
+			print (lat,lng)
 			return(lat,lng)
 		except:
 			try:
@@ -256,6 +259,7 @@ class EventPipeline(object):
 					place, (lat, lng) = g.geocode(denomLocation, True, None, None)
 					return(lat,lng)
 				except:
+					print('hola')
 					return (0,0)
 
 	def getCategoryId(self, denomCategory):

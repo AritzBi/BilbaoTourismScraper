@@ -122,6 +122,11 @@ UPDATE planet_osm_polygon SET way=ST_TRANSFORM(ST_SETSRID(way, 900913), 4326);
 
 SELECT UpdateGeometrySRID('planet_osm_roads','way',4326);
 UPDATE planet_osm_roads SET way=ST_TRANSFORM(ST_SETSRID(way, 900913), 4326);
+
+SELECT UpdateGeometrySRID('location','geom',4326);
+UPDATE location SET geom=ST_TRANSFORM(ST_SETSRID(geom, 900913), 4326);
+
+
 INSERT INTO event_type(denom) VALUES ('Infantiles');
 INSERT INTO event_type(denom) VALUES ('Exposiciones');
 INSERT INTO event_type(denom) VALUES ('Concursos');
