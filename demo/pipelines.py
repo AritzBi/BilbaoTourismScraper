@@ -20,19 +20,19 @@ class DemoPipeline(object):
     def process_item(self, item, spider):
     	print item
         return item"""
-"""class MyImagesPipeline(ImagesPipeline):
+class MyImagesPipeline(ImagesPipeline):
 	def get_media_requests(self, item, info):
-		print item['image_urls']
+		item['image_paths'] ="Item contains no images"
 		for image_url in item['image_urls']:
 			yield Request(image_url)
 	def item_completed(self, results, item, info):
-		print("pasa por aqui")
 		image_paths = [x['path'] for ok, x in results if ok]
 		if not image_paths:
 			item['image_paths'] ="Item contains no images"
 		else:
+			print image_paths
 			item['image_paths'] = image_paths
-		return item"""
+		return item
 
 class EventPipeline(object):
 	def __init__(self):
@@ -65,12 +65,15 @@ class EventPipeline(object):
 			informationLink=item['informationLink']
 			category1=item['category'][1]
 			category2=item['category'][0]
-			#print item['images_paths']
+			if len(item['image_paths'])>0:
+				image_path=item['image_paths'].pop()
+			else:
+				image_path="Item contains no images"
 			if address:
 				coordinates=self.getCoordinates(address.encode('utf-8'))
 				longitude=coordinates[1]
 				latitude=coordinates[0]
-				self.insertHosteleriaToDB(name,address,description,telephone,email,informationLink,category1,category2,longitude,latitude)
+				self.insertHosteleriaToDB(name,address,description,telephone,email,informationLink,category1,category2,longitude,latitude, image_path)
 		elif spider.name=='kedin_spider':
 			title=item['title']
 			description=item['description']
@@ -172,7 +175,7 @@ class EventPipeline(object):
 			print informationLink
 			print e;
 
-	def insertHosteleriaToDB(self,name,address,description,telephone,email, informationLink,category1,category2,lon,lat):
+	def insertHosteleriaToDB(self,name,address,description,telephone,email, informationLink,category1,category2,lon,lat, image_path):
 		SQLSelect="SELECT id FROM HOSTELERY WHERE DENOM_ES=%s;"
  		self.cursor.execute(SQLSelect,(name,))
  		try:
@@ -188,8 +191,8 @@ class EventPipeline(object):
 				SQLEvent="INSERT INTO LOCATION (address, geom) VALUES (%s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
 				self.cursor.execute(SQLEvent, (address,lon,lat))
 				location_id=self.cursor.fetchone()[0]
-				SQLEvent="INSERT INTO HOSTELERY(denom_es,location_id, description_es, information_url, HOSTELERY_TYPE, telephone, email) VALUES (%s, %s, %s, %s, %s,%s, %s) returning id;"
-				self.cursor.execute(SQLEvent, (name,location_id,description,informationLink,category_id,telephone,email))
+				SQLEvent="INSERT INTO HOSTELERY(denom_es,location_id, description_es, information_url, HOSTELERY_TYPE, telephone, email, IMAGE_PATH) VALUES (%s, %s, %s, %s, %s,%s, %s, %s) returning id;"
+				self.cursor.execute(SQLEvent, (name,location_id,description,informationLink,category_id,telephone,email,image_path ))
 			self.conn.commit()
 		except Exception as e:
 			self.conn.commit()
@@ -244,9 +247,7 @@ class EventPipeline(object):
  	def getCoordinates(self, denomLocation):
  		try:
  			g=geocoders.GoogleV3()
- 			print('hola2')
 			place, (lat, lng) = g.geocode(denomLocation)
-			print (lat,lng)
 			return(lat,lng)
 		except:
 			try:
@@ -259,7 +260,6 @@ class EventPipeline(object):
 					place, (lat, lng) = g.geocode(denomLocation, True, None, None)
 					return(lat,lng)
 				except:
-					print('hola')
 					return (0,0)
 
 	def getCategoryId(self, denomCategory):
