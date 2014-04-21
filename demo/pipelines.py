@@ -30,7 +30,6 @@ class MyImagesPipeline(ImagesPipeline):
 		if not image_paths:
 			item['image_paths'] ="Item contains no images"
 		else:
-			print image_paths
 			item['image_paths'] = image_paths
 		return item
 
@@ -60,11 +59,17 @@ class EventPipeline(object):
 			name=item['name']
 			address=item['address']
 			description=item['description']
+			description_en=item['description_en']
+			description_eu=item['description_eu']
 			telephone=item['telephone']
 			email=item['email']
 			informationLink=item['informationLink']
 			category1=item['category'][1]
 			category2=item['category'][0]
+			category1_en=item['category_en'][1]
+			category2_en=item['category_en'][0]
+			category1_eu=item['category_eu'][1]
+			category2_eu=item['category_eu'][0]
 			if len(item['image_paths'])>0:
 				image_path=item['image_paths'].pop()
 			else:
@@ -73,7 +78,7 @@ class EventPipeline(object):
 				coordinates=self.getCoordinates(address.encode('utf-8'))
 				longitude=coordinates[1]
 				latitude=coordinates[0]
-				self.insertHosteleriaToDB(name,address,description,telephone,email,informationLink,category1,category2,longitude,latitude, image_path)
+				self.insertHosteleriaToDB(name,address,description,telephone,email,informationLink,category1,category2,longitude,latitude, image_path, category1_en,category2_en,category1_eu,category2_eu,description_en,description_eu)
 		elif spider.name=='kedin_spider':
 			title=item['title']
 			description=item['description']
@@ -175,7 +180,7 @@ class EventPipeline(object):
 			print informationLink
 			print e;
 
-	def insertHosteleriaToDB(self,name,address,description,telephone,email, informationLink,category1,category2,lon,lat, image_path):
+	def insertHosteleriaToDB(self,name,address,description,telephone,email, informationLink,category1,category2,lon,lat, image_path,category1_en,category2_en,category1_eu,category2_eu,description_en,description_eu):
 		SQLSelect="SELECT id FROM HOSTELERY WHERE DENOM_ES=%s;"
  		self.cursor.execute(SQLSelect,(name,))
  		try:
@@ -183,16 +188,21 @@ class EventPipeline(object):
 	 			SQLSelect="SELECT id FROM HOSTELERY_TYPE WHERE FIRST_TYPE_ES=%s and SECOND_TYPE_ES=%s;"
 		 		self.cursor.execute(SQLSelect,(category1,category2))
 				if self.cursor.rowcount==0:
-					SQLocation="INSERT INTO HOSTELERY_TYPE (FIRST_TYPE_ES, SECOND_TYPE_ES) VALUES (%s,%s) returning id;"
-					self.cursor.execute(SQLocation, (category1,category2))
+					SQLocation="INSERT INTO HOSTELERY_TYPE (FIRST_TYPE_ES, SECOND_TYPE_ES,FIRST_TYPE_EN, SECOND_TYPE_EN,FIRST_TYPE_EU, SECOND_TYPE_EU) VALUES (%s,%s,%s,%s,%s,%s) returning id;"
+					self.cursor.execute(SQLocation, (category1,category2,category1_en,category2_en,category1_eu,category2_eu))
 					category_id=self.cursor.fetchone()[0]
 				else:
 					category_id=self.cursor.fetchone()[0]
-				SQLEvent="INSERT INTO LOCATION (address, geom) VALUES (%s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
-				self.cursor.execute(SQLEvent, (address,lon,lat))
-				location_id=self.cursor.fetchone()[0]
-				SQLEvent="INSERT INTO HOSTELERY(denom_es,location_id, description_es, information_url, HOSTELERY_TYPE, telephone, email, IMAGE_PATH) VALUES (%s, %s, %s, %s, %s,%s, %s, %s) returning id;"
-				self.cursor.execute(SQLEvent, (name,location_id,description,informationLink,category_id,telephone,email,image_path ))
+				SQLSelect="SELECT id FROM LOCATION WHERE ADDRESS=%s;"
+				self.cursor.execute(SQLSelect,(address,))
+				if self.cursor.rowcount==0:
+					SQLEvent="INSERT INTO LOCATION (address, geom) VALUES (%s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
+					self.cursor.execute(SQLEvent, (address,lon,lat))
+					location_id=self.cursor.fetchone()[0]
+				else:
+					location_id=self.cursor.fetchone()[0]
+				SQLEvent="INSERT INTO HOSTELERY(denom_es,location_id, description_es,description_en,description_eu, information_url, HOSTELERY_TYPE, telephone, email, IMAGE_PATH) VALUES (%s, %s, %s, %s, %s, %s, %s,%s, %s, %s) returning id;"
+				self.cursor.execute(SQLEvent, (name,location_id,description,description_en, description_eu,informationLink,category_id,telephone,email,image_path ))
 			self.conn.commit()
 		except Exception as e:
 			self.conn.commit()

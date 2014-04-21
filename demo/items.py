@@ -34,8 +34,12 @@ class EventItem(Item):
 class RestaurantItem(Item):
 	name=Field()
 	category=Field()
+	category_en=Field()
+	category_eu=Field()
 	address=Field()
 	information=Field()
+	information_en=Field()
+	information_eu=Field()
 	telephone=Field()
 	timetable=Field()
 	michelin=Field()
@@ -43,6 +47,8 @@ class RestaurantItem(Item):
 	email=Field()
 	informationLink=Field()
 	description=Field()
+	description_en=Field()
+	description_eu=Field()
 	image_urls = Field()
 	image_paths= Field()
 
