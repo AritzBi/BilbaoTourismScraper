@@ -39,7 +39,9 @@ class RestaurantesBilbaoTurismoSpider(Spider):
 		telephone=address.xpath("span[@itemprop='telephone']/text()").extract()
 		email=address.xpath("span[@itemprop='email']/text()").extract()
 		descriptionpath=sel.xpath("//*[@id='idContentScroll']")
-		description=descriptionpath.xpath("span[@itemprop='description']/p/text()").extract()
+		description=descriptionpath.xpath("span[@itemprop='description']/p[1]//text()").extract()
+		timetable=descriptionpath.xpath("span[@itemprop='description']/p[2]//text()").extract()
+		timetable2=descriptionpath.xpath("span[@itemprop='description']/p[3]//text()").extract()
 		informationLink=descriptionpath.xpath("span/a/@href").extract()
 		categoryPath=sel.xpath("//*[@id='gastronomy-content']/section[2]/div/section[1]/section/div/ul/li[2]/p[2]")
 		category=categoryPath.xpath("a/strong/text()").extract()
@@ -67,9 +69,16 @@ class RestaurantesBilbaoTurismoSpider(Spider):
 		else:
 			item['email']=''
 		if len(description)>0:
-			item['description']=description.pop()
+			item['description']=' '.join(description)
 		else:
 			item['description']=''
+		if len(timetable)>0:
+			if len(timetable2)>0:
+				item['timetable']=' '.join([timetable.pop(),timetable2.pop()])
+			else:
+				item['timetable']=timetable.pop()
+		else:
+			item['timetable']=''
 		if len(informationLink)>0:
 			item['informationLink']=informationLink.pop()
 		else:
@@ -80,30 +89,42 @@ class RestaurantesBilbaoTurismoSpider(Spider):
 			item['category']=['Restaurante','Otros']
 		if len(images)>0:
 			item['image_urls']=[''.join([self.BASE,images.pop()])]
+		item['originLink']=response.url
 		link=response.url
+		print link
 		link=link.replace("/es/","/en/")
 		request=Request(link,callback=self.parse_restaurants_en)
 		request.meta['item']=item
+		print item['timetable']
+
 		yield request
 
 	def parse_restaurants_en(self,response):
 		sel=Selector(response)
 		item = response.meta['item']
 		descriptionpath=sel.xpath("//*[@id='idContentScroll']")
-		description=descriptionpath.xpath("span[@itemprop='description']/p/text()").extract()
+		description=descriptionpath.xpath("span[@itemprop='description']/p//text()").extract()
+		timetable=descriptionpath.xpath("span[@itemprop='description']/p[2]//text()").extract()
+		timetable2=descriptionpath.xpath("span[@itemprop='description']/p[3]//text()").extract()
 		categoryPath=sel.xpath("//*[@id='gastronomy-content']/section[2]/div/section[1]/section/div/ul/li[2]/p[2]")
 		category=categoryPath.xpath("a/strong/text()").extract()
 		if len(description)>0:
-			item['description_en']=description.pop()
+			item['description_en']=' '.join(description)
 		else:
 			item['description_en']=''
 		if len(category)>0:
 			item['category_en']=['Restaurant',category.pop()]	
 		else:
 			item['category_en']=['Restaurant','Others']
+		if len(timetable)>0:
+			if len(timetable2)>0:
+				item['timetable_en']=' '.join([timetable.pop(),timetable2.pop()])
+			else:
+				item['timetable_en']=timetable.pop()
+		else:
+			item['timetable_en']=''
 		link=response.url
 		link=link.replace("/en/","/eu/")
-
 		request=Request(link,callback=self.parse_restaurants_eu)
 		request.meta['item']=item
 		yield request		
@@ -112,15 +133,24 @@ class RestaurantesBilbaoTurismoSpider(Spider):
 		sel=Selector(response)
 		item = response.meta['item']
 		descriptionpath=sel.xpath("//*[@id='idContentScroll']")
-		description=descriptionpath.xpath("span[@itemprop='description']/p/text()").extract()
+		timetable=descriptionpath.xpath("span[@itemprop='description']/p[2]//text()").extract()
+		timetable2=descriptionpath.xpath("span[@itemprop='description']/p[3]//text()").extract()
+		description=descriptionpath.xpath("span[@itemprop='description']/p//text()").extract()
 		categoryPath=sel.xpath("//*[@id='gastronomy-content']/section[2]/div/section[1]/section/div/ul/li[2]/p[2]")
 		category=categoryPath.xpath("a/strong/text()").extract()
 		if len(description)>0:
-			item['description_eu']=description.pop()
+			item['description_eu']=' '.join(description)
 		else:
 			item['description_eu']=''
 		if len(category)>0:
 			item['category_eu']=['Jatexea',category.pop()]	
 		else:
 			item['category_eu']=['Jatexea','Besteak']
+		if len(timetable)>0:
+			if len(timetable2)>0:
+				item['timetable_eu']=' '.join([timetable.pop(),timetable2.pop()])
+			else:
+				item['timetable_eu']=timetable.pop()
+		else:
+			item['timetable_eu']=''
 		return item

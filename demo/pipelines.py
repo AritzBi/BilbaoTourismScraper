@@ -9,17 +9,10 @@ import sys
 import psycopg2
 import pprint
 import datetime
-#import Image
 from scrapy.contrib.pipeline.images import ImagesPipeline
 from geopy import geocoders
 from scrapy.http.request import Request
 
-
-"""
-class DemoPipeline(object):
-    def process_item(self, item, spider):
-    	print item
-        return item"""
 class MyImagesPipeline(ImagesPipeline):
 	def get_media_requests(self, item, info):
 		item['image_paths'] ="Item contains no images"
@@ -70,6 +63,15 @@ class EventPipeline(object):
 			category2_en=item['category_en'][0]
 			category1_eu=item['category_eu'][1]
 			category2_eu=item['category_eu'][0]
+			source_url=item['originLink']
+			if spider.name=='bTurismoRestaurantes_spider_es':
+				timetable_es=item['timetable']
+				timetable_en=item['timetable_en']
+				timetable_eu=item['timetable_eu']
+			else:
+				timetable_es=''
+				timetable_en=''
+				timetable_eu=''
 			if len(item['image_paths'])>0:
 				image_path=item['image_paths'].pop()
 			else:
@@ -78,7 +80,7 @@ class EventPipeline(object):
 				coordinates=self.getCoordinates(address.encode('utf-8'))
 				longitude=coordinates[1]
 				latitude=coordinates[0]
-				self.insertHosteleriaToDB(name,address,description,telephone,email,informationLink,category1,category2,longitude,latitude, image_path, category1_en,category2_en,category1_eu,category2_eu,description_en,description_eu)
+				self.insertHosteleriaToDB(name,address,description,telephone,email,informationLink,category1,category2,longitude,latitude, image_path, category1_en,category2_en,category1_eu,category2_eu,description_en,description_eu, source_url, timetable_es, timetable_en, timetable_eu)
 		elif spider.name=='kedin_spider':
 			title=item['title']
 			description=item['description']
@@ -180,7 +182,7 @@ class EventPipeline(object):
 			print informationLink
 			print e;
 
-	def insertHosteleriaToDB(self,name,address,description,telephone,email, informationLink,category1,category2,lon,lat, image_path,category1_en,category2_en,category1_eu,category2_eu,description_en,description_eu):
+	def insertHosteleriaToDB(self,name,address,description,telephone,email, informationLink,category1,category2,lon,lat, image_path,category1_en,category2_en,category1_eu,category2_eu,description_en,description_eu,source_url, timetable_es, timetable_en, timetable_eu):
 		SQLSelect="SELECT id FROM HOSTELERY WHERE DENOM_ES=%s;"
  		self.cursor.execute(SQLSelect,(name,))
  		try:
@@ -201,8 +203,8 @@ class EventPipeline(object):
 					location_id=self.cursor.fetchone()[0]
 				else:
 					location_id=self.cursor.fetchone()[0]
-				SQLEvent="INSERT INTO HOSTELERY(denom_es,location_id, description_es,description_en,description_eu, information_url, HOSTELERY_TYPE, telephone, email, IMAGE_PATH) VALUES (%s, %s, %s, %s, %s, %s, %s,%s, %s, %s) returning id;"
-				self.cursor.execute(SQLEvent, (name,location_id,description,description_en, description_eu,informationLink,category_id,telephone,email,image_path ))
+				SQLEvent="INSERT INTO HOSTELERY(denom_es,location_id, description_es,description_en,description_eu, information_url, HOSTELERY_TYPE, telephone, email, IMAGE_PATH, SOURCE_URL, TIMETABLE_ES, TIMETABLE_EN, TIMETABLE_EU) VALUES (%s, %s, %s, %s, %s, %s, %s,%s, %s, %s, %s,%s, %s, %s) returning id;"
+				self.cursor.execute(SQLEvent, (name,location_id,description,description_en, description_eu,informationLink,category_id,telephone,email,image_path,source_url, timetable_es, timetable_en, timetable_eu ))
 			self.conn.commit()
 		except Exception as e:
 			self.conn.commit()
