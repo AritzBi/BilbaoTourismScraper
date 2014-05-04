@@ -57,10 +57,20 @@ class RestaurantItem(Item):
 
 class BuildingItem(Item):
 	name=Field()
+	name_en=Field()
+	name_eu=Field()
 	category=Field()
+	category_en=Field()
+	category_eu=Field()
 	address=Field()
 	description=Field()
+	description_en=Field()
+	description_eu=Field()
 	informationLink=Field()
+	informationLink_en=Field()
+	informationLink_eu=Field()
+	image_urls = Field()
+	image_paths= Field()
 class Item(Item):
 	title=Field()
 	link=Field()

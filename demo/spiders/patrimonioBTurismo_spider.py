@@ -48,14 +48,19 @@ class PatrimonioBilbaoTurismoSpider(Spider):
 		sel=Selector(response)
 		monument=sel.xpath('//div[@class="col-50 content-desc"]')
 		title=monument.xpath("h2[@class='big sec-color']/text()").extract()
-		summary=''.join(monument.xpath("div[@id='idContentScroll']/span/p/text()").extract())
+		summary=''.join(monument.xpath("div[@id='idContentScroll']/span/p//text()").extract())
 		address=monument.xpath("span/text()").re(r'[\w\s,-\/]*\s48\d{3}\s*\w*')
 		informationLink=monument.xpath("div[@id='idContentScroll']/span/a/@href").extract()
+		images=sel.xpath("//*[@id='CapaImagen_0']/img/@src").extract()
 		monumentoReligioso=sel.xpath("//*[@id='see-and-do-content']/section[2]/div/section[1]/section/ul/li/a[@class='sec-bg'][contains(.,'Monumentos religiosos')]").extract()
 		if monumentoReligioso:
 			category="Monumento Religioso"
+			category_en="Religious monument"
+			category_eu=""
 		else:
 			category="Monumento Historico"
+			category_en="Historical monument"
+			category_eu=""
 		item=BuildingItem()
 		if len(title)>0:
 			item['name']=title.pop()
@@ -73,7 +78,68 @@ class PatrimonioBilbaoTurismoSpider(Spider):
 			item['informationLink']=informationLink.pop()
 		else:
 			item['informationLink']=response.url
+		if len(images)>0:
+			item['image_urls']=[''.join([self.BASE,images.pop()])]
 		item['category']=category
+		item['category_en']=category_en
+		item['category_eu']=category_eu
 
+		enLink=sel.xpath('//*[@id="en"]/@href').extract()
+		request=Request(self.BASE+str(enLink.pop()),callback=self.parse_monuments_en)
+		request.meta['item']=item
+
+		yield request
+
+	def parse_monuments_en(self,response):
+		sel=Selector(response)
+		monument=sel.xpath('//div[@class="col-50 content-desc"]')
+		title=monument.xpath("h2[@class='big sec-color']/text()").extract()
+		summary=''.join(monument.xpath("div[@id='idContentScroll']/span/p//text()").extract())
+		informationLink=monument.xpath("div[@id='idContentScroll']/span/a/@href").extract()
+		item = response.meta['item']
+		if len(informationLink)>0:
+			item['informationLink_en']=informationLink.pop()
+		else:
+			item['informationLink_en']=response.url
+		if len(title)>0:
+			item['name_en']=title.pop()
+		else:
+			item['name_en']=''
+		if len(summary)>0:
+			item['description_en']=summary
+		else:
+			item['description_en']=''
+		if len(informationLink)>0:
+			item['informationLink']=informationLink.pop()
+		else:
+			item['informationLink']=response.url
+		
+		euLink=sel.xpath('//*[@id="eu"]/@href').extract()
+		request=Request(self.BASE+str(euLink.pop()),callback=self.parse_monuments_eu)
+		request.meta['item']=item
+		yield request
+
+	def parse_monuments_eu(self,response):
+		sel=Selector(response)
+		monument=sel.xpath('//div[@class="col-50 content-desc"]')
+		title=monument.xpath("h2[@class='big sec-color']/text()").extract()
+		summary=''.join(monument.xpath("div[@id='idContentScroll']/span/p//text()").extract())
+		informationLink=monument.xpath("div[@id='idContentScroll']/span/a/@href").extract()
+		item = response.meta['item']
+		if len(informationLink)>0:
+			item['informationLink_eu']=informationLink.pop()
+		else:
+			item['informationLink_eu']=response.url
+		if len(title)>0:
+			item['name_eu']=title.pop()
+		else:
+			item['name_eu']=''
+		if len(summary)>0:
+			item['description_eu']=summary
+		else:
+			item['description_eu']=''
+		if len(informationLink)>0:
+			item['informationLink']=informationLink.pop()
+		else:
+			item['informationLink']=response.url
 		return item
-

@@ -38,16 +38,28 @@ class EventPipeline(object):
 	def process_item(self,item,spider):
 		if spider.name == 'bTurismoPatrimonio_spider_es':
 			name=item['name']
+			name_en=item['name_en']
+			name_eu=item['name_eu']
 			category=item['category']
+			category_en=item['category_en']
+			category_eu=item['category_eu']
 			address=item['address']
 			description=item['description']
+			description_eu=item['description_eu']
+			description_en=item['description_en']
 			informationLink=item['informationLink']
+			informationLink_en=item['informationLink_en']
+			informationLink_eu=item['informationLink_eu']
+			if len(item['image_paths'])>0:
+				image_path=item['image_paths'].pop()
+			else:
+				image_path="Item contains no images"
 			#Algunos no tienen bien el addres por eso lo dejo asi
 			if address:
 				coordinates=self.getCoordinates(address.encode('utf-8'))
 				longitude=coordinates[1]
 				latitude=coordinates[0]
-				self.insertPatrimonioToDB(name,category,address,description,informationLink,longitude,latitude)
+				self.insertPatrimonioToDB(name,name_en,name_eu,category,category_en,category_eu,address,description, description_en,description_eu,informationLink,informationLink_en,informationLink_eu,longitude,latitude,image_path)
 		elif spider.name == 'bTurismoPintxos_spider_es' or spider.name=='bTurismoRestaurantes_spider_es':
 			name=item['name']
 			address=item['address']
@@ -156,7 +168,7 @@ class EventPipeline(object):
 			endDate=datetime.datetime.combine(datetime.date(int(endDate[2]),int(endDate[1]),int(endDate[0])),datetime.time(int(hour[0]),int(hour[1])))
 			self.insertDataToDB(denomLocation, denomEvent,1,startDate,endDate,-1)
 
- 	def insertPatrimonioToDB(self, name, category, address, description, informationLink, lon, lat):
+ 	def insertPatrimonioToDB(self, name,name_en,name_eu, category,category_en, category_eu, address, description,description_en,description_eu, informationLink,informationLink_en,informationLink_eu, lon, lat,image_path):
 		SQLSelect="SELECT id FROM EMBLEMATIC_BUILDING WHERE DENOM_ES=%s;"
  		self.cursor.execute(SQLSelect,(name,))
  		try:
@@ -164,22 +176,22 @@ class EventPipeline(object):
 	 			SQLSelect="SELECT id FROM BUILDING_TYPE WHERE DENOM_ES=%s;"
 		 		self.cursor.execute(SQLSelect,(category,))
 				if self.cursor.rowcount==0:
-					SQLocation="INSERT INTO BUILDING_TYPE (denom_es) VALUES (%s) returning id;"
-					self.cursor.execute(SQLocation, (category,))
+					SQLocation="INSERT INTO BUILDING_TYPE (denom_es, denom_en, denom_eu) VALUES (%s,%s,%s) returning id;"
+					self.cursor.execute(SQLocation, (category,category_en,category_eu))
 					category_id=self.cursor.fetchone()[0]
 				else:
 					category_id=self.cursor.fetchone()[0]
 				SQLEvent="INSERT INTO LOCATION (address, geom) VALUES (%s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
 				self.cursor.execute(SQLEvent, (address,lon,lat))
 				location_id=self.cursor.fetchone()[0]
-				SQLEvent="INSERT INTO EMBLEMATIC_BUILDING(denom_es,location_id, description_es, information_url, BUILDING_TYPE) VALUES (%s, %s, %s, %s, %s) returning id;"
-				self.cursor.execute(SQLEvent, (name,location_id,description,informationLink,category_id))
+				SQLEvent="INSERT INTO EMBLEMATIC_BUILDING(denom_es,denom_en,denom_eu,location_id, description_es,description_en,description_eu, information_url,INFORMATION_URL_EN ,INFORMATION_URL_EU, BUILDING_TYPE,IMAGE_PATH) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) returning id;"
+				self.cursor.execute(SQLEvent, (name,name_en,name_eu,location_id,description,description_en,description_eu,informationLink,informationLink_en,informationLink_eu,category_id,image_path))
 			self.conn.commit()
 		except Exception as e:
 			self.conn.commit()
-			print name
-			print address
-			print informationLink
+			#print name
+			#print address
+			#print informationLink
 			print e;
 
 	def insertHosteleriaToDB(self,name,address,description,telephone,email, informationLink,category1,category2,lon,lat, image_path,category1_en,category2_en,category1_eu,category2_eu,description_en,description_eu,source_url, timetable_es, timetable_en, timetable_eu):

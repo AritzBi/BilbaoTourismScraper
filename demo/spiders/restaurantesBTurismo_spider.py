@@ -91,11 +91,9 @@ class RestaurantesBilbaoTurismoSpider(Spider):
 			item['image_urls']=[''.join([self.BASE,images.pop()])]
 		item['originLink']=response.url
 		link=response.url
-		print link
 		link=link.replace("/es/","/en/")
 		request=Request(link,callback=self.parse_restaurants_en)
 		request.meta['item']=item
-		print item['timetable']
 
 		yield request
 
