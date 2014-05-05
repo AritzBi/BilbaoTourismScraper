@@ -173,17 +173,22 @@ class EventPipeline(object):
  		self.cursor.execute(SQLSelect,(name,))
  		try:
 			if self.cursor.rowcount==0:
-	 			SQLSelect="SELECT id FROM BUILDING_TYPE WHERE DENOM_ES=%s;"
+	 			SQLSelect="SELECT id FROM BUILDING_TYPE WHERE TYPE_DENOM_ES=%s;"
 		 		self.cursor.execute(SQLSelect,(category,))
 				if self.cursor.rowcount==0:
-					SQLocation="INSERT INTO BUILDING_TYPE (denom_es, denom_en, denom_eu) VALUES (%s,%s,%s) returning id;"
+					SQLocation="INSERT INTO BUILDING_TYPE (type_denom_es, type_denom_en, type_denom_eu) VALUES (%s,%s,%s) returning id;"
 					self.cursor.execute(SQLocation, (category,category_en,category_eu))
 					category_id=self.cursor.fetchone()[0]
 				else:
 					category_id=self.cursor.fetchone()[0]
-				SQLEvent="INSERT INTO LOCATION (address, geom) VALUES (%s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
-				self.cursor.execute(SQLEvent, (address,lon,lat))
-				location_id=self.cursor.fetchone()[0]
+				SQLSelect="SELECT id FROM LOCATION WHERE ADDRESS=%s;"
+				self.cursor.execute(SQLSelect,(address,))
+				if self.cursor.rowcount==0:
+					SQLEvent="INSERT INTO LOCATION (address, geom) VALUES (%s, ST_GeomFromText('POINT(%s %s)', 4326)) returning id;"
+					self.cursor.execute(SQLEvent, (address,lon,lat))
+					location_id=self.cursor.fetchone()[0]
+				else:
+					location_id=self.cursor.fetchone()[0]
 				SQLEvent="INSERT INTO EMBLEMATIC_BUILDING(denom_es,denom_en,denom_eu,location_id, description_es,description_en,description_eu, information_url,INFORMATION_URL_EN ,INFORMATION_URL_EU, BUILDING_TYPE,IMAGE_PATH) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) returning id;"
 				self.cursor.execute(SQLEvent, (name,name_en,name_eu,location_id,description,description_en,description_eu,informationLink,informationLink_en,informationLink_eu,category_id,image_path))
 			self.conn.commit()
