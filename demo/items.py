@@ -12,7 +12,11 @@ class DemoItem(Item):
 
 class EventItem(Item):
 	title=Field()
+	title_en=Field()
+	title_eu=Field()
 	description=Field()
+	description_en=Field()
+	description_eu=Field()
 	locationName=Field()
 	locationAddress=Field()
 	locationWebsite=Field()
@@ -29,7 +33,13 @@ class EventItem(Item):
 	endHour=Field()
 	informationLink=Field()
 	category=Field()
-	observations=Field()
+	category_en=Field()
+	category_eu=Field()
+	moreInformation=Field()
+	moreInformation_en=Field()
+	moreInformation_eu=Field()
+	image_urls = Field()
+	image_paths= Field()
 	
 class RestaurantItem(Item):
 	name=Field()

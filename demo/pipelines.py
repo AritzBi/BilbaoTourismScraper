@@ -9,6 +9,7 @@ import sys
 import psycopg2
 import pprint
 import datetime
+import goslate
 from scrapy.contrib.pipeline.images import ImagesPipeline
 from geopy import geocoders
 from scrapy.http.request import Request
@@ -95,7 +96,11 @@ class EventPipeline(object):
 				self.insertHosteleriaToDB(name,address,description,telephone,email,informationLink,category1,category2,longitude,latitude, image_path, category1_en,category2_en,category1_eu,category2_eu,description_en,description_eu, source_url, timetable_es, timetable_en, timetable_eu)
 		elif spider.name=='kedin_spider':
 			title=item['title']
+			title_en=self.getTranslation(title, 'en')
+			title_eu=self.getTranslation(title, 'eu')
 			description=item['description']
+			description_en=self.getTranslation(description,'en')
+			description_eu=self.getTranslation(description, 'eu')
 			informationLink=item['informationLink']
 			startDate=item['startDate']
 			endDate=item['endDate']
@@ -108,7 +113,16 @@ class EventPipeline(object):
 			rangePrices=item['rangePrices']
 			longitude=item['lon']
 			latitude=item['lat']
-			print "Title: "+title
+			moreInformation=item['moreInformation']
+			moreInformation_en=self.getTranslation(moreInformation, 'en')
+			moreInformation_eu=self.getTranslation(moreInformation, 'eu')
+			category1_es=category[2]
+			category1_en=self.getTranslation(category[2],'en')
+			category1_eu=self.getTranslation(category[2], 'eu')
+			category2_es=category[3]
+			category2_en=self.getTranslation(category[3], 'en')
+			category2_eu=self.getTranslation(category[3], 'eu')
+			"""print "Title: "+title
 			print "Description: "+description
 			print informationLink
 			print "StartDate: "+startDate
@@ -121,8 +135,8 @@ class EventPipeline(object):
 			print "price"+str(price)
 			print "rangePrices"+str(rangePrices)
 			print "longitude"+longitude
-			print "latitude"+latitude
-			self.insertEventToDB(title,description,startDate,endDate,startHour,endHour,category[2],category[3],informationLink,longitude, latitude,price, rangePrices, locationName, address)
+			print "latitude"+latitude"""
+			#self.insertEventToDB(title,description,startDate,endDate,startHour,endHour,category[2],category[3],informationLink,longitude, latitude,price, rangePrices, locationName, address)
 
 		elif spider.name == 'bilbao_spider':
 			denomLocation=item['location']
@@ -290,6 +304,9 @@ class EventPipeline(object):
 					return(lat,lng)
 				except:
 					return (0,0)
+	def getTranslation(self, sourceText, destLanguage):
+		gs=goslate.Goslate()
+		return gs.translate(sourceText, destLanguage)
 
 	def getCategoryId(self, denomCategory):
 		denomCategory=denomCategory.strip()

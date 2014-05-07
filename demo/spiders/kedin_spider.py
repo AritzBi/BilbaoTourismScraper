@@ -49,19 +49,20 @@ class KedinSpider(XMLFeedSpider):
 
 	def parse_events_links(self,response):
 		sel=Selector(response)
-		event=sel.xpath("//article/ul[@class='data-info']")
-		startDate=event.xpath("li[@class='info']/p[@class='lcontainer']/strong/meta[@itemprop='startDate']/@content").extract()
+		startDate=sel.xpath("//*[@id='main_content']/article/section[2]/div/strong/meta[@itemprop='startDate']/@content").extract()
 		startDate=startDate.pop()
-		endDate=event.xpath("li[@class='info']/p[@class='lcontainer']/strong/meta[@itemprop='endDate']/@content").extract()
-		category=sel.xpath("//header/div['@id=breadcrumb']/span/a/span/text()").extract()
+		endDate=sel.xpath("//*[@id='main_content']/article/section[2]/div/strong[2]/meta[@itemprop='endDate']/@content").extract()
+		category=sel.xpath("//*[@id='breadcrumb']/span/a/span/text()").extract()
+		moreInformation=sel.xpath("string(//*[@id='description']/div[1]/p)").extract()
+		images=sel.xpath("//*[@id='main_content']/article/section[1]/a/img/@src").extract()
 		if len(endDate)>0:
 			endDate=endDate.pop()
-			hours=event.xpath("li[@class='time']/p[@class='lcontainer']/strong/text()").re(r"\d{2}[:]\d{2}")
+			hours=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span/strong/text()").re(r"\d{2}[:]\d{2}")
 			if len(hours)==2:
 				startHour=hours[0]
 				endHour=hours.pop()
 		else:
-			hours=event.xpath("li[@class='time']/p[@class='lcontainer']/strong/text()").re(r"\d{2}[:]\d{2}")
+			hours=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span/strong/text()").re(r"\d{2}[:]\d{2}")
 			if len(hours)==2:
 				startHour=hours[0]
 				endHour=hours.pop()
@@ -72,44 +73,58 @@ class KedinSpider(XMLFeedSpider):
 		item['startHour']=startHour
 		item['endHour']=endHour
 		item['category']=category
-		priceItemprop=event.xpath("li[@class='price']/p[@class='lcontainer']/span/strong/@itemprop").extract()
-		priceClass=event.xpath("li[@class='price']/p[@class='lcontainer']/span/strong/@class").extract()
-		price=event.xpath("li[@class='price']/p[@class='lcontainer']/span/strong/text()").re(r"\d+")
+		"""if len(description)>0:
+			item['description']=description.pop()
+		else:
+			item['description']=''"""
+		if len(moreInformation)>0:
+			item['moreInformation']=moreInformation.pop()
+		else:
+			item['moreInformation']=''
+		if len(images)>0:
+			item['image_urls']=[''.join([self.BASE,images.pop()])]
+		priceItemprop=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[3]/span/strong/@itemprop").extract()
+		priceClass=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span/span/strong/@class").extract()
+		priceArray=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span/span/strong/text()").re(r"\d+\,?\d*")
+		price=-1
 		rangePrices=False;
 		if len(priceClass)>0:
 			priceClass=priceClass.pop()
 			if priceClass== 'free':
 				price=0
-			elif priceClass=='undefined':
-				price=-1
-
 		elif len(priceItemprop)>0:
 			if len(priceItemprop)==2:
-				price=price[0]+'-'+price[1]
+				price=priceArray[0]+'-'+priceArray[1]
 				rangePrices=True
 			else:
 				priceItemprop=priceItemprop.pop()
-				if(priceItemprop == 'price'):
-					price=price.pop()
+				if(priceItemprop == 'lowPrice'):
+					price=priceArray.pop()
 				elif priceItemprop=='highPrice':
-					price=price.pop()
+					price=priceArray.pop()
 					rangePrices=True;
+		
 		item['priceTaquilla']=price
 		item['rangePrices']=rangePrices
-		locationURL=event.xpath("li[@class='place'][@itemprop='location']/p[@class='lcontainer']/a/@href").extract()
+		locationURL=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[1]/a/@href").extract()
 		if len(locationURL)>0:
 			request=Request(self.BASE+locationURL[0],callback=self.parse_event_location,dont_filter=True)
 			request.meta['item']=item
 			yield request
-		#TODO later maybe, si no hay URL mirar por nombre
+		else:
+			locationName=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/hspan/span/text()").extract().pop()
+			if "Por confirmar" not in locationName:
+				item['locationName']=locationName
+				item['lat']=-1
+				item['lon']=-1
+				item['locationAddress']=locationName
 	def parse_event_location(self,response):
 		item=response.meta['item']
 		sel=Selector(response)
-		location=sel.xpath("//body/div/div/article/div/div/section[@id='place']")
-		locationName=location.xpath("p/strong/text()").extract()
-		locationAdress=location.xpath("p[@class='address']/text()").extract()
-		lat=location.xpath("div[@id='map']/@data-lat").extract()
-		lon=location.xpath("div[@id='map']/@data-lng").extract()
+		locationName=sel.xpath("//*[@id='header']/div[2]/div[1]/header/h1/text()").extract()
+		locationAdress=sel.xpath("//*[@id='place']/p[2]/text()").extract()
+		lon=sel.xpath("//*[@id='map']/@data-lng").extract()
+		lat=sel.xpath("//*[@id='map']/@data-lat").extract()
 		if len(locationName)>0:
 			item['locationName']=locationName.pop()
 		else:
