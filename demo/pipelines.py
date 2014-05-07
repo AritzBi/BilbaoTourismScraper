@@ -136,7 +136,7 @@ class EventPipeline(object):
 			print "rangePrices"+str(rangePrices)
 			print "longitude"+longitude
 			print "latitude"+latitude"""
-			#self.insertEventToDB(title,description,startDate,endDate,startHour,endHour,category[2],category[3],informationLink,longitude, latitude,price, rangePrices, locationName, address)
+			self.insertEventToDB(title,title_en, title_eu, description,description_en, description_eu,startDate,endDate,startHour,endHour,category1_es, category1_en, category1_eu, category2_es, category2_en, category2_eu,informationLink,longitude, latitude,price, rangePrices, locationName, address, moreInformation, moreInformation_en, moreInformation_eu)
 
 		elif spider.name == 'bilbao_spider':
 			denomLocation=item['location']
@@ -244,23 +244,23 @@ class EventPipeline(object):
 			print informationLink
 			print e;
 
-	def insertEventToDB(self, title, description, startDate, endDate, startHour, endHour, category1, category2, informationLink, longitude, latitude, price, rangePrices, locationName, address):
+	def insertEventToDB(self, title_es,title_en, title_eu, description_es, description_en, description_eu, startDate, endDate, startHour, endHour, category1_es,category1_en,category1_eu, category2_es,category2_en,category2_eu, informationLink, longitude, latitude, price, rangePrices, locationName, address,moreInformation_es, moreInformation_en, moreInformation_eu):
  		try:
- 			SQL="SELECT s.id FROM EVENT_TYPE t, EVENT_SUBTYPE s WHERE t.DENOM=%s and s.denom=%s and s.type_id=t.id;"
+ 			SQL="SELECT s.id FROM EVENT_TYPE t, EVENT_SUBTYPE s WHERE t.TYPE_ES=%s and s.SUBTYPE_ES=%s and s.type_id=t.id;"
  			self.cursor.execute(SQL,(category1,category2))
 			if self.cursor.rowcount==0:
-				SQL="SELECT id FROM EVENT_TYPE WHERE DENOM=%s;"
+				SQL="SELECT id FROM EVENT_TYPE WHERE TYPE_ES=%s;"
 				self.cursor.execute(SQL,(category1,))
 				if self.cursor.rowcount==0:
-					SQL="INSERT INTO EVENT_TYPE(denom) VALUES (%s) returning id;"
-					self.cursor.execute(SQL,(category1,))
+					SQL="INSERT INTO EVENT_TYPE(TYPE_ES, TYPE_EN, TYPE_EU) VALUES (%s,%s,%s) returning id;"
+					self.cursor.execute(SQL,(category1_es,category1_en, category1_eu))
 					category1_id=self.cursor.fetchone()[0]
-					SQL="INSERT INTO EVENT_SUBTYPE(denom, type_id) VALUES (%s, %s) returning id;"
-					category_id=self.cursor.execute(SQL,(category2,category1_id))
+					SQL="INSERT INTO EVENT_SUBTYPE(SUBTYPE_ES,SUBTYPE_EN, SUBTYPE_EU, type_id) VALUES (%s,%s,%s, %s) returning id;"
+					category_id=self.cursor.execute(SQL,(category2_es,category2_en, category2_eu,category1_id))
 				else:
 					category1_id=self.cursor.fetchone()[0]
-					SQL="INSERT INTO EVENT_SUBTYPE(denom, type_id) VALUES (%s, %s) returning id;"
-					category_id=self.cursor.execute(SQL,(category2,category1_id))
+					SQL="INSERT INTO EVENT_SUBTYPE(SUBTYPE_ES,SUBTYPE_EN, SUBTYPE_EU, type_id) VALUES (%s,%s,%s, %s) returning id;"
+					category_id=self.cursor.execute(SQL,(category2_es,category2_en, category2_eu,category1_id))
 			else:
 				category_id=self.cursor.fetchone()[0]
 			SQL="SELECT id FROM LOCATION WHERE ADDRESS=%s;"
@@ -271,8 +271,8 @@ class EventPipeline(object):
 				location_id=self.cursor.fetchone()[0]
 			else:
 				location_id=self.cursor.fetchone()[0]
-			SQL="INSERT INTO EVENT(denom,information_url, startdate,endate, starthour,endhour,type_id, price, range_prices) VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s) returning id;"
-			self.cursor.execute(SQL, (title, informationLink, startDate, endDate, startHour, endHour, category_id, price, rangePrices))
+			SQL="INSERT INTO EVENT(title_es,title_en, title_eu, description_es, description_en, description_eu, information_url, startdate,endate, starthour,endhour,type_id, price, range_prices, more_information_es,more_information_en,more_information_eu ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s, %s, %s, %s, %s,%s, %s, %s, %s) returning id;"
+			self.cursor.execute(SQL, (title_es, title_en,title_eu, description_es, description_en, description_eu, informationLink, startDate, endDate, startHour, endHour, category_id, price, rangePrices, moreInformation_es, moreInformation_en, moreInformation_eu))
 			event_id=self.cursor.fetchone()[0]
 			SQL="INSERT INTO EVENT_LOCATION(location_id, denom, event_id) VALUES (%s, %s, %s);"
 			self.cursor.execute(SQL, (location_id, locationName, event_id))
@@ -283,10 +283,6 @@ class EventPipeline(object):
 			print address
 			print informationLink
 			print e;
-	
-
-
-
  	def getCoordinates(self, denomLocation):
  		try:
  			g=geocoders.GoogleV3()
