@@ -12,7 +12,7 @@ SPIDER_MODULES = ['demo.spiders']
 NEWSPIDER_MODULE = 'demo.spiders'
 ITEM_PIPELINES = ['demo.pipelines.MyImagesPipeline','demo.pipelines.EventPipeline']
 #ITEM_PIPELINES = ['demo.pipelines.EventPipeline']
-IMAGES_STORE = '/Users/aritzbi/Development/XploreBilbao/app/images'
+IMAGES_STORE = '/home/aritzbi/Development/XploreBilbaoWeb/app/images'
 LOG_LEVEL='ERROR'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

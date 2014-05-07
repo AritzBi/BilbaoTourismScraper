@@ -82,7 +82,8 @@ class KedinSpider(XMLFeedSpider):
 		else:
 			item['moreInformation']=''
 		if len(images)>0:
-			item['image_urls']=[''.join([self.BASE,images.pop()])]
+			#item['image_urls']=[''.join([self.BASE,images.pop()])]
+			item['image_urls']=images
 		priceItemprop=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[3]/span/strong/@itemprop").extract()
 		priceClass=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span/span/strong/@class").extract()
 		priceArray=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span/span/strong/text()").re(r"\d+\,?\d*")

@@ -18,6 +18,7 @@ class MyImagesPipeline(ImagesPipeline):
 	def get_media_requests(self, item, info):
 		item['image_paths'] ="Item contains no images"
 		for image_url in item['image_urls']:
+			print image_url
 			yield Request(image_url)
 	def item_completed(self, results, item, info):
 		image_paths = [x['path'] for ok, x in results if ok]
@@ -122,6 +123,11 @@ class EventPipeline(object):
 			category2_es=category[3]
 			category2_en=self.getTranslation(category[3], 'en')
 			category2_eu=self.getTranslation(category[3], 'eu')
+			if len(item['image_paths'])>0:
+				print item['image_paths']
+				image_path=item['image_paths'].pop()
+			else:
+				image_path="Item contains no images"
 			"""print "Title: "+title
 			print "Description: "+description
 			print informationLink
@@ -136,7 +142,7 @@ class EventPipeline(object):
 			print "rangePrices"+str(rangePrices)
 			print "longitude"+longitude
 			print "latitude"+latitude"""
-			self.insertEventToDB(title,title_en, title_eu, description,description_en, description_eu,startDate,endDate,startHour,endHour,category1_es, category1_en, category1_eu, category2_es, category2_en, category2_eu,informationLink,longitude, latitude,price, rangePrices, locationName, address, moreInformation, moreInformation_en, moreInformation_eu)
+			self.insertEventToDB(title,title_en, title_eu, description,description_en, description_eu,startDate,endDate,startHour,endHour,category1_es, category1_en, category1_eu, category2_es, category2_en, category2_eu,informationLink,longitude, latitude,price, rangePrices, locationName, address, moreInformation, moreInformation_en, moreInformation_eu,image_path)
 
 		elif spider.name == 'bilbao_spider':
 			denomLocation=item['location']
@@ -244,13 +250,13 @@ class EventPipeline(object):
 			print informationLink
 			print e;
 
-	def insertEventToDB(self, title_es,title_en, title_eu, description_es, description_en, description_eu, startDate, endDate, startHour, endHour, category1_es,category1_en,category1_eu, category2_es,category2_en,category2_eu, informationLink, longitude, latitude, price, rangePrices, locationName, address,moreInformation_es, moreInformation_en, moreInformation_eu):
+	def insertEventToDB(self, title_es,title_en, title_eu, description_es, description_en, description_eu, startDate, endDate, startHour, endHour, category1_es,category1_en,category1_eu, category2_es,category2_en,category2_eu, informationLink, longitude, latitude, price, rangePrices, locationName, address,moreInformation_es, moreInformation_en, moreInformation_eu,image_path):
  		try:
  			SQL="SELECT s.id FROM EVENT_TYPE t, EVENT_SUBTYPE s WHERE t.TYPE_ES=%s and s.SUBTYPE_ES=%s and s.type_id=t.id;"
- 			self.cursor.execute(SQL,(category1,category2))
+ 			self.cursor.execute(SQL,(category1_es,category2_es))
 			if self.cursor.rowcount==0:
 				SQL="SELECT id FROM EVENT_TYPE WHERE TYPE_ES=%s;"
-				self.cursor.execute(SQL,(category1,))
+				self.cursor.execute(SQL,(category1_es,))
 				if self.cursor.rowcount==0:
 					SQL="INSERT INTO EVENT_TYPE(TYPE_ES, TYPE_EN, TYPE_EU) VALUES (%s,%s,%s) returning id;"
 					self.cursor.execute(SQL,(category1_es,category1_en, category1_eu))
@@ -271,17 +277,17 @@ class EventPipeline(object):
 				location_id=self.cursor.fetchone()[0]
 			else:
 				location_id=self.cursor.fetchone()[0]
-			SQL="INSERT INTO EVENT(title_es,title_en, title_eu, description_es, description_en, description_eu, information_url, startdate,endate, starthour,endhour,type_id, price, range_prices, more_information_es,more_information_en,more_information_eu ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s, %s, %s, %s, %s,%s, %s, %s, %s) returning id;"
-			self.cursor.execute(SQL, (title_es, title_en,title_eu, description_es, description_en, description_eu, informationLink, startDate, endDate, startHour, endHour, category_id, price, rangePrices, moreInformation_es, moreInformation_en, moreInformation_eu))
+			SQL="INSERT INTO EVENT(title_es,title_en, title_eu, description_es, description_en, description_eu, information_url, startdate,endate, starthour,endhour,type_id, price, range_prices, more_information_es,more_information_en,more_information_eu,image_path ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s) returning id;"
+			self.cursor.execute(SQL, (title_es, title_en,title_eu, description_es, description_en, description_eu, informationLink, startDate, endDate, startHour, endHour, category_id, price, rangePrices, moreInformation_es, moreInformation_en, moreInformation_eu,image_path))
 			event_id=self.cursor.fetchone()[0]
 			SQL="INSERT INTO EVENT_LOCATION(location_id, denom, event_id) VALUES (%s, %s, %s);"
 			self.cursor.execute(SQL, (location_id, locationName, event_id))
 			self.conn.commit()
 		except Exception as e:
 			self.conn.commit()
-			print title
-			print address
-			print informationLink
+			#print title
+			#print address
+			#print informationLink
 			print e;
  	def getCoordinates(self, denomLocation):
  		try:
