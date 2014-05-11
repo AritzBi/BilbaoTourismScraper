@@ -38,7 +38,7 @@ class EventPipeline(object):
 		# conn.cursor will return a cursor object, you can use this cursor to perform queries
 		self.cursor = self.conn.cursor()
 	def process_item(self,item,spider):
-		if spider.name == 'bTurismoPatrimonio_spider_es':
+		if spider.name == 'bTurismoPatrimonio_spider_es'or spider.name=='museosBTurismo_spider':
 			name=item['name']
 			name_en=item['name_en']
 			name_eu=item['name_eu']
