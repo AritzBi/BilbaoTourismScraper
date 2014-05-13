@@ -139,6 +139,9 @@ NOTE REAL,
 UNIQUE(MEMBER_ID,HOSTELERY_ID)
 );
 
+#http://extract.bbbike.org/
+#osm2pgsql -c -s -d mydb -U doctor -W -H localhost -P 5432 GranBilbao.osm
+#osm2pgrouting -dbname mydb -user doctor -passwd who -conf mapconfig.xml -file GranBilbao.osm
 SELECT UpdateGeometrySRID('planet_osm_line','way',4326);
 UPDATE planet_osm_line SET way=ST_TRANSFORM(ST_SETSRID(way, 900913), 4326);
 
