@@ -285,9 +285,6 @@ class EventPipeline(object):
 			self.conn.commit()
 		except Exception as e:
 			self.conn.commit()
-			#print title
-			#print address
-			#print informationLink
 			print e;
  	def getCoordinates(self, denomLocation):
  		try:
