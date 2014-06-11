@@ -18,7 +18,6 @@ class MyImagesPipeline(ImagesPipeline):
 	def get_media_requests(self, item, info):
 		item['image_paths'] ="Item contains no images"
 		for image_url in item['image_urls']:
-			print image_url
 			yield Request(image_url)
 	def item_completed(self, results, item, info):
 		image_paths = [x['path'] for ok, x in results if ok]
@@ -262,11 +261,13 @@ class EventPipeline(object):
 					self.cursor.execute(SQL,(category1_es,category1_en, category1_eu))
 					category1_id=self.cursor.fetchone()[0]
 					SQL="INSERT INTO EVENT_SUBTYPE(SUBTYPE_ES,SUBTYPE_EN, SUBTYPE_EU, type_id) VALUES (%s,%s,%s, %s) returning id;"
-					category_id=self.cursor.execute(SQL,(category2_es,category2_en, category2_eu,category1_id))
+					self.cursor.execute(SQL,(category2_es,category2_en, category2_eu,category1_id))
+					category_id=self.cursor.fetchone()[0]
 				else:
 					category1_id=self.cursor.fetchone()[0]
 					SQL="INSERT INTO EVENT_SUBTYPE(SUBTYPE_ES,SUBTYPE_EN, SUBTYPE_EU, type_id) VALUES (%s,%s,%s, %s) returning id;"
-					category_id=self.cursor.execute(SQL,(category2_es,category2_en, category2_eu,category1_id))
+					self.cursor.execute(SQL,(category2_es,category2_en, category2_eu,category1_id))
+					category_id=self.cursor.fetchone()[0]
 			else:
 				category_id=self.cursor.fetchone()[0]
 			SQL="SELECT id FROM LOCATION WHERE ADDRESS=%s;"
