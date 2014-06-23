@@ -278,8 +278,8 @@ class EventPipeline(object):
 				location_id=self.cursor.fetchone()[0]
 			else:
 				location_id=self.cursor.fetchone()[0]
-			SQL="INSERT INTO EVENT(title_es,title_en, title_eu, description_es, description_en, description_eu, information_url, startdate,endate, starthour,endhour,type_id, price, range_prices, more_information_es,more_information_en,more_information_eu,image_path ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s) returning id;"
-			self.cursor.execute(SQL, (title_es, title_en,title_eu, description_es, description_en, description_eu, informationLink, startDate, endDate, startHour, endHour, category_id, price, rangePrices, moreInformation_es, moreInformation_en, moreInformation_eu,image_path))
+			SQL="INSERT INTO EVENT(title_es,title_en, title_eu, description_es, description_en, description_eu, information_url, startdate,endate, starthour,endhour,type_id, price, range_prices, more_information_es,more_information_en,more_information_eu,image_path,alterStartDate ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s, %s) returning id;"
+			self.cursor.execute(SQL, (title_es, title_en,title_eu, description_es, description_en, description_eu, informationLink, startDate, endDate, startHour, endHour, category_id, price, rangePrices, moreInformation_es, moreInformation_en, moreInformation_eu,image_path, startDate))
 			event_id=self.cursor.fetchone()[0]
 			SQL="INSERT INTO EVENT_LOCATION(location_id, denom, event_id) VALUES (%s, %s, %s);"
 			self.cursor.execute(SQL, (location_id, locationName, event_id))

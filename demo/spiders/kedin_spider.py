@@ -93,6 +93,7 @@ class KedinSpider(XMLFeedSpider):
 			priceClass=priceClass.pop()
 			if priceClass== 'free':
 				price=0
+				rangePrices=False
 		elif len(priceItemprop)>0:
 			if len(priceItemprop)==2:
 				price=priceArray[0]+'-'+priceArray[1]
@@ -101,13 +102,16 @@ class KedinSpider(XMLFeedSpider):
 				priceItemprop=priceItemprop.pop()
 				if(priceItemprop == 'lowPrice'):
 					price=priceArray.pop()
+					rangePrices=False
 				elif priceItemprop=='highPrice':
 					price=priceArray.pop()
-					rangePrices=True;
+					rangePrices=False
 		
 		item['priceTaquilla']=price
 		item['rangePrices']=rangePrices
-		locationURL=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span[2]/a/@href").extract()
+		print price
+		print rangePrices
+		"""locationURL=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span[2]/a/@href").extract()
 		if len(locationURL)>0:
 			request=Request(self.BASE+locationURL[0],callback=self.parse_event_location,dont_filter=True)
 			request.meta['item']=item
@@ -142,5 +146,5 @@ class KedinSpider(XMLFeedSpider):
 			item['lon']=lon.pop()
 		else:
 			item['lon']=-1
-		return item
+		return item"""
 
