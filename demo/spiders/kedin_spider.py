@@ -111,7 +111,7 @@ class KedinSpider(XMLFeedSpider):
 		item['rangePrices']=rangePrices
 		print price
 		print rangePrices
-		"""locationURL=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span[2]/a/@href").extract()
+		locationURL=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span[2]/a/@href").extract()
 		if len(locationURL)>0:
 			request=Request(self.BASE+locationURL[0],callback=self.parse_event_location,dont_filter=True)
 			request.meta['item']=item
@@ -146,5 +146,5 @@ class KedinSpider(XMLFeedSpider):
 			item['lon']=lon.pop()
 		else:
 			item['lon']=-1
-		return item"""
+		return item
 
