@@ -87,30 +87,34 @@ class KedinSpider(XMLFeedSpider):
 		priceItemprop=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span[1]/span/strong/@itemprop").extract()
 		priceClass=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span[1]/span/strong/@class").extract()
 		priceArray=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span[1]/span/strong/text()").re(r"\d+\,?\d*")
-		price=-1
+		item['lowPrice']=-1
+		item['highPrice']=-1
 		rangePrices=False;
 		if len(priceClass)>0:
 			priceClass=priceClass.pop()
 			if priceClass== 'free':
 				price=0
+				item['lowPrice']=0
+				item['highPrice']=0
 				rangePrices=False
 		elif len(priceItemprop)>0:
 			if len(priceItemprop)==2:
 				price=priceArray[0]+'-'+priceArray[1]
+				priceArray[0]=priceArray[0].replace(',','.')
+				priceArray[1]=priceArray[1].replace(',','.')
+				item['lowPrice']=float(priceArray[0])
+				item['highPrice']=float(priceArray[1])
 				rangePrices=True
 			else:
-				priceItemprop=priceItemprop.pop()
-				if(priceItemprop == 'lowPrice'):
-					price=priceArray.pop()
-					rangePrices=False
-				elif priceItemprop=='highPrice':
-					price=priceArray.pop()
-					rangePrices=False
-		
-		item['priceTaquilla']=price
+				price=priceArray.pop()
+				if isinstance(price, str):
+					price=pricereplace(',','.')
+				item['lowPrice']=float(price)
+				item['highPrice']=item['lowPrice']
+				rangePrices=False
+	
+
 		item['rangePrices']=rangePrices
-		print price
-		print rangePrices
 		locationURL=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span[2]/a/@href").extract()
 		if len(locationURL)>0:
 			request=Request(self.BASE+locationURL[0],callback=self.parse_event_location,dont_filter=True)
