@@ -9,15 +9,17 @@ from scrapy.http.request import Request
 import re
 
 class KedinSpider(XMLFeedSpider):
+	#Nombre del spider
 	name="kedin_spider"
 	BASE='http://www.kedin.es'
+	#Los dominios permitidos, para evitar ir a webs externas
 	allowed_domains=["kedin.es"]
+	#Las URLs de inicio del spider, de donde va a empezar el proceso.
 	start_urls=["http://kedin.es/vizcaya/conciertos-de-pop/feed.rss",
 	"http://kedin.es/vizcaya/conciertos-de-rock/feed.rss",
-	"http://kedin.es/vizcaya/conciertos-de-cantautores.html",
 	"http://kedin.es/vizcaya/clasica/feed.rss",
 	"http://kedin.es/vizcaya/conciertos-de-electronica/feed.rss",
-	"http://kedin.es/vizcaya/conciertos-de-indie.html",
+	"http://kedin.es/vizcaya/conciertos-de-indie/feed.rss",
 	"http://kedin.es/vizcaya/conciertos-de-musica/feed.rss",
 	"http://kedin.es/vizcaya/festivales/feed.rss",
 	"http://kedin.es/vizcaya/conciertos-de-heavy/feed.rss",
@@ -27,23 +29,34 @@ class KedinSpider(XMLFeedSpider):
 	"http://kedin.es/vizcaya/musicales/feed.rss",
 	"http://kedin.es/vizcaya/monologos-humor/feed.rss",
 	"http://kedin.es/vizcaya/danza-baile/feed.rss",
-	"http://kedin.es/vizcaya/actividades-para-ninos.html",
+	"http://kedin.es/vizcaya/actividades-para-ninos/feed.rss",
 	"http://kedin.es/vizcaya/tendencias/feed.rss"]
+	#Nombre del tag de los elementos del RSS
 	itertag = 'item'
+	#Variable interna de Scrapy
 	iterator = 'iternodes'
+	"""Primer método que es llamado al iniciar el spider, una vez por cada nodo del RSS. 
+	En la varible response tiene el nodo obtenido"""
 	def parse_node(self, response, node):
-		links= node.xpath('link/text()').extract()
-		titles= node.xpath('title/text()').extract()
-		descriptions=node.xpath('description/text()').extract()
-		for link,title,description in zip(links,titles,descriptions):
-			item=EventItem()
-			item['title']=title
-			description=re.sub('<[^>]*>', '', description)
-			item['description']=description
-			item['informationLink']=link
-			request=Request(link,callback=self.parse_events_links)
-			request.meta['item']=item
-			yield request
+		#Se obtiene el enlace donde hay más información
+		link= node.xpath('link/text()').extract()
+		#Se obtiene el titulo del evento
+		title= node.xpath('title/text()').extract()
+		#Se obtiene la descripción del evento
+		description=node.xpath('description/text()').extract()
+		#Se crea un item por cada evento
+		item=EventItem()
+		item['title']=title[0]
+		#Se quitan todos los elementos HTML
+		description=re.sub('<[^>]*>', '', description[0])
+		item['description']=description
+		item['informationLink']=link
+		#Se crea un objeto request de Scrapy, indicando que enlance tiene que analizar y en qué metodo
+		request=Request(link[0],callback=self.parse_events_links)
+		#Se añade a la request el Item del evento donde se irá añadiendo la información
+		request.meta['item']=item
+		#Se hace la request
+		yield request
 
 
 
@@ -69,8 +82,6 @@ class KedinSpider(XMLFeedSpider):
 				endDate=startDate.replace(startHour,endHour)
 			else: 
 				startHour=hours[0]
-
-
 		item = response.meta['item']
 		item['startDate']=startDate
 		item['endDate']=endDate
@@ -150,5 +161,6 @@ class KedinSpider(XMLFeedSpider):
 			item['lon']=lon.pop()
 		else:
 			item['lon']=-1
+		print item
 		return item
 
