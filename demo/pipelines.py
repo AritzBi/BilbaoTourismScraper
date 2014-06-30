@@ -240,8 +240,8 @@ class EventPipeline(object):
 					location_id=self.cursor.fetchone()[0]
 				else:
 					location_id=self.cursor.fetchone()[0]
-				SQLEvent="INSERT INTO HOSTELERY(denom_es,location_id, description_es,description_en,description_eu, information_url, HOSTELERY_TYPE, telephone, email, IMAGE_PATH, SOURCE_URL, TIMETABLE_ES, TIMETABLE_EN, TIMETABLE_EU) VALUES (%s, %s, %s, %s, %s, %s, %s,%s, %s, %s, %s,%s, %s, %s) returning id;"
-				self.cursor.execute(SQLEvent, (name,location_id,description,description_en, description_eu,informationLink,category_id,telephone,email,image_path,source_url, timetable_es, timetable_en, timetable_eu ))
+				SQLEvent="INSERT INTO HOSTELERY(denom_es,denom_en, denom_eu,location_id, description_es,description_en,description_eu, information_url, HOSTELERY_TYPE, telephone, email, IMAGE_PATH, SOURCE_URL, TIMETABLE_ES, TIMETABLE_EN, TIMETABLE_EU) VALUES (%s, %s, %s, %s, %s, %s, %s,%s, %s, %s, %s,%s, %s, %s) returning id;"
+				self.cursor.execute(SQLEvent, (name,name,name,location_id,description,description_en, description_eu,informationLink,category_id,telephone,email,image_path,source_url, timetable_es, timetable_en, timetable_eu ))
 			self.conn.commit()
 		except Exception as e:
 			self.conn.commit()
