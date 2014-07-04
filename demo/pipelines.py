@@ -304,6 +304,7 @@ class EventPipeline(object):
 					place, (lat, lng) = g.geocode(denomLocation, True, None, None)
 					return(lat,lng)
 				except:
+					print denomLocation
 					return (0,0)
 	def getTranslation(self, sourceText, destLanguage):
 		gs=goslate.Goslate()
