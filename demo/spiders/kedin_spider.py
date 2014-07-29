@@ -62,20 +62,20 @@ class KedinSpider(XMLFeedSpider):
 
 	def parse_events_links(self,response):
 		sel=Selector(response)
-		startDate=sel.xpath("//*[@id='main_content']/article/section[1]/div/strong/meta[@itemprop='startDate']/@content").extract()
+		startDate=sel.xpath("//*[@id='main_content']/article/section[2]/div/strong/meta[@itemprop='startDate']/@content").extract()
 		startDate=startDate.pop()
-		endDate=sel.xpath("//*[@id='main_content']/article/section[1]/div/strong[2]/meta[@itemprop='endDate']/@content").extract()
+		endDate=sel.xpath("//*[@id='main_content']/article/section[2]/div/strong[2]/meta[@itemprop='endDate']/@content").extract()
 		category=sel.xpath("//*[@id='breadcrumb']/span/a/span/text()").extract()
 		moreInformation=sel.xpath("string(//*[@id='description']/div[1]/p)").extract()
-		images=sel.xpath("//*[@id='main_content']/article/section[2]/a/img/@src").extract()
+		images=sel.xpath("//*[@id='main_content']/article/section[1]/a/img/@src").extract()
 		if len(endDate)>0:
 			endDate=endDate.pop()
-			hours=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span/strong/text()").re(r"\d{2}[:]\d{2}")	
+			hours=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span/strong/text()").re(r"\d{2}[:]\d{2}")	
 			if len(hours)==2:
 				startHour=hours[0]
 				endHour=hours.pop()
 		else:
-			hours=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span/strong/text()").re(r"\d{2}[:]\d{2}")
+			hours=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span/strong/text()").re(r"\d{2}[:]\d{2}")
 			if len(hours)==2:
 				startHour=hours[0]
 				endHour=hours.pop()
@@ -95,9 +95,9 @@ class KedinSpider(XMLFeedSpider):
 		if len(images)>0:
 			#item['image_urls']=[''.join([self.BASE,images.pop()])]
 			item['image_urls']=images
-		priceItemprop=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span[1]/span/strong/@itemprop").extract()
-		priceClass=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span[1]/span/strong/@class").extract()
-		priceArray=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span[1]/span/strong/text()").re(r"\d+\,?\d*")
+		priceItemprop=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[1]/span/strong/@itemprop").extract()
+		priceClass=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[1]/span/strong/@class").extract()
+		priceArray=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[1]/span/strong/text()").re(r"\d+\,?\d*")
 		item['lowPrice']=-1
 		item['highPrice']=-1
 		rangePrices=False;
@@ -126,13 +126,13 @@ class KedinSpider(XMLFeedSpider):
 	
 
 		item['rangePrices']=rangePrices
-		locationURL=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/span[2]/a/@href").extract()
+		locationURL=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[2]/a/@href").extract()
 		if len(locationURL)>0:
 			request=Request(self.BASE+locationURL[0],callback=self.parse_event_location,dont_filter=True)
 			request.meta['item']=item
 			yield request
 		else:
-			locationName=sel.xpath("//*[@id='main_content']/article/section[1]/p[2]/hspan/span/text()").extract().pop()
+			locationName=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/hspan/span/text()").extract().pop()
 			if "Por confirmar" not in locationName:
 				item['locationName']=locationName
 				item['lat']=-1

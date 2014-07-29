@@ -29,7 +29,7 @@ class MyImagesPipeline(ImagesPipeline):
 
 class EventPipeline(object):
 	def __init__(self):
-		conn_string = "host='localhost' dbname='mydb' user='doctor' password='who'"
+		conn_string = "host='localhost' dbname='xploreDB' user='xplore' password='bilbao'"
 		# print the connection string we will use to connect
 		print "Connecting to database\n	->%s" % (conn_string)
 		# get a connection, if a connect cannot be made an exception will be raised here

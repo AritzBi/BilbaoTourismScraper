@@ -76,14 +76,16 @@ MORE_INFORMATION_ES VARCHAR(1000),
 MORE_INFORMATION_EN VARCHAR(1000),
 MORE_INFORMATION_EU VARCHAR(1000),
 INFORMATION_URL VARCHAR(255),
-STARTDATE DATE,
-ENDATE DATE,
-STARTHOUR VARCHAR(255),
-ENDHOUR VARCHAR(255),
-TYPE_ID INTEGER references event_subtype(id),
-PRICE VARCHAR(255),
+STARTDATE TIMESTAMP WITH TIME ZONE,
+ENDATE TIMESTAMP WITH TIME ZONE,
+STARTHOUR CHARACTER VARYING(255),
+ENDHOUR CHARACTER VARYING(255),
+TYPE_ID INTEGER,
+PRICE CHARACTER VARYING(255),
+IMAGE_PATH CHARACTER VARYING(255),
+LOWPRICE REAL,
+HIGHPRICE REAL,
 RANGE_PRICES BOOLEAN,
-IMAGE_PATH VARCHAR(255),
 UNIQUE (TITLE_ES)
 );
 
@@ -130,17 +132,18 @@ UNIQUE(USERNAME, EMAIL)
 );
 
 CREATE TABLE ROUTE
-(ID SERIAL PRIMARY KEY, 
-NAME_ES VARCHAR(250),
-NAME_EU VARCHAR(250),
-NAME_EN VARCHAR(250),
-DESCRIPTION_ES VARCHAR(2000),
-DESCRIPTION_EN VARCHAR(2000),
-DESCRIPTION_EU VARCHAR(2000),
-ROUTE VARCHAR(30000),
-WEATHER BOOLEAN,
-CREATEDBY INTEGER references member(id),
-CREATED_AT DATE
+( ID SERIAL PRIMARY KEY,
+  NAME_ES CHARACTER VARYING(250),
+  NAME_EU CHARACTER VARYING(250),
+  NAME_EN CHARACTER VARYING(250),
+  DESCRIPTION_ES CHARACTER VARYING(2000),
+  DESCRIPTION_EN CHARACTER VARYING(2000),
+  DESCRIPTION_EU CHARACTER VARYING(2000),
+  ROUTE CHARACTER VARYING(30000),
+  WEATHER BOOLEAN,
+  CREATEDBY INTEGER references member(id),
+  CREATED_AT DATE,
+  ROUTE_CODE CHARACTER VARYING
 );
 
 
@@ -151,9 +154,6 @@ ROUTE_ID INTEGER references route(id),
 NOTE REAL,
 PRIMARY KEY(USER_ID, ROUTE_ID)
 ); 
-
-#[{"ID":1, "TYPE": "HOSTELERY"}, {"ID":50, "TYPE": "EMBLEMATIC_BUILDING"}, {"ID": 5, "TYPE": "HOSTELERY"}]
-#[{"ID":4, "TYPE": "HOSTELERY"}, {"ID":50, "TYPE": "EMBLEMATIC_BUILDING"}, {"ID": 8, "TYPE": "HOSTELERY"}]
 
 CREATE TABLE HOSTELERY_COMMENTS
 (ID SERIAL PRIMARY KEY,
@@ -175,7 +175,9 @@ UNIQUE(MEMBER_ID,BUILDING_ID)
 
 #http://extract.bbbike.org/
 #osm2pgsql -c -s -d mydb -U doctor -W -H localhost -P 5432 GranBilbao.osm
+#osm2pgsql -c -s -d xploreDB -U xplore -W -H localhost -P 5432 GranBilbao.osm
 #osm2pgrouting -dbname mydb -user doctor -passwd who -conf mapconfig.xml -file GranBilbao.osm
+#osm2pgrouting -dbname xploreDB -user xplore -passwd bilbao -conf mapconfig.xml -file GranBilbao.osm
 SELECT UpdateGeometrySRID('planet_osm_line','way',4326);
 UPDATE planet_osm_line SET way=ST_TRANSFORM(ST_SETSRID(way, 900913), 4326);
 
@@ -194,17 +196,3 @@ UPDATE planet_osm_roads SET way=ST_TRANSFORM(ST_SETSRID(way, 900913), 4326);
 
 /*SELECT UpdateGeometrySRID('location','geom',4326);
 UPDATE location SET geom=ST_TRANSFORM(ST_SETSRID(geom, 900913), 4326);*/
-
-
-INSERT INTO event_type(denom) VALUES ('Infantiles');
-INSERT INTO event_type(denom) VALUES ('Exposiciones');
-INSERT INTO event_type(denom) VALUES ('Concursos');
-INSERT INTO event_type(denom) VALUES ('Jornadas, conferencias y congresos');
-#Voy a meter Opera tambien aqui.
-INSERT INTO event_type(denom) VALUES ('Música');
-INSERT INTO event_type(denom) VALUES ('Teatro y Danza');
-INSERT INTO event_type(denom) VALUES ('Cine');
-INSERT INTO event_type(denom) VALUES ('Deportes');
-INSERT INTO event_type(denom) VALUES ('Mercados y compras');
-INSERT INTO event_type(denom) VALUES ('Folclore y fiestas populares');
-INSERT INTO event_type(denom) VALUES ('Otros');
