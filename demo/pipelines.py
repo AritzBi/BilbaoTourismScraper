@@ -17,8 +17,9 @@ from scrapy.http.request import Request
 class MyImagesPipeline(ImagesPipeline):
 	def get_media_requests(self, item, info):
 		item['image_paths'] ="Item contains no images"
-		for image_url in item['image_urls']:
-			yield Request(image_url)
+		if 'image_urls' in item:
+			for image_url in item['image_urls']:
+				yield Request(image_url)
 	def item_completed(self, results, item, info):
 		image_paths = [x['path'] for ok, x in results if ok]
 		if not image_paths:
@@ -85,7 +86,8 @@ class EventPipeline(object):
 				timetable_es=''
 				timetable_en=''
 				timetable_eu=''
-			if len(item['image_paths'])>0:
+			if len(item['image_paths'])>0 and isinstance(item['image_paths'],list):
+				print item['image_paths']
 				image_path=item['image_paths'].pop()
 			else:
 				image_path="Item contains no images"
