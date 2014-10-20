@@ -15,7 +15,7 @@ class KedinSpider(XMLFeedSpider):
 	#Los dominios permitidos, para evitar ir a webs externas
 	allowed_domains=["kedin.es"]
 	#Las URLs de inicio del spider, de donde va a empezar el proceso.
-	start_urls=["http://kedin.es/vizcaya/conciertos-de-pop/feed.rss",
+	"""start_urls=["http://kedin.es/vizcaya/conciertos-de-pop/feed.rss",
 	"http://kedin.es/alava/conciertos-de-pop/feed.rss",
 	"http://kedin.es/guipuzcoa/conciertos-de-pop/feed.rss",
 	"http://kedin.es/vizcaya/conciertos-de-rock/feed.rss",
@@ -62,7 +62,23 @@ class KedinSpider(XMLFeedSpider):
 	"http://kedin.es/guipuzcoa/actividades-para-ninos/feed.rss",
 	"http://kedin.es/vizcaya/tendencias/feed.rss",
 	"http://kedin.es/alava/tendencias/feed.rss",
-	"http://kedin.es/guipuzcoa/tendencias/feed.rss"]
+	"http://kedin.es/guipuzcoa/tendencias/feed.rss"]"""
+	start_urls=["http://kedin.es/vizcaya/conciertos-de-pop/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-rock/feed.rss",
+	"http://kedin.es/vizcaya/clasica/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-electronica/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-indie/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-musica/feed.rss",
+	"http://kedin.es/vizcaya/festivales/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-heavy/feed.rss",
+	"http://kedin.es/vizcaya/conciertos-de-jazz/feed.rss",
+	"http://kedin.es/vizcaya/arte-cultura/feed.rss",
+	"http://kedin.es/vizcaya/teatro/feed.rss",
+	"http://kedin.es/vizcaya/musicales/feed.rss",
+	"http://kedin.es/vizcaya/monologos-humor/feed.rss",
+	"http://kedin.es/vizcaya/danza-baile/feed.rss",
+	"http://kedin.es/vizcaya/actividades-para-ninos/feed.rss",
+	"http://kedin.es/vizcaya/tendencias/feed.rss"]
 	#Nombre del tag de los elementos del RSS
 	itertag = 'item'
 	#Variable interna de Scrapy
@@ -83,7 +99,6 @@ class KedinSpider(XMLFeedSpider):
 		description=re.sub('<[^>]*>', '', description[0])
 		item['description']=description
 		item['informationLink']=link
-		print link
 		#Se crea un objeto request de Scrapy, indicando que enlance tiene que analizar y en qué metodo
 		request=Request(link[0],callback=self.parse_events_links)
 		#Se añade a la request el Item del evento donde se irá añadiendo la información
@@ -131,13 +146,17 @@ class KedinSpider(XMLFeedSpider):
 			item['moreInformation']=''
 		if len(images)>0:
 			#item['image_urls']=[''.join([self.BASE,images.pop()])]
-			item['image_urls']=images //*[@id="header"]/div[3]/div[1]/header/ul/li[4]/span/span
+			item['image_urls']=images 
 		#priceItemprop=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[1]/span/strong/@itemprop").extract()
-		priceItemprop=sel.xpath("//*[@id='header']/div[3]/div[1]/header/ul/li[4]/span/span")
-		print priceItemprop
-		"""
-		priceClass=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[1]/span/strong/@class").extract()
-		priceArray=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[1]/span/strong/text()").re(r"\d+\,?\d*")
+		priceItemprop=sel.xpath("//*[@id='header']/div[3]/div[1]/header/ul/li[4]/span/span/strong/@itemprop").extract()
+		#print priceItemprop
+		#priceClass=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[1]/span/strong/@class").extract()
+		priceClass=sel.xpath("//*[@id='header']/div[3]/div[1]/header/ul/li[4]/span/span/strong/@class").extract()
+		#print priceClass
+		
+		#priceArray=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[1]/span/strong/text()").re(r"\d+\,?\d*")
+		priceArray=sel.xpath("//*[@id='header']/div[3]/div[1]/header/ul/li[4]/span/span/strong/text()").re(r"\d+\,?\d*")
+		#print priceArray
 		item['lowPrice']=-1
 		item['highPrice']=-1
 		rangePrices=False;
@@ -164,24 +183,26 @@ class KedinSpider(XMLFeedSpider):
 				item['highPrice']=item['lowPrice']
 				rangePrices=False
 	
-
 		item['rangePrices']=rangePrices
-		locationURL=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[2]/a/@href").extract()
+		#locationURL=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/span[2]/a/@href").extract()
+		locationURL=sel.xpath("//*[@id='header']/div[3]/div[1]/header/ul/li[1]/span/a[1]/@href").extract()
 		if len(locationURL)>0:
 			request=Request(self.BASE+locationURL[0],callback=self.parse_event_location,dont_filter=True)
 			request.meta['item']=item
 			yield request
 		else:
-			locationName=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/hspan/span/text()").extract().pop()
+			#locationName=sel.xpath("//*[@id='main_content']/article/section[2]/p[2]/hspan/span/text()").extract().pop()
+			locationName=sel.xpath("//*[@id='header']/div[3]/div[1]/header/ul/li[1]/span/span/text()").extract().pop()
 			if "Por confirmar" not in locationName:
 				item['locationName']=locationName
 				item['lat']=-1
 				item['lon']=-1
-				item['locationAddress']=locationName"""
+				item['locationAddress']=locationName
+			yield item
 	def parse_event_location(self,response):
 		item=response.meta['item']
 		sel=Selector(response)
-		locationName=sel.xpath("//*[@id='header']/div[2]/div[1]/header/h1/text()").extract()
+		locationName=sel.xpath("//*[@id='header']/div[3]/div[1]/header/h1/text()").extract()
 		locationAdress=sel.xpath("//*[@id='place']/p[2]/text()").extract()
 		lon=sel.xpath("//*[@id='map']/@data-lng").extract()
 		lat=sel.xpath("//*[@id='map']/@data-lat").extract()
@@ -201,6 +222,5 @@ class KedinSpider(XMLFeedSpider):
 			item['lon']=lon.pop()
 		else:
 			item['lon']=-1
-		print item
 		return item
 
