@@ -52,10 +52,10 @@ class EventPipeline(object):
 			informationLink=item['informationLink']
 			informationLink_en=item['informationLink_en']
 			informationLink_eu=item['informationLink_eu']
-			if len(item['image_paths'])>0:
+			if len(item['image_paths'])>0 and isinstance(item['image_paths'],list):
 				image_path=item['image_paths'].pop()
 			else:
-				image_path="Item contains no images"
+				image_path="full/unknown.jpg"
 			#Algunos no tienen bien el addres por eso lo dejo asi
 			if address:
 				coordinates=self.getCoordinates(address.encode('utf-8'))
@@ -87,10 +87,9 @@ class EventPipeline(object):
 				timetable_en=''
 				timetable_eu=''
 			if len(item['image_paths'])>0 and isinstance(item['image_paths'],list):
-				print item['image_paths']
 				image_path=item['image_paths'].pop()
 			else:
-				image_path="Item contains no images"
+				image_path="full/unknown.jpg"
 			if address:
 				coordinates=self.getCoordinates(address.encode('utf-8'))
 				longitude=coordinates[1]
@@ -125,11 +124,10 @@ class EventPipeline(object):
 			category2_es=category[3]
 			category2_en=self.getTranslation(category[3], 'en')
 			category2_eu=self.getTranslation(category[3], 'eu')
-			if len(item['image_paths'])>0:
-				print item['image_paths']
+			if len(item['image_paths'])>0 and isinstance(item['image_paths'],list):
 				image_path=item['image_paths'].pop()
 			else:
-				image_path="Item contains no images"
+				image_path="full/unknown.jpg"
 			"""print "Title: "+title
 			print "Description: "+description
 			print informationLink
